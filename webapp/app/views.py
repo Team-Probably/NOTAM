@@ -2,7 +2,7 @@
 from flask import render_template
 
 from app import app
-
+from app import extract
 @app.route('/') #TO-DO : By Aditya and Avi 
 def index():
     return render_template("index.html")
@@ -23,6 +23,6 @@ def processor():
 
     return Response(
             json.dumps(
-                    {'something akshay makes'}
+                    extract.extract('NOTAM.pdf')
                 ), mimetype='application/json'
             )
