@@ -1,0 +1,21 @@
+body{
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+}
+
+.fullpage{
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
+#mapfull { 
+    height: 100%; 
+}
+
+#side-button{
+    position: absolute;
+    right: 2vw;
+    top:2vw;
+    z-index: 500;
+}
