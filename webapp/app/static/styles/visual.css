@@ -2,6 +2,7 @@ body{
     width: 100vw;
     height: 100vh;
     margin: 0;
+    overflow: hidden;
 }
 
 .fullpage{
@@ -13,9 +14,61 @@ body{
     height: 100%; 
 }
 
-#side-button{
+#down_nav{
     position: absolute;
-    right: 2vw;
-    top:2vw;
     z-index: 500;
+    width: 25vw;
+    height: 45vh;
+    bottom: 0vw;
+    right: 2vw;
+    
+}
+
+.down_hide{
+    transform: translateY(42.5vh);
+}
+#down_tab{
+    background: #454545;
+    margin: auto;
+    margin-top:0vw;
+    height: 2.5vh;
+    width: 7.5vw;
+
+}
+
+#down_div{
+    background: #749513;
+    width: 100%;
+    /* Tempoary to be changed after adding jinja */
+    height: 30vh;
+}
+
+#right_nav{
+    position: absolute;
+    z-index: 500;
+    width: 25vw;
+    height: 35vh;
+    right: 0vw;
+    top: 2vw;
+    
+}
+
+.right_hide{
+    transform: translateX(22.5vw);
+}
+#right_tab{
+    background: #454545;
+    margin: auto;
+    margin-top: 15vh;
+    height: 2.5vw;
+    width: 2.5vw;
+    float: left;
+}
+
+#right_div{
+    background: #749513;
+    width: 22.5vw;
+    /* Tempoary to be changed after adding jinja */
+    height: 100%;
+    float: right;
 }
