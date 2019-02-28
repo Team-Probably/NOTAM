@@ -21,11 +21,12 @@ body{
     height: 45vh;
     bottom: 0vw;
     right: 2vw;
-    
+    transition: 0.5s; 
 }
 
 .down_hide{
     transform: translateY(42.5vh);
+    transition: 0.5s; 
 }
 #down_tab{
     background: #454545;
@@ -50,11 +51,12 @@ body{
     height: 35vh;
     right: 0vw;
     top: 2vw;
-    
+    transition: 0.5s; 
 }
 
 .right_hide{
     transform: translateX(22.5vw);
+    transition: 0.5s; 
 }
 #right_tab{
     background: #454545;
