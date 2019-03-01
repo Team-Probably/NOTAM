@@ -1,12 +1,1 @@
-{
-    "notam_no" : "",
-    "ident" : "",
-    "coords" : "",
-    "facility" : "",
-    "notam_series" : "",
-    "duration" : "",
-    "start_time" : "",
-    "end_time" : "",
-    "remarks" : "",
-    "freq" : ""
-}
+{"notam_no" : "","ident" : "","coords" : "","facility" : "","notam_series" : "","duration" : "","start_time" : "","end_time" : "","remarks" : "","freq" : ""}
