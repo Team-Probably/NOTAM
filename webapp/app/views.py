@@ -40,6 +40,7 @@ def processor():
 def dashboard():
     airspace = database.get_notams('airspace')
     facility = database.get_notams('facility')
+    print(airspace, facility)
     return render_template("dashboard.html", facility = facility , airspace = airspace)
 
 @app.route('/create_notam',methods=['POST']) #Admin : Create Notams

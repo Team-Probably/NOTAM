@@ -2,6 +2,7 @@
     height: 0px;
     width: 100%;
     display: none;
+    background-color: #fff;
 }
 
 .magicopen{
@@ -9,3 +10,10 @@
     display: block;
     transition: 0.5s;
 }
+
+td{
+    padding-right: 5px !important;
+    font-size: 2rem;
+}
+
+
