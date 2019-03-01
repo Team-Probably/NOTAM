@@ -46,4 +46,19 @@ def remove_notam(notam):
         print("NOTAM not Present")
     return
 
-    
+def add_user(user):
+    db = connect()
+    db = db.users
+    if db.find_one(user):
+        return 0
+    db.insert(user)
+    print(user, "USER CREATED")
+    return 1
+
+def verify_login(user):
+    db = connect()
+    db = db.users
+    if db.find_one(user):
+        print(user, "LOGIN SUCCESSFUL")
+        return 1
+    return 0
