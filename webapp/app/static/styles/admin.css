@@ -57,7 +57,7 @@ ul {
   .modalc {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    z-index: 1021; /* Sit on top */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
@@ -73,6 +73,7 @@ ul {
     background-color: #fefefe;
     top:50%;
     left:50%;
+    z-index: 1022;
     transform: translate(-50%, -50%); 
     padding: 20px;
     border: 1px solid #888;
@@ -102,12 +103,12 @@ ul {
 
   }
 
-  #notam_series{
+  #notam_series, #notam_series_fac{
       width:40%;
       margin: auto; 
   }
 
-  #notam_no{
+  #notam_no, #notam_no_fac{
       margin:auto;
       width:40%;
   }
@@ -151,7 +152,8 @@ textarea:hover{
   }
 
   textarea{
-      width: 100%;
+      width: 90%;
+      
      
   }
   #sbmb{
@@ -167,7 +169,7 @@ textarea:hover{
     border-width: 2px;  
     border-color: rgb(0, 34, 98);  
     color:rgb(0, 34, 98);
-    font-size:1.5rem;
+    font-size:1.6rem;
     width:40%;
     transition: background-color 1s;
     text-align: center;
@@ -235,4 +237,24 @@ textarea:hover{
   
 #fac{
     display:none;
+    
+}
+#firdiv > * {
+    margin: 15px 0;
+}
+#fac > * {
+    margin: 15px 0;
+}
+.shiftup{
+    padding:5px;
+}
+.shiftdown{
+    margin-bottom: -10px;
+}
+.tbcm{
+    width:90%;
+    margin:auto;
+}
+.tbc{
+    width:90%;
 }

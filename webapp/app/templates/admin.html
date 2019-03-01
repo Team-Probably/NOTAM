@@ -6,10 +6,21 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<link rel="stylesheet" href="{{ url_for('static',filename='styles/admin.css') }}">
+
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+	 crossorigin="" />
+	<!-- Make sure you put this AFTER Leaflet's CSS -->
+	<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js" integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+	 crossorigin=""></script>
+
+
+
 	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
 	<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
 	<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700,700i'>
+	<!-- Date Time Picker -->
+	<link rel="stylesheet" href="{{ url_for('static',filename='styles/imports/daterangepicker.css') }}" />
 </head>
 <body>
     
@@ -25,7 +36,7 @@
 			</ul>
     </div>
     
-	<div class="main-page container col-md-9 container">
+	<div class="main-page container col-md-9 ">
 		
 		{% include '_listview.html' %}
     </div>
@@ -41,16 +52,17 @@
 	<div class="modal-content">
 		<span class="close">&times;</span>
 		<div id="modalhead">Create NOTAM</div>
-		<div class="container">
+		<div class="tbcm">
             <form>
-                <div class="container">
-                        FIR&nbsp;<label class="switch" for="checkbox">
-                            <input type="checkbox" id="checkboxtog" onchange="checkch()"/>
+                <div class="tbc">
+                        <span class="shiftup">Airspace&nbsp;</span><label class="switch shiftdown" for="checkboxtog" onclick="checkch()">
+                            <input type="checkbox" id="checkboxtog" />
                             <div class="slider round"></div>
-                        </label>&nbsp;FACILTY
+                        </label><span class="shiftup">&nbsp;Facility</span>
                 </div>
-                <div id="fir">
-                    <div id = "notamheads" class="container">
+                <br/>
+                <div id="firdiv">
+                    <div id = "notamheads" class="tbc">
                         <label>NOTAM Header</label><br/>
                         <select  id="notam_series">
                                 <option value="A">Series A</option>
@@ -61,40 +73,43 @@
                         <input id="notam_no" placeholder="NOTAM NO."/>
                     </div>
                     <br/>
-                    <div class="container">
+                    <div class="tbc">
                         <label>Enter the air space affected</label><br/>
                         <input placeholder="AFFECTED FIR" id="fir"/>
                     </div>
-                    <div class="container">
-                        <label>SCENARIO</label><br/>
+                    <div class="tbc">
+                        <label>Scenario</label><br/>
                     
                         <select id="scenario">
-                                <option value="A">CLOSURE</option>
-                                <option value="B">UNSERVICABLE</option>
+                                <option value="CLOSURE">CLOSURE</option>
+                                <option value="UNSERVICABLE">UNSERVICABLE</option>
                         </select>
                     </div>
-                    <div class="container">
+                    <div class="tbc">
                             <label>Nature of the event</label><br/>
                     <input placeholder="NATURE" id="nature"/>
                     </div >
-                    <div class="container">
+                    <div class="tbc">
                         <label>Coordinates</label><br/>
                         <input placeholder="LATTITUDE" id="latin"/>
-                        <input placeholder="LONGITUDE" id="longin"/><br/>
+						<input placeholder="LONGITUDE" id="longin"/><br/>
+						<div>
+							<div id="map_picker" style="height : 200px;width:200px;"></div>
+						</div>
                     </div>
-                    <div class="container">
+                    <div class="tbc">
                         <label>Validity Period</label><br/>
-                        <input placeholder="STARTTIME" id="stimein"/>
-                        <input placeholder="ENDTIME" id="endtimein"/>
+                        <input placeholder="VALIDITY" id="stimein"/>
+                        <!-- <input placeholder="ENDTIME" id="endtimein"/> -->
                     </div>
-                    <div class="container">
+                    <div class="tbc">
                         <label>Remarks</label><br/>
                         <textarea placeholder="REMARK" id="remark"></textarea><br/>
-                    </div class="container">
+                    </div >
                     
                 </div>
                 <div id="fac">
-                        <div id = "notamheads_fac" class="container">
+                        <div id = "notamheads_fac" class="tbc">
                                 <label>NOTAM Header</label><br/>
                                 <select  id="notam_series_fac">
                                         <option value="A">Series A</option>
@@ -105,32 +120,32 @@
                                 <input id="notam_no" placeholder="NOTAM NO."/>
                         </div>
                         <br/>
-                        <div class="container">
+                        <div class="tbc">
                             <label>Enter the name of the facility</label><br/>
                             <input placeholder="FACILITY NAME" id="fir"/>
                         </div>
-                        <div class="container">
+                        <div class="tbc">
                             <label>IDENT</label><br/>
                             <input placeholder="IDENT" id="latin_fac"/>
                         </div>
-                        <div class="container">
+                        <div class="tbc">
                                 <label>Frequency</label><br/>
                                 <input placeholder="FREQ" id="freq_fac"/>
                         </div >
-                        <div class="container">
+                        <div class="tbc">
                             <label>Coordinates</label><br/>
                             <input placeholder="LATTITUDE" id="latin_fac"/>
                             <input placeholder="LONGITUDE" id="longin_fac"/><br/>
                         </div>
-                        <div class="container">
+                        <div class="tbc">
                             <label>Validity Period</label><br/>
-                            <input placeholder="STARTTIME" id="stimein_fac"/>
-                            <input placeholder="ENDTIME" id="endtimein_fac"/>
+                            <input placeholder="VALIDITY" id="stimein_fac"/>
+                            <!-- <input placeholder="ENDTIME" id="endtimein_fac"/> -->
                         </div>
-                        <div class="container">
+                        <div class="tbc">
                             <label>Remarks</label><br/>
                             <textarea placeholder="REMARK" id="remark_fac"></textarea><br/>
-                        </div class="container">
+                        </div>
                 </div>
                 <div id="sbmb">
                         <div  id ="create_notam">Submit</div>
@@ -146,12 +161,21 @@
 </div>
 
   <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" ></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>  
-  <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script> -->
   <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js'></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
+ crossorigin="anonymous"></script>
+<!-- For Map files
+	<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script> -->
+ <!-- for datetime picker -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js"></script>
+  <script src="{{ url_for('static', filename='js/admin/daterangepicker.js') }}"></script>
   <script  src="{{ url_for('static', filename='js/admin/create.js') }}"></script>
- </body>
+<script src="{{ url_for('static', filename='js/admin/map_picker.js') }}"></script>
+
+</body>
 </html>

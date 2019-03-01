@@ -8,7 +8,7 @@ $('#create_notam').on('click', function() {
     var latin = $('#latin').val();
     var longin = $('#longin').val();
     var stimein = $('#stimein').val();
-    var endtimein = $('#endtimein').val();
+    // var endtimein = $('#endtimein').val();
     var remarks = $('#remark').val();
 
     var notam_data = {
@@ -20,10 +20,10 @@ $('#create_notam').on('click', function() {
         latin: latin,
         longin: longin,
         stimein: stimein,
-        endtimein: endtimein,
+        // endtimein: endtimein,
         remarks: remarks
     }
-        
+    console.log('Adding Notam to Database');
     $.ajax({
         url : '/create_notam',
         type: 'POST',
@@ -52,3 +52,25 @@ $('#create_notam').on('click', function() {
     
 
 });
+
+// For Date Time Picker
+
+window.onload = function () {
+    $('#stimein_fac').daterangepicker({
+        timePicker: true,
+        startDate: moment().startOf('hour'),
+        endDate: moment().startOf('hour').add(32, 'hour'),
+        locale: {
+            format: 'M/DD hh:mm A'
+        }
+    });
+
+    $('#stimein').daterangepicker({
+        timePicker: true,
+        startDate: moment().startOf('hour'),
+        endDate: moment().startOf('hour').add(32, 'hour'),
+        locale: {
+            format: 'M/DD hh:mm A'
+        }
+    });
+};

@@ -45,12 +45,15 @@ def dashboard():
 @app.route('/create_notam',methods=['POST']) #Admin : Create Notams
 def create():
     notam = {}
-    keys = ['notam_series','notam_no','fir','scenario','nature','latin','longin','stimein','endtimein','remarks']
+    keys = ['notam_series','notam_no','fir','scenario','nature','latin','longin','stimein','remarks']
     data = request.get_json()
     notam_data = ""
     for key in keys:
         notam[key] = data[key]
         notam_data += " " + notam[key]
+    notam['coords'] = []
+    for i, j in zip(notam['latin'], notam['longin']):
+        notam['coords'].append((i,j))
     notam_extract = extract.tags(notam_data)
     for key in notam_extract.keys():
         notam[key] = notam_extract[key]
