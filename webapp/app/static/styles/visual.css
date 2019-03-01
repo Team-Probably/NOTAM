@@ -5,6 +5,9 @@ body{
     overflow: hidden;
 }
 
+.hide{
+    display:hidden;
+}
 .fullpage{
     overflow: hidden;
     width: 100%;
@@ -20,7 +23,7 @@ body{
     width: 25vw;
     height: 45vh;
     bottom: 0vw;
-    right: 2vw;
+    right: 5vw;
     transition: 0.5s; 
 }
 
@@ -34,7 +37,8 @@ body{
     margin-top:0vw;
     height: 2.5vh;
     width: 7.5vw;
-
+    float: left;
+    margin-left: 9vw;
 }
 
 #down_div{
@@ -42,6 +46,7 @@ body{
     width: 100%;
     /* Tempoary to be changed after adding jinja */
     height: 30vh;
+    float: left;
 }
 
 #right_nav{
@@ -73,4 +78,12 @@ body{
     /* Tempoary to be changed after adding jinja */
     height: 100%;
     float: right;
+}
+
+#halfscreen{
+    background: #469315;
+    height: 2.5vh;
+    width: 2.5vh;
+    float: right;
+
 }
