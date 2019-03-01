@@ -118,16 +118,16 @@
                                         <option value="G">Series G</option> 
                                 </select>
                                 
-                                <input id="notam_no" placeholder="NOTAM NO."/>
+                                <input id="notam_no_fac" placeholder="NOTAM NO."/>
                         </div>
                         <br/>
                         <div class="tbc">
                             <label>Enter the name of the facility</label><br/>
-                            <input placeholder="FACILITY NAME" id="fir"/>
+                            <input placeholder="FACILITY NAME" id="fir_fac"/>
                         </div>
                         <div class="tbc">
                             <label>IDENT</label><br/>
-                            <input placeholder="IDENT" id="latin_fac"/>
+                            <input placeholder="IDENT" id="ident_fac"/>
                         </div>
                         <div class="tbc">
                                 <label>Frequency</label><br/>
@@ -176,6 +176,7 @@
   <script type="text/javascript" src="{{ url_for('static', filename='js/imports/moment.min.js') }}"></script>
   <script src="{{ url_for('static', filename='js/admin/daterangepicker.js') }}"></script>
   <script  src="{{ url_for('static', filename='js/admin/create.js') }}"></script>
+  <script  src="{{ url_for('static', filename='js/admin/create_fac.js') }}"></script>
 <script src="{{ url_for('static', filename='js/admin/map_picker.js') }}"></script>
 
 </body>
