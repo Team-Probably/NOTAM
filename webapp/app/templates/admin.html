@@ -24,7 +24,7 @@
     
 	<nav class="navbar sticky-top navbar-dark mygrad">
 			<a class="navbar-brand" href="#">Kiteretsu</a>
-			<button class="btn btn-warning my-2 my-sm-0">Logout</button>
+			<button class="btn btn-warning my-2 my-sm-0" id="logout">Logout</button>
     </nav>
     <div class="full-page-except-nav" class="row">
     <div class="sidenav bg-dark col-md-3">
@@ -85,7 +85,12 @@
                     </div>
                     <div class="tbc">
                             <label>Nature of the event</label><br/>
-                    <input placeholder="NATURE" id="nature"/>
+                    
+                    <select id="nature">
+                            <option value="Prohibited">Prohibited</option>
+                            <option value="Danger">Danger</option>
+                            <option value="Restricted">Restricted</option>
+                    </select>
                     </div >
                     <div class="tbc">
                         <label>Coordinates</label><br/>
