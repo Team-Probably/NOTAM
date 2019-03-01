@@ -17,6 +17,10 @@ def visualizer():
 def listview():
     return render_template("index.html")
 
+@app.route('/admin')
+def admin():
+    return render_template('admin.html')
+
 
 @app.route('/processor', methods=['POST'])  # TO-DO : By Rushang and akshay
 def processor():
