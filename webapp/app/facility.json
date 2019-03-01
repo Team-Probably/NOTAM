@@ -1,4 +1,4 @@
-{
+[
     {
         "notam_no" : "a1234",
         "ident" : "1234",
@@ -47,4 +47,4 @@
         "remarks" : "none",
         "freq" : "idk"
     }
-}
+]
