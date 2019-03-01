@@ -22,7 +22,9 @@ def listview():
 
 @app.route('/admin')
 def admin():
-    return render_template('admin.html')
+    airspace = database.get_notams('airspace')
+    facility = database.get_notams('facility')
+    return render_template('admin.html', facility=facility, airspace=airspace)
 
 
 @app.route('/processor', methods=['POST'])  # TO-DO : By Rushang and akshay
@@ -43,7 +45,7 @@ def dashboard():
 @app.route('/create_notam',methods=['POST']) #Admin : Create Notams
 def create():
     notam = {}
-    keys = ['notam_series','notam_no','fir','scenario','nature','coords','time','remarks']
+    keys = ['notam_series','notam_no','fir','scenario','nature','latin','longin','stimein','endtimein','remarks']
     data = request.get_json()
     notam_data = ""
     for key in keys:
@@ -52,6 +54,8 @@ def create():
     notam_extract = extract.tags(notam_data)
     for key in notam_extract.keys():
         notam[key] = notam_extract[key]
+    notam['notam_type'] = 'airspace'
+    print(notam)
     if database.add_notam(notam):
         return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
     else:

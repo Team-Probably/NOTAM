@@ -1,13 +1,31 @@
 .sidenav{
-    position:fixed;
+    position:absolute;
     left:0;
     top:0;
     
-    padding-top: 5%;
-    height:100%;
+    
+    height: 100vh;
     width:20%;
     box-shadow: 5px 5px 10px #888;
 }
+
+.navbar{
+    margin-bottom: 0 !important;
+    border-radius: 0 !important;
+}
+
+.full-page-except-nav{
+    overflow:hidden;
+    
+}
+
+.main-page{
+    padding: 20px;
+}
+
+html,body { height:100%; overflow: hidden;}
+
+
 
 ul {
     list-style-type: none;
@@ -84,7 +102,7 @@ ul {
 
   }
 
-  #series{
+  #notam_series{
       width:40%;
       margin: auto; 
   }
@@ -166,3 +184,55 @@ textarea:hover{
     cursor: pointer;
 }
 
+.switch {
+    display: inline-block;
+    height: 34px;
+    position: relative;
+    width: 60px;
+  }
+  
+  .switch input {
+    display:none;
+  }
+  
+  .slider {
+    background-color: #ccc;
+    bottom: 0;
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    background-color: #fff;
+    bottom: 4px;
+    content: "";
+    height: 26px;
+    left: 4px;
+    position: absolute;
+    transition: .4s;
+    width: 26px;
+  }
+  
+  input:checked + .slider {
+    background-color: #66bb6a;
+  }
+  
+  input:checked + .slider:before {
+    transform: translateX(26px);
+  }
+  
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+  
+#fac{
+    display:none;
+}

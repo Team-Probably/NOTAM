@@ -5,8 +5,10 @@ $('#create_notam').on('click', function() {
     var fir = $('#fir').val();
     var scenario = $('#scenario').val();
     var nature = $('#nature').val();
-    var coords = $('#coords').val();
-    var time = $('#time').val();
+    var latin = $('#latin').val();
+    var longin = $('#longin').val();
+    var stimein = $('#stimein').val();
+    var endtimein = $('#endtimein').val();
     var remarks = $('#remark').val();
 
     var notam_data = {
@@ -15,8 +17,10 @@ $('#create_notam').on('click', function() {
         fir: fir,
         scenario: scenario,
         nature: nature,
-        coords: coords,
-        time: time,
+        latin: latin,
+        longin: longin,
+        stimein: stimein,
+        endtimein: endtimein,
         remarks: remarks
     }
         
@@ -28,11 +32,16 @@ $('#create_notam').on('click', function() {
         data: JSON.stringify(notam_data),
         success: function (data) {
             console.log('notam created');
-            if (data.success == 'true') {
-                console.log('Notam Created')
+            if (data.success == true) {
+                console.log('Notam Created');
+                var modal = document.getElementById('myModal');
+                $(modal).fadeOut();
             } else {
-                console.log(data.success)
+                console.log(data.success);
+                var modal = document.getElementById('myModal');
+                
             }
+            
         }
 
         

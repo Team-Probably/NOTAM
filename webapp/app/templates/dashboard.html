@@ -38,20 +38,7 @@
 
 
 		<!-- Jinja here -->
-		<div class="row">
-			<div class="col-md-12">
-
-				<div class="list-group list">
-					{% for notam in facility %}
-						{% include '_fcard.html' %}
-					{% endfor %}
-
-                    {% for notam in airspace %}
-						{% include '_acard.html' %}
-					{% endfor %}
-				</div>
-			</div>
-		</div>
+		{% include '_listview.html' %}
 	</div>
 </div>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
