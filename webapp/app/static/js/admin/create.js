@@ -61,20 +61,30 @@ $('#create_notam').on('click', function() {
 
 window.onload = function () {
     $('#stimein_fac').daterangepicker({
-        timePicker: true,
-        startDate: moment().startOf('hour'),
-        endDate: moment().startOf('hour').add(32, 'hour'),
+        "showDropdowns": true,
+        "timePicker": true,
+        "timePicker24Hour": true,
+        "startDate": "02/02/2019",
+        "endDate": "03/02/2019",
+        "drops": "up",
         locale: {
-            format: 'M/DD hh:mm A'
+            format: 'YYYY-MM-DD hh:mm A'
         }
+    }, function (start, end, label) {
+        console.log('New date range selected: ' + start.format('YYYY-MM-DD hh:mm A') + ' to ' + end.format('YYYY-MM-DD hh:mm A') + ' (predefined range: ' + label + ')');
     });
 
     $('#stimein').daterangepicker({
-        timePicker: true,
-        startDate: moment().startOf('hour'),
-        endDate: moment().startOf('hour').add(32, 'hour'),
+        "showDropdowns": true,
+        "timePicker": true,
+        "timePicker24Hour": true,
+        "startDate": "02/02/2019",
+        "endDate": "03/02/2019",
+        "drops": "up",
         locale: {
-            format: 'M/DD hh:mm A'
+            format: 'YYYY-MM-DD hh:mm A'
         }
+    }, function (start, end, label) {
+        console.log('New date range selected: ' + start.format('YYYY-MM-DD hh:mm A') + ' to ' + end.format('YYYY-MM-DD hh:mm A') + ' (predefined range: ' + label + ')');
     });
 };

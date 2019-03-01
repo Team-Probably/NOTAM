@@ -1,0 +1,12 @@
+.content_vis{
+    background: #461846;
+    height: 0px;
+    width: 100%;
+    display: none;
+}
+
+.magicopen{
+    height: 200px;
+    display: block;
+    transition: 0.5s;
+}
