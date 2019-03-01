@@ -46,5 +46,5 @@ def create():
     data = request.get_json()
     for key in keys:
         notam[key] = data[key]
-    return str(add_notam(notam))
+    
     
