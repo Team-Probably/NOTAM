@@ -20,21 +20,25 @@ $('#create_notam').on('click', function() {
         remarks: remarks
     }
         
-    req = $.ajax({
+    $.ajax({
         url : '/create_notam',
         type: 'POST',
         dataType: 'json',
         contentType: 'application/json',
-        data: JSON.stringify(notam_data)
+        data: JSON.stringify(notam_data),
+        success: function (data) {
+            console.log('notam created');
+            if (data.success == 'true') {
+                console.log('Notam Created')
+            } else {
+                console.log(data.success)
+            }
+        }
 
         
     });
 
-    req.done(function (data) {
-
-        console.log('notam created');
-
-    });
+    
     
     
 

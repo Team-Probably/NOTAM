@@ -1,6 +1,6 @@
 # views.py
 from flask import render_template,request
-
+import json
 from app import app
 from app import extract
 from app import database
@@ -47,5 +47,5 @@ def create():
     for key in keys:
         notam[key] = data[key]
     print(notam)
-    return render_template('admin.html')
+    return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
     
