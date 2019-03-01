@@ -33,21 +33,55 @@
         <div class="modal-content">
           <span class="close">&times;</span>
           <div id="modalhead">Create NOTAM</div>
+          <div class="container">
           <form>
-                <select aria-placeholder="NOTOM SERIES">
-                        <option value="A">Series A</option>
-                        <option value="B">Series B</option>
-                        <option value="G">Series G</option> 
-                </select>
-                <input placeholder="NOTAM NO."/>
-                <input placeholder="AFFECTED FIR"/>
-                <input placeholder="SCENARIO"/>
+                
+                <div id = "notamheads" class="container">
+                    <label>NOTAM Header</label><br/>
+                    <select id="series">
+                            <option value="A">Series A</option>
+                            <option value="B">Series B</option>
+                            <option value="G">Series G</option> 
+                    </select>
+                    
+                    <input id = "notamnoin" placeholder="NOTAM NO."/>
+                </div>
+                <br/>
+                <div class="container">
+                    <label>Enter the air space affected</label><br/>
+                    <input placeholder="AFFECTED FIR"/>
+                </div>
+                <div class="container">
+                    <label>SCENARIO</label><br/>
+                
+                    <select >
+                            <option value="A">CLOSURE</option>
+                            <option value="B">UNSERVICABLE</option>
+                    </select>
+                </div>
+                <div class="container">
+                        <label>Nature of the event</label><br/>
                 <input placeholder="NATURE"/>
-                <input placeholder="COORDS"/>
-                <input placeholder="TIME"/>
-                <input placeholder="REMARK"/><br/>
-            <div class = "btn bg-dark text-light" id ="create">Submit</div>
+                </div >
+                <div class="container">
+                    <label>Coordinates</label><br/>
+                    <input placeholder="LATTITUDE"/>
+                    <input placeholder="LONGITUDE"/><br/>
+                </div>
+                <div class="container">
+                    <label>Validity Period</label><br/>
+                    <input placeholder="STARTTIME"/>
+                    <input placeholder="ENDTIME"/>
+                </div>
+                <div class="container">
+                    <label>Remarks</label><br/>
+                    <textarea placeholder="REMARK"></textarea><br/>
+                </div class="container">
+                <div id="sbmb">
+                    <div  id ="create">Submit</div>
+                </div>
               </form>
+            </div>
         </div>
 
 
