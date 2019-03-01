@@ -26,3 +26,7 @@ def processor():
                     extract.extract('NOTAM.pdf')
                 ), mimetype='application/json'
             )
+
+@app.route('/dashboard') #USER : Notam Lists
+def dashboard():
+    return render_template("dashboard.html")
