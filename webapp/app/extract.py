@@ -1,5 +1,5 @@
 import re
-#import pdftotext
+import pdftotext
 import pprint
 
 keys = ['data', 'year', 'notam_no', 'class', 'timestamps', 'priority_score', 'phrase', 'widget', 'airport', 'coords']

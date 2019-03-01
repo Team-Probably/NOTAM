@@ -45,19 +45,24 @@ def dashboard():
 @app.route('/create_notam',methods=['POST']) #Admin : Create Notams
 def create():
     notam = {}
-    keys = ['notam_series','notam_no','fir','scenario','nature','latin','longin','stimein','remarks']
     data = request.get_json()
+    print(data)
+    if data['notam_type'] == 'airspace':
+        keys = ['notam_series','notam_no','fir','scenario','nature','latin','longin','stimein','remarks','notam_type']
+    else:
+        keys = ['notam_series','notam_no','fir','ident','freq','latin','longin','stimein','remarks','notam_type']    
     notam_data = ""
     for key in keys:
         notam[key] = data[key]
         notam_data += " " + notam[key]
     notam['coords'] = []
-    for i, j in zip(notam['latin'], notam['longin']):
-        notam['coords'].append((i,j))
+    notam['coords'].append((notam['latin'],notam['longin']))
     notam_extract = extract.tags(notam_data)
+    time = notam['stimein'].split('-')
+    notam['start_time'] = time[0]
+    notam['end_time'] = time[1]
     for key in notam_extract.keys():
         notam[key] = notam_extract[key]
-    notam['notam_type'] = 'airspace'
     print(notam)
     if database.add_notam(notam):
         return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}

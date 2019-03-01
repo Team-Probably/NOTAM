@@ -2,7 +2,9 @@ import pymongo
 import os
 from pymongo import MongoClient
 
-mongodb_url = str(os.environ["NOTAMS_MONGODB"])
+#mongodb_url = str(os.environ["NOTAMS_MONGODB"])
+#mongod --dbpath "/home/rusherrg/Projects/SIH/webapp/database" --port 10000
+mongodb_url = 'mongodb://localhost:10000/' 
 
 def connect():
     client = MongoClient(mongodb_url)
