@@ -9,11 +9,11 @@ def connect():
     db = client.notams
     return db
 
-def add_notam(notam_type, notam):
+def add_notam(notam):
     db = connect()
-    if notam_type == "airspace":
+    if notam['notam_type'] == "airspace":
         db = db.airspace
-    if notam_type == "facility":
+    if notam['notam_type'] == "facility":
         db = db.facility
     if db.find_one(notam):
         print("Already Present")
@@ -34,11 +34,11 @@ def get_notams(notam_type):
         notams.append(notam)
     return notams
 
-def remove_notam(notam_type, notam):
+def remove_notam(notam):
     db = connect()
-    if notam_type == "airspace":
+    if notam['notam_type'] == "airspace":
         db = db.airspace
-    if notam_type == "facility":
+    if notam['notam_type'] == "facility":
         db = db.facility
     if db.find_one(notam):
         db.delete_one(notam)
@@ -46,4 +46,5 @@ def remove_notam(notam_type, notam):
     else:
         print("NOTAM not Present")
     return
+
     
