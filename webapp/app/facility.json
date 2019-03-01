@@ -1,0 +1,50 @@
+[
+    {
+        "notam_no" : "a1234",
+        "ident" : "1234",
+        "coords" : "28421461,77689748",
+        "facility" : "sdff",
+        "notam_series" : "a",
+        "duration" : "006000",
+        "start_time" : "131415",
+        "end_time" : "131515",
+        "remarks" : "none",
+        "freq" : "null"
+    },
+    {
+        "notam_no" : "r5235",
+        "ident" : "5123",
+        "coords" : "19433538,72523955",
+        "facility" : "5135",
+        "notam_series" : "c",
+        "duration" : "006000",
+        "start_time" : "131415",
+        "end_time" : "131515",
+        "remarks" : "none",
+        "freq" : "idk"
+    },
+    {
+        "notam_no" : "r5235",
+        "ident" : "afrf",
+        "coords" : "28421461,77689748",
+        "facility" : "sdsdfve",
+        "notam_series" : "a",
+        "duration" : "006000",
+        "start_time" : "131415",
+        "end_time" : "131515",
+        "remarks" : "none",
+        "freq" : "idk"
+    },
+    {
+        "notam_no" : "k4122",
+        "ident" : "1324",
+        "coords" : "19433538,72523955",
+        "facility" : "51353423",
+        "notam_series" : "g",
+        "duration" : "012000",
+        "start_time" : "131415",
+        "end_time" : "131715",
+        "remarks" : "none",
+        "freq" : "idk"
+    }
+]

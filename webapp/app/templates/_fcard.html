@@ -1,0 +1,44 @@
+
+<a href="#" class="list-group-item">
+
+<div class="col-md-2">
+    <div class="notam_no">
+    <span class="notam_series">{{notam.notam_series}}</span>{{notam.notam_no}}
+    </div>
+</div>
+<div class="col-md-8">
+    <span class="notam">
+    {{notam.facility}}&nbsp;  
+    {{notam.ident}}&nbsp;
+    {{notam.freq}}&nbsp;
+    <br>
+    {% for cord in notam.coords%}
+        
+        ({{cord[0]}} , {{cord[1]}}) 
+
+    {% endfor %}
+
+    {{notam.start_time}}&nbsp;UNTIL&nbsp;{{notam.end_time}}
+    <br>
+    {{notam.remarks}}
+
+    
+</span>
+</div>
+
+<div class="col-md-2">
+    <div class="expertise">
+    <div class="read-more">
+        <button type="button" class="btn btn-primary btn-more">Visualize &nbsp; <i class="fa fa-chevron-circle-right" aria-hidden="true"></i></button>
+    </div>
+    <span class="expertise-label">Keywords&nbsp;</span>
+    <p class="labels">
+        {% for word in notam.keywords %}
+            <span class="label label-default expertise">{{word}}</span>
+        {% endfor %}
+    </p>
+    </div>
+</div>
+
+<div class="clearfix"></div>
+</a>

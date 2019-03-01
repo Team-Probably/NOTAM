@@ -3,6 +3,8 @@ from flask import render_template
 
 from app import app
 from app import extract
+from app import database
+
 @app.route('/') #TO-DO : By Aditya and Avi 
 def index():
     return render_template("index.html")
@@ -30,3 +32,9 @@ def processor():
                     extract.extract('NOTAM.pdf')
                 ), mimetype='application/json'
             )
+
+@app.route('/dashboard') #USER : Notam Lists
+def dashboard():
+    airspace = get_notams('airspace')
+    facility = get_notams('facility')
+    return render_template("dashboard.html", facility = facility , airspace = airspace)
