@@ -1,6 +1,6 @@
 # views.py
-from flask import render_template
-
+from flask import render_template,request
+import json
 from app import app
 from app import extract
 from app import database
@@ -38,3 +38,14 @@ def dashboard():
     airspace = get_notams('airspace')
     facility = get_notams('facility')
     return render_template("dashboard.html", facility = facility , airspace = airspace)
+
+@app.route('/create_notam',methods=['POST']) #Admin : Create Notams
+def create():
+    notam = {}
+    keys = ['notam_series','notam_no','fir','scenario','nature','coords','time','remarks']
+    data = request.get_json()
+    for key in keys:
+        notam[key] = data[key]
+    print(notam)
+    return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
+    

@@ -38,18 +38,18 @@
                 
                 <div id = "notamheads" class="container">
                     <label>NOTAM Header</label><br/>
-                    <select id="series">
+                    <select id="series" id="notam_series">
                             <option value="A">Series A</option>
                             <option value="B">Series B</option>
                             <option value="G">Series G</option> 
                     </select>
                     
-                    <input id = "notamnoin" placeholder="NOTAM NO."/>
+                    <input id="notam_no" placeholder="NOTAM NO."/>
                 </div>
                 <br/>
                 <div class="container">
                     <label>Enter the air space affected</label><br/>
-                    <input placeholder="AFFECTED FIR"/>
+                    <input placeholder="AFFECTED FIR" id="fir"/>
                 </div>
                 <div class="container">
                     <label>SCENARIO</label><br/>
@@ -61,27 +61,30 @@
                 </div>
                 <div class="container">
                         <label>Nature of the event</label><br/>
-                <input placeholder="NATURE"/>
+                <input placeholder="NATURE" id="scenario"/>
                 </div >
                 <div class="container">
                     <label>Coordinates</label><br/>
-                    <input placeholder="LATTITUDE"/>
-                    <input placeholder="LONGITUDE"/><br/>
+                    <input placeholder="LATTITUDE" id="latin"/>
+                    <input placeholder="LONGITUDE" id="longin"/><br/>
                 </div>
                 <div class="container">
                     <label>Validity Period</label><br/>
-                    <input placeholder="STARTTIME"/>
-                    <input placeholder="ENDTIME"/>
+                    <input placeholder="STARTTIME" id="stimein"/>
+                    <input placeholder="ENDTIME" id="endtimein"/>
                 </div>
                 <div class="container">
                     <label>Remarks</label><br/>
-                    <textarea placeholder="REMARK"></textarea><br/>
+                    <textarea placeholder="REMARK" id="remark"></textarea><br/>
                 </div class="container">
                 <div id="sbmb">
-                    <div  id ="create">Submit</div>
+                    <div  id ="create_notam">Submit</div>
                 </div>
               </form>
             </div>
+            
+                
+            </form>
         </div>
 
 
@@ -91,5 +94,7 @@
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>  
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script  src="{{ url_for('static', filename='js/admin/create.js') }}"></script>
  </body>
 </html>

@@ -89,7 +89,7 @@ ul {
       margin: auto; 
   }
 
-  #notamnoin{
+  #notam_no{
       margin:auto;
       width:40%;
   }
@@ -141,7 +141,7 @@ textarea:hover{
     width:100%;
 }
 
-#create{
+#create_notam{
     padding:0.1rem;
     margin: 1rem auto;
     border-radius : 30px 30px;
@@ -154,13 +154,13 @@ textarea:hover{
     transition: background-color 1s;
     text-align: center;
 }
-#create:hover{
+#create_notam:hover{
     background-color: rgb(0, 34, 98);
     color:#fff;
     cursor: pointer;
 }
 
-#create:focus{
+#create_notam:focus{
     background-color:rgb(0, 34, 98);
     color:#fff;
     cursor: pointer;
