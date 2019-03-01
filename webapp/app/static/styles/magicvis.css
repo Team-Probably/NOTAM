@@ -1,0 +1,15 @@
+.vismap{
+    width:60%;
+    height: 35vh;
+    min-height: 250px;
+}
+
+.visinfo{
+    margin-left:3%;
+    margin-top: 3%;
+    width:35%;
+}
+
+.visrow{
+    display: flex;
+}
