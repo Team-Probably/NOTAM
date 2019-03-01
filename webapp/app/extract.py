@@ -1,9 +1,6 @@
-
 import re
 import pdftotext
 import pprint
-
-
 
 keys = ['data', 'year', 'notam_no', 'class', 'timestamps', 'priority_score', 'phrase', 'widget', 'airport', 'coords']
 
@@ -13,12 +10,9 @@ def pdf_to_notams(filename):
         pdf = pdftotext.PDF(f)
         for i in range(len(pdf)):
             data_list.append(pdf[i])
-
     data = ""
     for page in data_list:
         data += "\n".join(page.split('\n')[1:-2])
-        
-
     notams = []
     notam_no = re.findall('[0-9][a-zA-Z][0-9]+\/[0-9]+',data)
     for i in range(len(notam_no)-1):
@@ -109,7 +103,6 @@ def getDaysTimes(s):
     return toret
 
 #getDaysTimes("1A166/19\n  MON 0430-2359,TUE WED THU FRI H24, SAT 0000-1230\n  PORTION OF RWY 32 FM BEGINNING UP TO THR RWY 32\n   NOT AVBL FOR TAX. REMAINING PORTION OF RWY\n   14/32 AVBL FOR TAX. TOWING OF ACFT TO/FM APN L\n   WILL BE PERMITTED UNDER FLW ME SER WITH 01HR\n   NOTICE.EMERG RESTORATION TIME 03HR FM SUNRISE\n   TO SUNSET AND 04HR FM SUNSET TO SUNRISE\n")
-        
 
 def valuetype(s):
     aall = ['LENGTH','WIDTH','PSN', 'POSITION', 'ALTITUDE', 'DISTANCE','DIST', 'FREQ','FREQUENCY','SPEED', 'HEIGHT', 'COORD', 'ANGLE', 'DAYS', 'DATES','ELEVATION', 'ELEV']
@@ -133,64 +126,52 @@ def extract(filename='NOTAM.pdf'):
     dataout=[]
 
     for notam in notams:
-        upl = notam.split('\n')[0].split('/')
-        notamno = upl[0]
-        year = upl[1][:2]
-        clas = notamno[1]
-        times = re.findall('[0-9]{4}-[0-9]{4}', notam)
-        days = list(filter(lambda x: x in notam,daysall ))
-        runways = list(set(re.findall('RWY *[0-9][0-9A-Za-z/]+', notam)))
-        taxiways = list(set(re.findall('TWY *[0-9][0-9A-Za-z/]+', notam)))
-        
-        ls = notam.split('\n')
-        for e in ls:
-            if 'EAIP' in e:
-                ls.remove(e)
-        
-        sentences = ' '.join(ls).replace('.\n', '. ').replace('+\n', '. ').replace('-\n', '. ').split('. ')
-        # print(sentences)
-        sentence_an = []
-        for sentence in sentences:
-            runs = list(set(re.findall('RWY *[0-9][0-9A-Za-z/]+', sentence)))
-            taxis = list(set(re.findall('TWY *[0-9][0-9A-Za-z/]+', sentence)))
-            coords = re.findall('[0-9]{6,7}.[0-9]{1,2}[N|E|W|S]', sentence)
-            san = {}
-            san['content'] = sentence
-            san['subject'] = getSubjects(' '+sentence.replace('\n', ' ')+' ')
-            san['mod'] = getMod(' '+sentence.replace('\n', ' ')+' ')
-            san['extra'] = getExtra(' '+sentence.replace('\n', ' ')+' ')
-            san['runways'] = runs
-            san['taxiways'] = taxis
-            san['coords'] = coords
-            san['daystimes']=getDaysTimes(sentence)
-            san['valuetypes']=valuetype(sentence)
-            sentence_an.append(san)
-
-            
-        data = {}
-        data['notamno']=notamno
-        data['class']=clas
-        data['content']='\n'.join(notam.split('\n')[1:])
-        data['priority'] = rushang()
-        data['runways']=runways
-        data['taxiways']=taxiways
-        data['year']=year
-        data['sentence_an']=sentence_an
-        print(pprint.pprint(data))
+        data = tags(notam)
         dataout.append(data)
-        
-        
-        
-
-
-
-
     pprint.pprint(dataout)
     return dataout
 
-
-
-
-
-
-
+def tags(notam):
+    upl = notam.split('\n')[0].split('/')
+    notamno = upl[0]
+    year = upl[1][:2]
+    clas = notamno[1]
+    times = re.findall('[0-9]{4}-[0-9]{4}', notam)
+    days = list(filter(lambda x: x in notam,daysall ))
+    runways = list(set(re.findall('RWY *[0-9][0-9A-Za-z/]+', notam)))
+    taxiways = list(set(re.findall('TWY *[0-9][0-9A-Za-z/]+', notam)))
+    
+    ls = notam.split('\n')
+    for e in ls:
+        if 'EAIP' in e:
+            ls.remove(e)
+    
+    sentences = ' '.join(ls).replace('.\n', '. ').replace('+\n', '. ').replace('-\n', '. ').split('. ')
+    # print(sentences)
+    sentence_an = []
+    for sentence in sentences:
+        runs = list(set(re.findall('RWY *[0-9][0-9A-Za-z/]+', sentence)))
+        taxis = list(set(re.findall('TWY *[0-9][0-9A-Za-z/]+', sentence)))
+        coords = re.findall('[0-9]{6,7}.[0-9]{1,2}[N|E|W|S]', sentence)
+        san = {}
+        san['content'] = sentence
+        san['subject'] = getSubjects(' '+sentence.replace('\n', ' ')+' ')
+        san['mod'] = getMod(' '+sentence.replace('\n', ' ')+' ')
+        san['extra'] = getExtra(' '+sentence.replace('\n', ' ')+' ')
+        san['runways'] = runs
+        san['taxiways'] = taxis
+        san['coords'] = coords
+        san['daystimes']=getDaysTimes(sentence)
+        san['valuetypes']=valuetype(sentence)
+        sentence_an.append(san)
+    data = {}
+    data['notamno']=notamno
+    data['class']=clas
+    data['content']='\n'.join(notam.split('\n')[1:])
+    data['priority'] = rushang()
+    data['runways']=runways
+    data['taxiways']=taxiways
+    data['year']=year
+    data['sentence_an']=sentence_an
+    print(pprint.pprint(data))
+    return data
