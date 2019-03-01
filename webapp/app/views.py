@@ -1,5 +1,5 @@
 # views.py
-from flask import render_template
+from flask import render_template,request
 
 from app import app
 from app import extract
@@ -38,3 +38,13 @@ def dashboard():
     airspace = get_notams('airspace')
     facility = get_notams('facility')
     return render_template("dashboard.html", facility = facility , airspace = airspace)
+
+@app.route('/create_notam') #Admin : Create Notams
+def create():
+    notam = {}
+    keys = ['notam_series','notam_no','fir','scenario','nature','coords','time','remarks']
+    for key in keys:
+        notam[key] = request.form(key)
+    print(notam)
+    return render_template(str(notam))
+    
