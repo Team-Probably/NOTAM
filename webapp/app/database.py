@@ -2,29 +2,29 @@ import pymongo
 import os
 from pymongo import MongoClient
 
-#mongodb_url = str(os.environ["NOTAMS_MONGODB"])
+mongodb_remote_url = str(os.environ["NOTAMS_MONGODB"])
 #mongod --dbpath "/home/rusherrg/Projects/SIH/webapp/database" --port 10000
-mongodb_url = 'mongodb://localhost:10000/' 
+mongodb_local_url = 'mongodb://localhost:10000/' 
 
-def connect():
-    client = MongoClient(mongodb_url)
+def connect(uri):
+    client = MongoClient(uri)
     db = client.notams
     return db
 
 def add_notam(notam):
-    db = connect()
+    db = connect(mongodb_local_url)
     if notam['notam_type'] == "airspace":
         db = db.airspace
     if notam['notam_type'] == "facility":
         db = db.facility
-    if db.find_one(notam):
+    if db.find_one({'notam_no':notam['notam_no'],'notam_series':notam['notam_series']}):
         print("Already Present")
         return 0
     db.insert(notam)
     return 1
 
 def get_notams(notam_type):
-    db = connect()
+    db = connect(mongodb_local_url)
     if notam_type == "airspace":
         db = db.airspace
     if notam_type == "facility":
@@ -36,20 +36,23 @@ def get_notams(notam_type):
     return notams
 
 def remove_notam(notam):
-    db = connect()
+    db = connect(mongodb_local_url)
     if notam['notam_type'] == "airspace":
         db = db.airspace
     if notam['notam_type'] == "facility":
         db = db.facility
-    if db.find_one(notam):
-        db.delete_one(notam)
+    if db.find_one({'notam_no':notam['notam_no'],'notam_series':notam['notam_series']}):
+        try:
+            db.delete_one(notam)
+        except:
+            print("ERROR")
         print("NOTAM Deleted")
     else:
         print("NOTAM not Present")
     return
 
 def add_user(user):
-    db = connect()
+    db = connect(mongodb_local_url)
     db = db.users
     if db.find_one(user):
         return 0
@@ -58,9 +61,31 @@ def add_user(user):
     return 1
 
 def verify_login(user):
-    db = connect()
+    db = connect(mongodb_local_url)
     db = db.users
     if db.find_one(user):
         print(user, "LOGIN SUCCESSFUL")
         return 1
     return 0
+
+def mongodb_push():
+    remote = connect(mongodb_remote_url)
+    local = connect(mongodb_local_url)
+    collections = local.collection_names()
+    for coll in collections:
+        for data in list(local[coll].find()):
+            if list(remote[coll].find(data))!=[]:
+                remote[coll].insert(data)
+    return
+
+def mongodb_pull():
+    remote = connect(mongodb_remote_url)
+    local = connect(mongodb_local_url)
+    collections = local.collection_names()
+    for coll in collections:
+        for data in list(remote[coll].find()):
+            if list(local[coll].find(data))!=[]:
+                local[coll].insert(data)
+    return
+    
+            
