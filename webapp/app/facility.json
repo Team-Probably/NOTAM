@@ -1,12 +1,50 @@
 {
-    "notam_no" : "",
-    "ident" : "",
-    "coords" : "",
-    "facility" : "",
-    "notam_series" : "",
-    "duration" : "",
-    "start_time" : "",
-    "end_time" : "",
-    "remarks" : "",
-    "freq" : ""
+    {
+        "notam_no" : "abcd",
+        "ident" : "1234",
+        "coords" : "12314,53123",
+        "facility" : "sdff",
+        "notam_series" : "a",
+        "duration" : "4189489324",
+        "start_time" : "5145145",
+        "end_time" : "154232",
+        "remarks" : "none",
+        "freq" : "null"
+    },
+    {
+        "notam_no" : "a1342ec",
+        "ident" : "5123",
+        "coords" : "151,514",
+        "facility" : "5135",
+        "notam_series" : "c",
+        "duration" : "26143",
+        "start_time" : "53453",
+        "end_time" : "513453",
+        "remarks" : "none",
+        "freq" : "idk"
+    },
+    {
+        "notam_no" : "a1342ec",
+        "ident" : "afrf",
+        "coords" : "31223242,234.123",
+        "facility" : "sdsdfve",
+        "notam_series" : "a",
+        "duration" : "52341",
+        "start_time" : "41345343",
+        "end_time" : "5541333",
+        "remarks" : "none",
+        "freq" : "idk"
+    },
+    {
+        "notam_no" : "32",
+        "ident" : "1324",
+        "coords" : "98193,5135.342",
+        "facility" : "51353423",
+        "notam_series" : "g",
+        "duration" : "5144354",
+        "start_time" : "53453",
+        "end_time" : "234435",
+        "remarks" : "none",
+        "freq" : "idk"
+    }
 }
