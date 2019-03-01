@@ -39,12 +39,13 @@ def dashboard():
     facility = get_notams('facility')
     return render_template("dashboard.html", facility = facility , airspace = airspace)
 
-@app.route('/create_notam') #Admin : Create Notams
+@app.route('/create_notam',methods=['POST']) #Admin : Create Notams
 def create():
     notam = {}
     keys = ['notam_series','notam_no','fir','scenario','nature','coords','time','remarks']
+    data = request.get_json()
     for key in keys:
-        notam[key] = request.form(key)
+        notam[key] = data[key]
     print(notam)
-    return render_template(str(notam))
+    return render_template('admin.html')
     
