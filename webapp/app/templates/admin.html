@@ -25,7 +25,7 @@
 			</ul>
     </div>
     
-	<div class="main-page container col-md-9 container">
+	<div class="main-page container col-md-9 ">
 		
 		{% include '_listview.html' %}
     </div>
@@ -41,16 +41,17 @@
 	<div class="modal-content">
 		<span class="close">&times;</span>
 		<div id="modalhead">Create NOTAM</div>
-		<div class="container">
+		<div class="tbcm">
             <form>
-                <div class="container">
-                        FIR&nbsp;<label class="switch" for="checkbox">
-                            <input type="checkbox" id="checkboxtog" onchange="checkch()"/>
+                <div class="tbc">
+                        <span class="shiftup">Airspace&nbsp;</span><label class="switch shiftdown" for="checkboxtog" onclick="checkch()">
+                            <input type="checkbox" id="checkboxtog" />
                             <div class="slider round"></div>
-                        </label>&nbsp;FACILTY
+                        </label><span class="shiftup">&nbsp;Facility</span>
                 </div>
+                <br/>
                 <div id="fir">
-                    <div id = "notamheads" class="container">
+                    <div id = "notamheads" class="tbc">
                         <label>NOTAM Header</label><br/>
                         <select  id="notam_series">
                                 <option value="A">Series A</option>
@@ -61,40 +62,40 @@
                         <input id="notam_no" placeholder="NOTAM NO."/>
                     </div>
                     <br/>
-                    <div class="container">
+                    <div class="tbc">
                         <label>Enter the air space affected</label><br/>
                         <input placeholder="AFFECTED FIR" id="fir"/>
                     </div>
-                    <div class="container">
-                        <label>SCENARIO</label><br/>
+                    <div class="tbc">
+                        <label>Scenario</label><br/>
                     
                         <select id="scenario">
                                 <option value="A">CLOSURE</option>
                                 <option value="B">UNSERVICABLE</option>
                         </select>
                     </div>
-                    <div class="container">
+                    <div class="tbc">
                             <label>Nature of the event</label><br/>
                     <input placeholder="NATURE" id="nature"/>
                     </div >
-                    <div class="container">
+                    <div class="tbc">
                         <label>Coordinates</label><br/>
                         <input placeholder="LATTITUDE" id="latin"/>
                         <input placeholder="LONGITUDE" id="longin"/><br/>
                     </div>
-                    <div class="container">
+                    <div class="tbc">
                         <label>Validity Period</label><br/>
                         <input placeholder="STARTTIME" id="stimein"/>
                         <input placeholder="ENDTIME" id="endtimein"/>
                     </div>
-                    <div class="container">
+                    <div class="tbc">
                         <label>Remarks</label><br/>
                         <textarea placeholder="REMARK" id="remark"></textarea><br/>
-                    </div class="container">
+                    </div >
                     
                 </div>
                 <div id="fac">
-                        <div id = "notamheads_fac" class="container">
+                        <div id = "notamheads_fac" class="tbc">
                                 <label>NOTAM Header</label><br/>
                                 <select  id="notam_series_fac">
                                         <option value="A">Series A</option>
@@ -105,32 +106,32 @@
                                 <input id="notam_no" placeholder="NOTAM NO."/>
                         </div>
                         <br/>
-                        <div class="container">
+                        <div class="tbc">
                             <label>Enter the name of the facility</label><br/>
                             <input placeholder="FACILITY NAME" id="fir"/>
                         </div>
-                        <div class="container">
+                        <div class="tbc">
                             <label>IDENT</label><br/>
                             <input placeholder="IDENT" id="latin_fac"/>
                         </div>
-                        <div class="container">
+                        <div class="tbc">
                                 <label>Frequency</label><br/>
                                 <input placeholder="FREQ" id="freq_fac"/>
                         </div >
-                        <div class="container">
+                        <div class="tbc">
                             <label>Coordinates</label><br/>
                             <input placeholder="LATTITUDE" id="latin_fac"/>
                             <input placeholder="LONGITUDE" id="longin_fac"/><br/>
                         </div>
-                        <div class="container">
+                        <div class="tbc">
                             <label>Validity Period</label><br/>
                             <input placeholder="STARTTIME" id="stimein_fac"/>
                             <input placeholder="ENDTIME" id="endtimein_fac"/>
                         </div>
-                        <div class="container">
+                        <div class="tbc">
                             <label>Remarks</label><br/>
                             <textarea placeholder="REMARK" id="remark_fac"></textarea><br/>
-                        </div class="container">
+                        </div>
                 </div>
                 <div id="sbmb">
                         <div  id ="create_notam">Submit</div>

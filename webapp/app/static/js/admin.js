@@ -23,12 +23,19 @@ window.onclick = function(event) {
   }
 }
 
+
 function checkch()
 {
+    console.log('hi');
     var chk = document.getElementById('checkboxtog');
     if(chk.checked)
     {
         document.getElementById('fir').style.display='none';
+        document.getElementById('fac').style.display='block';
+        
+    }
+    else{
+        document.getElementById('fac').style.display='none';
         document.getElementById('fir').style.display='block';
     }
 }
