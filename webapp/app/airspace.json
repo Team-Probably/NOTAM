@@ -1,1 +1,17 @@
-{{"notam_no" : "s123","notam_series" : "a","ICO" : "413","duration" : "54134","start_time" : "31243","end_time" : "342","facility" : "fgr","ident" : "4344f","nature_closure" : "bombing","affected_fir" : "dvaer","coords" : [3123,4134],"limit" : [2414,414],"freq" : "idk","remarks" : "none" },{"notam_no" : "s123","notam_series" : "a","ICO" : "413","duration" : "54134","start_time" : "31243","end_time" : "342","facility" : "fgr","ident" : "4344f","nature_closure" : "bombing","affected_fir" : "dvaer","coords" : [3123,4134],"limit" : [2414,414],"freq" : "idk","remarks" : "none" },{"notam_no" : "s123","notam_series" : "a","ICO" : "413","duration" : "54134","start_time" : "31243","end_time" : "342","facility" : "fgr","ident" : "4344f","nature_closure" : "bombing","affected_fir" : "dvaer","coords" : [3123,4134],"limit" : [2414,414],"freq" : "idk","remarks" : "none" }}
+{
+    "notam_no" : "4123",
+    "notam_series" : "A",
+    "ICO" : "413",
+    "duration" : "54134",
+    "start_time" : "31243",
+    "end_time" : "342",
+    "facility" : "FGR",
+    "ident" : "4344f",
+    "nature_closure" : "bombing",
+    "affected_fir" : "dvaer",
+    "coords" : [3123,4134],
+    "limit" : [2414,414],
+    "freq" : "idk",
+    "remarks" : "none" 
+}
+

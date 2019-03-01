@@ -29,4 +29,6 @@ def processor():
 
 @app.route('/dashboard') #USER : Notam Lists
 def dashboard():
-    return render_template("dashboard.html")
+    airspace = get_notams('airspace')
+    facility = get_notams('facility')
+    return render_template("dashboard.html", facility = facility , airspace = airspace)

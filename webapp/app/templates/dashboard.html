@@ -2,81 +2,57 @@
 <html lang="en" >
 
 <head>
-  <meta charset="UTF-8">
-  <title>Search and Sort Bootstrap 3 List Group with List.js</title>
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
-    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
-    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700,700i'>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/dashboard.css') }}">
-  
+	<meta charset="UTF-8">
+	<title>Search and Sort Bootstrap 3 List Group with List.js</title>
+		<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
+		<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
+		<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700,700i'>
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/dashboard.css') }}">
+	
 </head>
 
 <body>
 
-  <div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <h1>Search and Filter Bootstrap 3 List Group</h1>
-    </div>
-  </div>
+	<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h1>Search and Filter Bootstrap 3 List Group</h1>
+		</div>
+	</div>
 </div>
 <div id="users">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
 
-        <input class="search form-control" placeholder="Search" />
-        <button class="sort btn btn-primary" data-sort="name">
-          Sort by name
-        </button>
-        <button class="sort btn btn-primary" data-sort="title">
-          Sort by title
-        </button>
-       
-      </div>
-    </div>
+				<input class="search form-control" placeholder="Search" />
+				<button class="sort btn btn-primary" data-sort="name">
+					Sort by name
+				</button>
+				<button class="sort btn btn-primary" data-sort="title">
+					Sort by title
+				</button>
+			 
+			</div>
+		</div>
 
 
-    <!-- Jinja here -->
-    <div class="row">
-      <div class="col-md-12">
+		<!-- Jinja here -->
+		<div class="row">
+			<div class="col-md-12">
 
-        <div class="list-group list">
-          <a href="#" class="list-group-item">
+				<div class="list-group list">
+					{% for notam in facility %}
+						{% include '_fcard.html' %}
+					{% endfor %}
 
-            <div class="col-md-2">
-              <div class="notam_no">
-                <span class="notam_series">A</span>4132
-              </div>
-            </div>
-            <div class="col-md-8">
-              <span class="notam">A3191/18 NOTAMN
-              Q) WMFC/QMPXX/IV/NBO/A /000/999/0244N10141E005
-              A) WMKK B) 1810150101 C) PERM
-              E) BAY A3 AND BAY B3 FOR TYP B737-800 AND BLW ONLY
-            </span>
-            </div>
-
-            <div class="col-md-2">
-              <div class="expertise">
-                <div class="read-more">
-                  <button type="button" class="btn btn-primary btn-more">Read More &nbsp; <i class="fa fa-chevron-circle-right" aria-hidden="true"></i></button>
-                </div>
-                <span class="expertise-label">Areas of Expertise &nbsp;</span>
-                <p class="labels">
-                <span class="label label-default expertise">Love</span>
-                <span class="label label-default expertise">Spells</span>
-                <span class="label label-default expertise">Magic</span>
-                <span class="label label-default expertise">Alchemy</span>
-                </p>
-              </div>
-            </div>
-            <div class="clearfix"></div>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
+                    {% for notam in airspace %}
+						{% include '_acard.html' %}
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js'></script>
