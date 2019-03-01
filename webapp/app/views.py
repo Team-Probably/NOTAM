@@ -2,8 +2,8 @@
 from flask import render_template,request
 import json
 from app import app
-from app import extract
-from app import database
+import extract
+import database
 
 @app.route('/') #TO-DO : By Aditya and Avi 
 def index():

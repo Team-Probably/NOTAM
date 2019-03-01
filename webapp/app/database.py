@@ -17,10 +17,9 @@ def add_notam(notam):
         db = db.facility
     if db.find_one(notam):
         print("Already Present")
-        return
+        return 0
     db.insert(notam)
-    print("NOTAM Inserted")
-    return
+    return 1
 
 def get_notams(notam_type):
     db = connect()
