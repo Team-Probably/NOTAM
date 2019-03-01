@@ -30,12 +30,12 @@ function checkch()
     var chk = document.getElementById('checkboxtog');
     if(chk.checked)
     {
-        document.getElementById('fir').style.display='none';
+        document.getElementById('firdiv').style.display='none';
         document.getElementById('fac').style.display='block';
         
     }
     else{
         document.getElementById('fac').style.display='none';
-        document.getElementById('fir').style.display='block';
+        document.getElementById('firdiv').style.display='block';
     }
 }

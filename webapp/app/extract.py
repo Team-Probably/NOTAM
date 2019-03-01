@@ -3,7 +3,7 @@ import re
 import pprint
 
 keys = ['data', 'year', 'notam_no', 'class', 'timestamps', 'priority_score', 'phrase', 'widget', 'airport', 'coords']
-
+daysall = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN']
 def pdf_to_notams(filename):
     data_list = []
     with open(filename,"rb") as f:
