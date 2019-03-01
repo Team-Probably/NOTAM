@@ -5,8 +5,10 @@ $('#create_notam').on('click', function() {
     var fir = $('#fir').val();
     var scenario = $('#scenario').val();
     var nature = $('#nature').val();
-    var coords = $('#coords').val();
-    var time = $('#time').val();
+    var latin = $('#latin').val();
+    var longin = $('#longin').val();
+    var stimein = $('#stimein').val();
+    var endtimein = $('#endtimein').val();
     var remarks = $('#remark').val();
 
     var notam_data = {
@@ -15,8 +17,10 @@ $('#create_notam').on('click', function() {
         fir: fir,
         scenario: scenario,
         nature: nature,
-        coords: coords,
-        time: time,
+        latin: latin,
+        longin: longin,
+        stimein: stimein,
+        endtimein: endtimein,
         remarks: remarks
     }
         
