@@ -32,11 +32,16 @@ $('#create_notam').on('click', function() {
         data: JSON.stringify(notam_data),
         success: function (data) {
             console.log('notam created');
-            if (data.success == 'true') {
-                console.log('Notam Created')
+            if (data.success == true) {
+                console.log('Notam Created');
+                var modal = document.getElementById('myModal');
+                $(modal).fadeOut();
             } else {
-                console.log(data.success)
+                console.log(data.success);
+                var modal = document.getElementById('myModal');
+                
             }
+            
         }
 
         
