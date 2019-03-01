@@ -17,33 +17,46 @@
   <div class="row">
     <div class="col-md-12">
       <h1>Search and Filter Bootstrap 3 List Group</h1>
-    </div>transition: 0.5s; 
+    </div>
   </div>
 </div>
 <div id="users">
   <div class="container">
     <div class="row">
       <div class="col-md-12">
+
         <input class="search form-control" placeholder="Search" />
         <button class="sort btn btn-primary" data-sort="name">
-    Sort by name
-  </button>
+          Sort by name
+        </button>
         <button class="sort btn btn-primary" data-sort="title">
-    Sort by title
-  </button>
+          Sort by title
+        </button>
        
       </div>
     </div>
+
+
+    <!-- Jinja here -->
     <div class="row">
       <div class="col-md-12">
 
         <div class="list-group list">
           <a href="#" class="list-group-item">
-            <div class="col-md-10">
-              <img src="https://gravatar.com/avatar/ff3265b13420b9d301d0005ef494385a?s=80&d=https://codepen.io/assets/avatars/user-avatar-80x80-bdcd44a3bfb9a5fd01eb8b86f9e033fa1a9897c3a15b33adfc2649a002dab1b6.png" class="pull-left photo">
-              <h4 class="list-group-item-heading name">Dr. Kevin Schueller, PhD</h4>
-              <p class="list-group-item-text title">Professor of Witchcraft</p>
+
+            <div class="col-md-2">
+              <div class="notam_no">
+                <span class="notam_series">A</span>4132
+              </div>
             </div>
+            <div class="col-md-8">
+              <span class="notam">A3191/18 NOTAMN
+              Q) WMFC/QMPXX/IV/NBO/A /000/999/0244N10141E005
+              A) WMKK B) 1810150101 C) PERM
+              E) BAY A3 AND BAY B3 FOR TYP B737-800 AND BLW ONLY
+            </span>
+            </div>
+
             <div class="col-md-2">
               <div class="expertise">
                 <div class="read-more">
@@ -59,89 +72,7 @@
               </div>
             </div>
             <div class="clearfix"></div>
-           <a href="#" class="list-group-item">
-            <div class="col-md-10">
-              <img src="https://cldup.com/iK8ZpZm42G-3000x3000.png" class="pull-left photo">
-              <h4 class="list-group-item-heading name">Alyssa Porambo, HKF</h4>
-              <p class="list-group-item-text title">Faculty Advisor for the Hello Kitty Fan Club</p>
-            </div>
-            <div class="col-md-2">
-              <div class="expertise">
-                <div class="read-more">
-                  <button type="button" class="btn btn-primary btn-more">Read More &nbsp; <i class="fa fa-chevron-circle-right" aria-hidden="true"></i></button>
-                </div>
-                <span class="expertise-label">Areas of Expertise &nbsp;</span>
-                <p class="labels">
-                <span class="label label-default expertise">Kitties</span>
-                <span class="label label-default expertise">Pink Bows</span>
-                <span class="label label-default expertise">Nosebreathers</span>
-                </p>
-              </div>
-            </div>
-            <div class="clearfix"></div>
-             <a href="#" class="list-group-item">
-            <div class="col-md-10">
-              <img src="https://cldup.com/rvcqJvAhF8-3000x3000.jpeg" class="pull-left photo">
-              <h4 class="list-group-item-heading name">Kristin Norton</h4>
-              <p class="list-group-item-text title">Professor of Chakras, Light, and Love</p>
-            </div>
-            <div class="col-md-2">
-              <div class="expertise">
-                <div class="read-more">
-                  <button type="button" class="btn btn-primary btn-more">Read More &nbsp; <i class="fa fa-chevron-circle-right" aria-hidden="true"></i></button>
-                </div>
-                <span class="expertise-label">Areas of Expertise &nbsp;</span>
-                <p class="labels">
-                <span class="label label-default expertise">Beads</span>
-                <span class="label label-default expertise">Buddha</span>
-                <span class="label label-default expertise">Reiki</span>
-                <span class="label label-default expertise">Crystals</span>
-                </p>
-              </div>
-            </div>
-            <div class="clearfix"></div>
-               <a href="#" class="list-group-item">
-            <div class="col-md-10">
-              <img src="https://scontent.cdninstagram.com/t51.2885-19/s150x150/16906528_199349667211504_5513904462286028800_a.jpg" class="pull-left photo">
-              <h4 class="list-group-item-heading name">Dan Nguyen</h4>
-              <p class="list-group-item-text title">Professor of Film</p>
-            </div>
-            <div class="col-md-2">
-              <div class="expertise">
-                <div class="read-more">
-                  <button type="button" class="btn btn-primary btn-more">Read More &nbsp; <i class="fa fa-chevron-circle-right" aria-hidden="true"></i></button>
-                </div>
-                <span class="expertise-label">Areas of Expertise &nbsp;</span>
-                <p class="labels">
-                <span class="label label-default expertise">Photography</span>
-                <span class="label label-default expertise">Cameras</span>
-                <span class="label label-default expertise">Netflix</span>
-                </p>
-              </div>
-            </div>
-            <div class="clearfix"></div>
-                 <a href="#" class="list-group-item">
-            <div class="col-md-10">
-              <img src="https://pbs.twimg.com/profile_images/612768818662928384/iHzVIY95_400x400.jpg" class="pull-left photo">
-              <h4 class="list-group-item-heading name">Dr. Greg Fala, PhD</h4>
-              <p class="list-group-item-text title">Professor of Piano</p>
-            </div>
-            <div class="col-md-2">
-              <div class="expertise">
-                <div class="read-more">
-                  <button type="button" class="btn btn-primary btn-more">Read More &nbsp; <i class="fa fa-chevron-circle-right" aria-hidden="true"></i></button>
-                </div>
-                <span class="expertise-label">Areas of Expertise &nbsp;</span>
-                <p class="labels">
-                <span class="label label-default expertise">Beatles Songs</span>
-                <span class="label label-default expertise">Baseball</span>
-                <span class="label label-default expertise">Dancing to "Happy"</span>
-                </p>
-              </div>
-            </div>
-            <div class="clearfix"></div>
-
-                </a>
+          </a>
         </div>
       </div>
     </div>

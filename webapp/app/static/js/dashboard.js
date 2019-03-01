@@ -2,4 +2,4 @@ var options = {
     valueNames: [ 'name', 'title', 'expertise' ]
   };
   
-  var userList = new List('users', options);
+  var userList = new List('users', options); 
