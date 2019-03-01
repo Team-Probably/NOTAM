@@ -160,12 +160,12 @@ def tags(notam):
         san['extra'] = getExtra(' '+sentence.replace('\n', ' ')+' ')
         san['runways'] = runs
         san['taxiways'] = taxis
-        san['coords'] = coords
+        #san['coords'] = coords
         san['daystimes']=getDaysTimes(sentence)
         san['valuetypes']=valuetype(sentence)
         sentence_an.append(san)
     data = {}
-    data['notamno']=notamno
+    #data['notamno']=notamno
     data['class']=clas
     data['content']='\n'.join(notam.split('\n')[1:])
     data['priority'] = rushang()
