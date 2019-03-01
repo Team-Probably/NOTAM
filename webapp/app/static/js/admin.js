@@ -22,3 +22,13 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
+
+function checkch()
+{
+    var chk = document.getElementById('checkboxtog');
+    if(chk.checked)
+    {
+        document.getElementById('fir').style.display='none';
+        document.getElementById('fir').style.display='block';
+    }
+}
