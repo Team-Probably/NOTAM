@@ -1,5 +1,8 @@
 $('#create_notam').on('click', function() {
-
+    var chk = document.getElementById('checkboxtog');
+    console.log(chk.checked);
+    if(chk.checked)
+        return;
     var notam_series = $('#notam_series').val();
     var notam_no = $('#notam_no').val();
     var fir = $('#fir').val();
@@ -21,9 +24,10 @@ $('#create_notam').on('click', function() {
         longin: longin,
         stimein: stimein,
         // endtimein: endtimein,
-        remarks: remarks
+        remarks: remarks,
+        notam_type: "airspace"
     }
-    console.log('Adding Notam to Database');
+    console.log('Adding Notam to Airspace');
     $.ajax({
         url : '/create_notam',
         type: 'POST',
