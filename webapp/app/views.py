@@ -7,7 +7,7 @@ from app import database
 
 @app.route('/') #TO-DO : By Aditya and Avi 
 def index():
-    return render_template("index.html")
+    return render_template("login.html")    
 
 
 @app.route('/visualizer') #TO-DO : By Kiteretsu
@@ -15,7 +15,7 @@ def visualizer():
     return render_template("visualizer/visual.html")
 
 
-@app.route('/listview')  # TO-DO : By Hatel di
+@app.route('/listview') 
 def listview():
     return render_template("index.html")
 
