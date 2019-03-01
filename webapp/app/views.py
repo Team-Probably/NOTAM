@@ -2,8 +2,8 @@
 from flask import render_template,request
 
 from app import app
-from app import extract
-from app import database
+import extract
+import database
 
 @app.route('/') #TO-DO : By Aditya and Avi 
 def index():
@@ -46,5 +46,6 @@ def create():
     for key in keys:
         notam[key] = request.form(key)
     print(notam)
+    add_notam(notam)
     return render_template(str(notam))
     
