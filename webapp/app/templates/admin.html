@@ -7,9 +7,9 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<link rel="stylesheet" href="{{ url_for('static',filename='styles/admin.css') }}">
 
-	<link rel="stylesheet" href="{{ url_for('static',filename='styles/imports/leaflet.css') }}"/>
+	<link rel="stylesheet" href="{{ url_for('static',filename='styles/leaflet.css') }}"/>
 	<!-- Make sure you put this AFTER Leaflet's CSS -->
-	<script src="{{ url_for('static',filename='js/imports/leaflet.js') }}" ></script>
+	<script src="{{ url_for('static',filename='js/leaflet.js') }}" ></script>
 
 
 
@@ -90,10 +90,13 @@
                     <div class="tbc">
                         <label>Coordinates</label><br/>
                         <input placeholder="LATTITUDE" id="latin"/>
-						<input placeholder="LONGITUDE" id="longin"/><br/>
-						<div>
-							<div id="map_picker" style="height : 200px;width:200px;"></div>
-						</div>
+                        <input placeholder="LONGITUDE" id="longin"/>
+                        <i class="fa fa-map-marker" aria-hidden="true" id="mapfa" onclick="maptoggle()"></i>
+						<div id = "mappickdiv"><div id = "mappickindiv">
+                            <div id="map_picker" style="height:400px;width:400px;"></div>
+                        </div>
+                        </div>
+                        <br/>
                     </div>
                     <div class="tbc">
                         <label>Validity Period</label><br/>

@@ -258,3 +258,26 @@ textarea:hover{
 .tbc{
     width:90%;
 }
+
+#mappickdiv{
+    
+    position: absolute;
+    width: 50%;
+    height: 0;
+    display:none;
+    
+}
+
+#mappickindiv{
+    
+    position: relative;
+    
+    background-color:white;
+    border: 1px solid #888;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px #888;
+    top: -20vh;
+    left: 50%;
+    width: fit-content;
+    padding: 5px;
+}
