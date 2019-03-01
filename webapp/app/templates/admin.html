@@ -33,21 +33,26 @@
         <div class="modal-content">
           <span class="close">&times;</span>
           <div id="modalhead">Create NOTAM</div>
-          <form>
-                <select aria-placeholder="NOTOM SERIES">
+            <form>
+                <select aria-placeholder="NOTOM SERIES" id="notam_series">
                         <option value="A">Series A</option>
                         <option value="B">Series B</option>
                         <option value="G">Series G</option> 
                 </select>
-                <input placeholder="NOTAM NO."/>
-                <input placeholder="AFFECTED FIR"/>
-                <input placeholder="SCENARIO"/>
-                <input placeholder="NATURE"/>
-                <input placeholder="COORDS"/>
-                <input placeholder="TIME"/>
-                <input placeholder="REMARK"/><br/>
-            <div class = "btn bg-dark text-light" id ="create">Submit</div>
-              </form>
+                <input placeholder="NOTAM NO." id="notam_no"/>
+                <input placeholder="AFFECTED FIR" id="fir"/>
+                <input placeholder="SCENARIO" id="scenario"/>
+                <input placeholder="NATURE" id="nature"/>
+                <input placeholder="COORDS" id="coords"/>
+                <input placeholder="TIME" id="time"/>
+                <input placeholder="REMARK" id="remark"/><br/>
+
+                
+				<div class = "btn bg-dark text-light" id ="create_notam">
+					Submit
+				</div>
+                
+            </form>
         </div>
 
 
@@ -57,5 +62,7 @@
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>  
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script  src="{{ url_for('static', filename='js/admin/create.js') }}"></script>
  </body>
 </html>
