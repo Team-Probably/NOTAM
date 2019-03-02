@@ -1,6 +1,7 @@
 import re
 import pdftotext
 import pprint
+from app import airportdata
 
 keys = ['data', 'year', 'notam_no', 'class', 'timestamps', 'priority_score', 'phrase', 'widget', 'airport', 'coords']
 daysall = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN']
@@ -51,7 +52,7 @@ def getMod(s):
     return list(found)
 
 def getExtra(s):
-    aall = ['LDG', 'TAXING','TAX', 'TOWING', 'CROSSING', 'TKOF', 'PRKG', 'STANDS', 'LTN', 'THR', 'THRESHOLD', 'WIP', 'COORD']
+    aall = ['OPS','LDG', 'TAXING','TAX', 'TOWING', 'CROSSING', 'TKOF', 'PRKG', 'STANDS', 'LTN', 'THR', 'THRESHOLD', 'WIP', 'COORD']
     found = set()
     for aalle in aall:
         try:
@@ -134,7 +135,7 @@ def extract(filename='NOTAM.pdf'):
 def tags(notam):
     upl = notam.split('\n')[0].split('/')
     notamno = upl[0]
-    year = upl[1][:2]
+    # year = upl[1][:2]
     clas = notamno[1]
     times = re.findall('[0-9]{4}-[0-9]{4}', notam)
     days = list(filter(lambda x: x in notam,daysall ))
@@ -171,7 +172,107 @@ def tags(notam):
     data['priority'] = rushang()
     data['runways']=runways
     data['taxiways']=taxiways
-    data['year']=year
+    # data['year']=year
     data['sentence_an']=sentence_an
     print(pprint.pprint(data))
     return data
+
+def extract_is_back(notam):
+    lines = notam.split('\n')
+    header = lines[0]
+    clas = header[0]
+    notam_no = header[1:5]
+    year = header.split()[0][-2:]
+    typ = header.split()[1]
+    if typ == 'NOTAMR':
+        reference_to = header.split()[-1]
+    qcode = notam.split('Q)')[1].split('/')[1]
+    fir = notam.split('Q)')[1].split('/')[0].strip()
+    a = notam.split('A)')[1].split('B)')[0].strip()
+    firOfac = ''
+    if a[-1]=='F':
+        firOfac='FIR'
+    else:
+        firOfac='FAC'
+    
+    b = notam.split('B)')[1].split('C)')[0].strip()
+    c = notam.split('C)')[1].split('D)')[0].strip()
+    start = '20'+b[0:2]+'/'+b[2:4]+'/'+b[4:6]+' '+b[6:8]+':'+b[8:10]
+    end = '20'+c[0:2]+'/'+c[2:4]+'/'+c[4:6]+' '+c[6:8]+':'+c[8:10]
+    d = notam.split('D)')[1].split('E)')[0].strip()
+    e = notam.split('E)')[1].split('F)')[0].strip()
+    if 'F)' in notam:
+        f = notam.split('F)')[1].split('G)')[0].strip()
+        g = notam.split('G)')[1]
+
+    sentences = e.replace('.\n', '. ').replace('+\n', '. ').replace('-\n', '. ').split('. ')
+    # print(sentences)
+    radiim = []
+    coordm = []
+    sentence_an = []
+    for sentence in sentences:
+        runs = list(set(re.findall('RWY *[0-9][0-9A-Za-z/]+', sentence)))
+        radii = list(set(re.findall('RADIUS (\w+){0,2}[0-9]+ *[A-Z]{0,2}', sentence)))
+        radiim.extend(radii)
+        taxis = list(set(re.findall('TWY *[0-9][0-9A-Za-z/]+', sentence)))
+        # coords = re.findall('[0-9]{6,7}.[0-9]{1,2}[N|E|W|S]', sentence)
+        coords = re.findall('[0-9.]{6,}[N|E|W|S]', sentence)
+        san = {}
+        san['content'] = sentence
+        san['subject'] = getSubjects(' '+sentence.replace('\n', ' ')+' ')
+        san['mod'] = getMod(' '+sentence.replace('\n', ' ')+' ')
+        san['extra'] = getExtra(' '+sentence.replace('\n', ' ')+' ')
+        san['runways'] = runs
+        san['taxiways'] = taxis
+        san['coords'] = coords
+        coordm.extend(coords)
+        
+        sentence_an.append(san)
+    
+    data = {}
+    data['notam']=notam
+    data['class'] = clas
+    data['notam_no'] = notam_no
+    data['firOfac']=firOfac
+    data['starttime']=start
+    data['endtime']=end
+    data['sentence_an']=sentence_an
+    data['a']=a
+    data['b']=b
+    data['c']=c
+    data['d']=d
+    data['e']=e
+    if 'F) ' in notam:
+        data['lower_limit']=f
+        data['upper_limit']=g
+        data['f']=f
+        data['g']=g
+    if firOfac == 'FAC':
+        airport = {
+            'icao': a,
+            'name': airportdata.data[a]['name'],
+            'lat': airportdata.data[a]['lat'],
+            'lng':airportdata.data[a]['lng']
+        }
+        data['airport'] = airport
+    else:
+        dfir = {'VABF':'VABB', 'VIDF':'VIDD', 'VOMF':'VOMM', 'VECF':'VECC'}
+        amod = dfir[a]
+        airport = {
+            'icao': amod,
+            'name': airportdata.data[amod]['name'],
+            'lat': airportdata.data[amod]['lat'],
+            'lng':airportdata.data[amod]['lng']
+        }
+        data['airport'] = airport
+    data['coords'] = coordm
+    data['radii'] = radiim
+    pprint.pprint(data)
+
+    return data
+    
+   
+
+
+
+
