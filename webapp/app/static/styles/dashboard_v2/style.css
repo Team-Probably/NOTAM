@@ -19,6 +19,12 @@
      height: 400px;
      
    }
+#test-slider{
+    position :relative;
+    margin-left: 10%;
+    width : 10px;
+
+}
 .content{
     transform: translateY(-200px);
 }

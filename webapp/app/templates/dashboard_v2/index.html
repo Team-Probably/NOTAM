@@ -13,7 +13,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/dashboard_v2/style.css') }}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="{{ url_for('static', filename='js/dashboard_v2/index.js') }}"></script>
+    
 </head>
 <body style="background:#d0d8d8;">
     <div class="desk_nav">
@@ -127,7 +127,7 @@
 
             <div class="col m8">
                 <div class="map">
-            
+                    
                 </div>
             </div>
         </div>
@@ -148,7 +148,18 @@
                     <input type="text" class="timepicker" value="End Time" id="ed_time">
                 </div>
             </div>
-
+            
+            <div class="row">
+                    <div class="input-field col m4">
+                        <input id="llimit" type="text" class="validate">
+                        <label for="llimit">Lower Limit</label>
+                    </div>
+            
+                    <div class="input-field col m4">
+                        <input id="ulimit" type="text" class="validate">
+                        <label for="ulimit">Upper Limit</label>
+                    </div>
+            </div>
             <div class="row">
                 <form class="col m12">
                     <div class="row">
@@ -166,5 +177,7 @@
 
     </div>
      <script  src="{{ url_for('static', filename='js/admin/create.js') }}"></script>
+     <script src="{{ url_for('static', filename='js/dashboard_v2/index.js') }}"></script>
+     
 </body>
 </html>
