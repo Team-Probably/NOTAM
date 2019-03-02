@@ -48,11 +48,17 @@
                 <div id="vismap" class="vismap col m6">
                                 
                 </div>
+                {% if notam.notam_type != "facility" %}
                 <div class="indicator-outer col m1">
                         <div class="indicator">
                                 <div class="gauge"></div>
                         </div>
+                
+                                <span class="ulim" style="position:relative;left:40px;"></span>
+                                <span class="llim" style="position:relative;left:14px;"></span>
+                        
                 </div>
+                {% endif %}
                 <div class="visinfo col m5">
                         <table id="vistable">
                         
