@@ -24,7 +24,7 @@ def visualizer():
 def listview():
     return render_template("index.html")
 
-@app.route('/admin')
+@app.route('/admin1')
 def admin():
     # if session['username']!=app.secret_key:
     #     return redirect(url_for('index'))
@@ -57,16 +57,18 @@ def create():
     data = request.get_json()
     print(data)
     if data['notam_type'] == 'airspace':
-        keys = ['notam_series','notam_no','fir','scenario','nature','latin','longin','stimein','remarks','notam_type']
+        keys = ['notam_series', 'notam_no', 'fir', 'scenario', 'nature', 'latin', 'longin', 'stime', 'etime',
+        'remarks','notam_type']
     else:
-        keys = ['notam_series','notam_no','fir','ident','freq','latin','longin','stimein','remarks','notam_type']    
+        keys = ['notam_series', 'notam_no', 'fir', 'ident', 'freq', 'latin', 'longin', 'stime', 'etime',
+        'remarks','notam_type']    
     notam_data = ""
     for key in keys:
         notam[key] = data[key]
         notam_data += " " + notam[key]
     notam['coords'] = []
     notam['coords'].append((notam['latin'],notam['longin']))
-    notam_extract = extract.tags(notam_data)
+    notam_extract = extract.(notam_data)
     notam['issued_by'] = app.username
 
     for key in notam_extract.keys():
@@ -107,6 +109,6 @@ def kittu():
     return render_template("kittu.html")
 
 
-@app.route('/admin2')  # USER : Notam Lists
+@app.route('/admin')  # USER : Notam Lists
 def dash2():
     return render_template("dashboard_v2/index.html")

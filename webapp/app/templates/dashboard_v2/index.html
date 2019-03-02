@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Kiteretsu</title>
     <!-- Compiled and minified CSS -->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="{{ url_for('static', filename='js/imports/jquery-3.3.1.min.js') }}" ></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     
     <!-- Compiled and minified JavaScript -->
@@ -148,9 +148,11 @@
                     </div>
                 </form>
             </div>
+            <a class="waves-effect waves-light btn" id="create_notam">Submit</a>
         </div>
 
 
     </div>
+     <script  src="{{ url_for('static', filename='js/admin/create.js') }}"></script>
 </body>
 </html>
