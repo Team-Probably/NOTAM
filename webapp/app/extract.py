@@ -184,26 +184,28 @@ def extract_is_back(notam):
     notam_no = header[1:5]
     year = header.split()[0][-2:]
     typ = header.split()[1]
-    if typ == 'NOTAMR':
-        reference_to = header.split()[-1]
-    qcode = notam.split('Q)')[1].split('/')[1]
-    fir = notam.split('Q)')[1].split('/')[0].strip()
-    a = notam.split('A)')[1].split('B)')[0].strip()
-    firOfac = ''
-    if a[-1]=='F':
-        firOfac='FIR'
-    else:
-        firOfac='FAC'
-    
-    b = notam.split('B)')[1].split('C)')[0].strip()
-    c = notam.split('C)')[1].split('D)')[0].strip()
-    start = '20'+b[0:2]+'/'+b[2:4]+'/'+b[4:6]+' '+b[6:8]+':'+b[8:10]
-    end = '20'+c[0:2]+'/'+c[2:4]+'/'+c[4:6]+' '+c[6:8]+':'+c[8:10]
-    d = notam.split('D)')[1].split('E)')[0].strip()
-    e = notam.split('E)')[1].split('F)')[0].strip()
-    if 'F)' in notam:
-        f = notam.split('F)')[1].split('G)')[0].strip()
-        g = notam.split('G)')[1]
+    try:
+        if typ == 'NOTAMR':
+            reference_to = header.split()[-1]
+        qcode = notam.split('Q)')[1].split('/')[1]
+        fir = notam.split('Q)')[1].split('/')[0].strip()
+        a = notam.split('A)')[1].split('B)')[0].strip()
+        firOfac = ''
+        if a[-1]=='F':
+            firOfac='FIR'
+        else:
+            firOfac='FAC'
+        b = notam.split('B)')[1].split('C)')[0].strip()
+        c = notam.split('C)')[1].split('D)')[0].strip()
+        starttime = '20'+b[0:2]+'/'+b[2:4]+'/'+b[4:6]+' '+b[6:8]+':'+b[8:10]
+        endtime = '20'+c[0:2]+'/'+c[2:4]+'/'+c[4:6]+' '+c[6:8]+':'+c[8:10]
+        d = notam.split('D)')[1].split('E)')[0].strip()
+        e = notam.split('E)')[1].split('F)')[0].strip()
+        if 'F)' in notam:
+            f = notam.split('F)')[1].split('G)')[0].strip()
+            g = notam.split('G)')[1]
+    except:
+        pass
 
     sentences = e.replace('.\n', '. ').replace('+\n', '. ').replace('-\n', '. ').split('. ')
     # print(sentences)
@@ -211,37 +213,33 @@ def extract_is_back(notam):
     coordm = []
     sentence_an = []
     for sentence in sentences:
-        runs = list(set(re.findall('RWY *[0-9][0-9A-Za-z/]+', sentence)))
-        radii = list(set(re.findall('RADIUS (\w+){0,2}[0-9]+ *[A-Z]{0,2}', sentence)))
-        radiim.extend(radii)
-        taxis = list(set(re.findall('TWY *[0-9][0-9A-Za-z/]+', sentence)))
-        # coords = re.findall('[0-9]{6,7}.[0-9]{1,2}[N|E|W|S]', sentence)
-        coords = re.findall('[0-9.]{6,}[N|E|W|S]', sentence)
-        san = {}
-        san['content'] = sentence
-        san['subject'] = getSubjects(' '+sentence.replace('\n', ' ')+' ')
-        san['mod'] = getMod(' '+sentence.replace('\n', ' ')+' ')
-        san['extra'] = getExtra(' '+sentence.replace('\n', ' ')+' ')
-        san['runways'] = runs
-        san['taxiways'] = taxis
-        san['coords'] = coords
-        coordm.extend(coords)
-        
-        sentence_an.append(san)
+        try:
+            runs = list(set(re.findall('RWY *[0-9][0-9A-Za-z/]+', sentence)))
+            radii = list(set(re.findall('RADIUS (\w+){0,2}[0-9]+ *[A-Z]{0,2}', sentence)))
+            radiim.extend(radii)
+            taxis = list(set(re.findall('TWY *[0-9][0-9A-Za-z/]+', sentence)))
+            # coords = re.findall('[0-9]{6,7}.[0-9]{1,2}[N|E|W|S]', sentence)
+            coords = re.findall('[0-9.]{6,}[N|E|W|S]', sentence)
+            san = {}
+            san['content'] = sentence
+            san['subject'] = getSubjects(' '+sentence.replace('\n', ' ')+' ')
+            san['mod'] = getMod(' '+sentence.replace('\n', ' ')+' ')
+            san['extra'] = getExtra(' '+sentence.replace('\n', ' ')+' ')
+            san['runways'] = runs
+            san['taxiways'] = taxis
+            san['coords'] = coords
+            coordm.extend(coords)
+            sentence_an.append(san)
+        except:
+            print(sentence,"ERROR\n")
+            pass
     
     data = {}
-    data['notam']=notam
-    data['class'] = clas
-    data['notam_no'] = notam_no
-    data['firOfac']=firOfac
-    data['starttime']=start
-    data['endtime']=end
-    data['sentence_an']=sentence_an
-    data['a']=a
-    data['b']=b
-    data['c']=c
-    data['d']=d
-    data['e']=e
+    for key in ['notam','class','notam_no','firOfac','starttime','endtime','sentence_an','a','b','c','d','e']:
+        if key=='class':
+            data[key] = clas
+            continue
+        data[key] = eval(key)
     if 'F) ' in notam:
         data['lower_limit']=f
         data['upper_limit']=g

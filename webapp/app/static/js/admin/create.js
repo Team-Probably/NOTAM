@@ -13,9 +13,13 @@ $('#create_notam').on('click', function() {
     var longin = $('#longin').val();
     var stime = $('#st_date').val() + " " + $('#st_time').val();
     var etime = $('#ed_date').val() + " " + $('#ed_time').val();
+    var llimit = $('#llimit').val();
+    var ulimit = $('#ulimit').val();
     // var endtimein = $('#endtimein').val();
     var remarks = $('#remark').val();
+
     var map_poly = [center, radius, poly];
+    
 
     var notam_data = {
         notam_notam: notam_notam,
@@ -31,8 +35,12 @@ $('#create_notam').on('click', function() {
         // endtimein: endtimein,
         remarks: remarks,
         map_poly: map_poly,
+        zoom: zoom,
+        llimit: llimit,
+        ulimit: ulimit,
         notam_type: "airspace"
     }
+    
     console.log('Adding Notam to Airspace');
     console.log(notam_data);
     $.ajax({

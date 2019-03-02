@@ -13,7 +13,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/dashboard_v2/style.css') }}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="{{ url_for('static', filename='js/dashboard_v2/index.js') }}"></script>
     <link rel="stylesheet" href="{{ url_for('static',filename='styles/imports/leaflet.css') }}" />
     <!-- Make sure you put this AFTER Leaflet's CSS -->
     <script src="{{ url_for('static',filename='js/imports/leaflet.js') }}"></script>
@@ -46,6 +45,7 @@
             
             <li><a href="#">Dashboard</a></li>
             <li><a href="#">Logout</a></li>
+            
         </ul>
     </div>
 
@@ -56,8 +56,8 @@
                     <form class="col m12">
                         <div class="row">
                             <div class="input-field col s12">
-                                <textarea id="textarea1" class="materialize-textarea" >{{notam.notam}}</textarea>
-                                <label for="textarea1">Paste NOTAM Here</label>
+                                <textarea id="notam_notam_fac" class="materialize-textarea" >{{notam.notam}}</textarea>
+                                <label for="notam_notam_fac">Paste NOTAM Here</label>
                             </div>
                         </div>
                     </form>
@@ -69,7 +69,13 @@
             <div class="row">
                 <div class="input-field col m4">
                     <select id="notam_series_fac">
-                        <option value="" disabled selected>Choose Option</option>
+                        <option value="{{notam.class}}" disabled selected>
+                            {% if notam.class!="" %}
+                                {{notam.class}}
+                            {% else %}
+                                Choose an Option
+                            {% endif %}
+                        </option>
                         <option value="A">A Series</option>
                         <option value="B">B Series</option>
                         <option value="C">C Series</option>
@@ -109,9 +115,9 @@
             
             <!-- To be Changed later -->
                 <div class="row">
-                    <center>
+                    <centre>
                         <i class="material-icons prefix">place</i>
-                    </center>
+                    </centre>
                 </div>
                 <div class="row">
                     <div class="input-field col m12">
@@ -162,13 +168,14 @@
                     </div>
                 </form>
             </div>
-            <a class="waves-effect waves-light btn" id="create_notam_fac" style="margin-bottom: 2vw; margin-left: 1vw;">Submit</a>
+            <a class="waves-effect waves-light btn" id="create_notam" style="margin-bottom: 2vw; margin-left: 1vw;">Submit</a>
         </div>
         </div>
 
 
     </div>
-     <script  src="{{ url_for('static', filename='js/admin/create.js') }}"></script>
-     <script src="{{ url_for('static', filename='js/kittu/map.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/dashboard_v2/index.js') }}"></script>
+    <script  src="{{ url_for('static', filename='js/admin/create_fac.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/kittu/map.js') }}"></script>
 </body>
 </html>

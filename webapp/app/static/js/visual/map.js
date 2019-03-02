@@ -1,4 +1,5 @@
-var mymap = L.map('mapfull').setView([51.505, -0.09], 13);
+center = [51.505, -0.09]
+var mymap = L.map('mapfull').setView(center, 13);
 
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     // attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -7,7 +8,7 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
     accessToken: 'pk.eyJ1Ijoia2l0ZXJldHN1IiwiYSI6ImNqc216MTExNzA2NDE0OW80bWhyNmwyMmoifQ.v7pnFYhTlfA59e_sMBMSBA'
 }).addTo(mymap); 
 
-var marker = L.marker([51.5, -0.09]).addTo(mymap);
+var marker = L.marker(center).addTo(mymap);
 
 var circle = L.circle([51.508, -0.11], {
     color: 'red',

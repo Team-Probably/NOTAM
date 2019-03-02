@@ -1,12 +1,12 @@
 <li class="adi_full">
     
-    <div class="collapsible-header">
+    <div class="collapsible-header" onclick="loadgauge(this)">
         <div class="dsd">
             <div class = "row">
                     
                     <div class = "col m2 number"><span class="series">{{notam.notam_series}}</span><span class="adi_no">{{notam.notam_no}}</span></div>
                     <div class="col m7 notamview">
-                         
+                         {{notam.msg}}
                     </div>
                     <div class="col m3">
                             <table id="uptable">
@@ -33,12 +33,28 @@
                         <div class="coordlat">{{cord[0]}}</div>
                         <div class="coordlong">{{cord[1]}}</div>
                     {% endfor %}
+
+                    <div class="circle_lat">{{notam.map_poly[0].lat}}</div>
+                    <div class="circle_lng">{{notam.map_poly[0].lng}}</div>
+                    <div class="circle_rad">{{notam.map_poly[1]}}</div>
+                    {% for cord in notam.map_poly[2][0]%}       
+                        <div class="polylat">{{cord.lat}}</div>
+                        <div class="polylng">{{cord.lng}}</div>
+                    {% endfor %}
+                    <div class="zoom">{{notam.zoom}}</div>
+                    <div class="llimit">{{notam.llimit}}</div>
+                    <div class="ulimit">{{notam.ulimit}}</div>
                 </div>
         <div class ="row">
                 <div id="vismap" class="vismap col m6">
-    
+                                
                 </div>
-                <div class="visinfo col m6">
+                <div class="indicator-outer col m1">
+                        <div class="indicator">
+                                <div class="gauge"></div>
+                        </div>
+                </div>
+                <div class="visinfo col m5">
                         <table id="vistable">
                         
                         <tr><td>Issued By</td><td>{{notam.issued_by}}</td></tr>
