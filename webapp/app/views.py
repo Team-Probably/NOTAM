@@ -65,7 +65,7 @@ def create():
                 'latin', 'longin', 'stime', 'etime', 'remarks', 'map_poly', 'zoom', 'llimit', 'ulimit','notam_type']
     else:
         keys = ['notam_series', 'notam_no', 'fir', 'ident', 'freq', 'latin', 'longin', 'stime', 'etime',
-        'remarks','notam_type']    
+                'remarks', 'map_poly', 'zoom', 'notam_type']
     notam_data = ""
     print(data)
     if data.get('notam_notam'):
