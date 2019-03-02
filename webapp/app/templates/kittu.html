@@ -1,0 +1,11 @@
+<link rel="stylesheet" href="{{ url_for('static',filename='styles/imports/leaflet.css') }}" />
+<!-- Make sure you put this AFTER Leaflet's CSS -->
+<script src="{{ url_for('static',filename='js/imports/leaflet.js') }}"></script>
+<link rel='stylesheet' href="{{ url_for('static',filename='styles/kittu/map.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css">
+<script src="{{ url_for('static', filename='js/kittu/leaflet.draw.min.js') }}"></script>
+<div id="marker_map">
+
+</div>
+<script src="{{ url_for('static', filename='js/imports/jquery-3.3.1.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/kittu/map.js') }}"></script>

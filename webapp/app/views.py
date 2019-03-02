@@ -130,3 +130,7 @@ PRESENTATION. AS A CONSEQUENCE OF AIRSPACE CLOSURE COIMBATORE AP
 WILL REMAIN CLSD FOR ACFT OPS.
 F) GND G) FL140'''
     return str(extract.extract_is_back(tnot))
+
+@app.route('/kittu')  # USER : Notam Lists
+def kittu():
+    return render_template("kittu.html")

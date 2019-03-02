@@ -135,7 +135,11 @@ def extract(filename='NOTAM.pdf'):
 def tags(notam):
     upl = notam.split('\n')[0].split('/')
     notamno = upl[0]
+<<<<<<< HEAD
     # year = upl[1][:2]
+=======
+    #year = upl[1][:2]
+>>>>>>> cbbc01d6d08635a58b8b536cfb8453d80c565284
     clas = notamno[1]
     times = re.findall('[0-9]{4}-[0-9]{4}', notam)
     days = list(filter(lambda x: x in notam,daysall ))
@@ -172,7 +176,11 @@ def tags(notam):
     data['priority'] = rushang()
     data['runways']=runways
     data['taxiways']=taxiways
+<<<<<<< HEAD
     # data['year']=year
+=======
+    #data['year']=year
+>>>>>>> cbbc01d6d08635a58b8b536cfb8453d80c565284
     data['sentence_an']=sentence_an
     print(pprint.pprint(data))
     return data
