@@ -10,3 +10,16 @@
 .nav-wrapper{
     padding-left: 2vw;
 }
+.map{
+    /* background: rgb(10, 39, 38);
+    margin-left: 75%;
+    width:300px;
+     */
+     background-color: rgb(77, 165, 161);
+     height: 400px;
+     
+   }
+.content{
+    transform: translateY(-200px);
+}
+
