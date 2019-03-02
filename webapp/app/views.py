@@ -36,9 +36,9 @@ def dashboard():
 def admin_airspace():
     try:
         if session['username']['admin']!=True:
-            return redirect(url_for('index'))
+            return redirect(url_for('dashboard'))
     except:
-        return redirect(url_for('index'))
+        return redirect(url_for('dashboard'))
     else:
         notam = {'class': 'Notam Series', 'airport': '', 'notam': '', 'start_date': 'Start Date',
      'end_date': 'End Date', 'start_time': 'Start Time', 'end_time': 'End Time',
@@ -49,9 +49,9 @@ def admin_airspace():
 def admin_facility():
     try:
         if session['username']['admin']!=True:
-            return redirect(url_for('index'))
+            return redirect(url_for('dashboard'))
     except:
-        return redirect(url_for('index'))
+        return redirect(url_for('dashboard'))
     else:
         notam = {'class': 'Notam Series', 'airport': '', 'notam': '', 'start_date': 'Start Date',
         'end_date': 'End Date', 'start_time': 'Start Time', 'end_time': 'End Time',
@@ -132,7 +132,7 @@ def signup():
     user['admin'] = False
     if database.add_user(user):
         return redirect(url_for('dashboard'))
-    return redirect(url_for('index'))
+    return redirect(url_for('dashboard'))
 
 @app.route('/verify_login',methods=['POST'])
 def verify_login():
@@ -147,7 +147,7 @@ def verify_login():
         session['username'] = {'user_name':user['email'],'admin':user['admin'], "key":app.secret_key} 
         print(session['username'])
         return redirect(url_for('dashboard'))
-    return redirect(url_for('index'))
+    return redirect(url_for('dashboard'))
 
 @app.route('/getnotamdata')
 def getnotamdata():
