@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Kiteretsu</title>
+    <title>Facility form</title>
     <!-- Compiled and minified CSS -->
-    <script src="{{ url_for('static', filename='js/imports/jquery-3.3.1.min.js') }}" ></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     
     <!-- Compiled and minified JavaScript -->
@@ -62,7 +62,7 @@
             </div>
             <div class="row">
                 <div class="input-field col s4">
-                    <select id="notam_series">
+                    <select id="notam_series_fac">
                         <option value="" disabled selected>Choose your option</option>
                         <option value="1">A Series</option>
                         <option value="2">B Series</option>
@@ -73,70 +73,64 @@
                 </div>
                 <div class="input-field col s4">
                     <i class="material-icons prefix">account_circle</i>
-                    <input id="notam_no" type="text" class="validate">
-                    <label for="notam_no">Notam No.</label>
+                    <input id="notam_no_fac" type="text" class="validate">
+                    <label for="notam_no_fac">Notam No.</label>
                 </div>
             </div>
             
             <div class="row">
                 <div class="input-field col s4">
-                    <i class="material-icons prefix">place</i>
-                    <input id="fir" type="text" class="validate">
-                    <label for="fir">Affected Fir</label>
+                    <!-- <i class="material-icons prefix">place</i> -->
+                    <input id="fir_fac" type="text" class="validate">
+                    <label for="fir_fac">Facility Name</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s4">
+                    <!-- <i class="material-icons prefix">place</i> -->
+                    <input id="ident_fac" type="text" class="validate">
+                    <label for="ident_fac">IDENT</label>
                 </div>
             </div>
 
+         
             <div class="row">
                 <div class="input-field col s4">
-                    <select id="scenario">
-                        <option value="" disabled selected>Choose your option</option>
-                        <option value="CLOSURE">Closure</option>
-                        <option value="UNSERVICEABLE">Unserviceable</option>
-                    </select>
-                    <label>Scenario</label>
+                    <!-- <i class="material-icons prefix">place</i> -->
+                    <input id="freq_fac" type="text" class="validate">
+                    <label for="freq_fac">Frequency</label>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="input-field col s4">
-                    <select id="nature">
-                        <option value="" disabled selected>Choose your option</option>
-                        <option value="PROHIBITED">Prohibited</option>
-                        <option value="DANGER">Danger</option>
-                        <option value="RESTRICTED">Restricted</option>
-                    </select>
-                    <label>Nature Of Event</label>
-                </div>
-            </div>
             <!-- To be Changed later -->
             <div class="row">
                 <div class="input-field col s4">
                     <i class="material-icons prefix">place</i>
-                    <input id="latin" type="text" class="validate">
-                    <label for="latin">Latitude</label>
+                    <input id="latin_fac" type="text" class="validate">
+                    <label for="latin_fac">Latitude</label>
                 </div>
 
                 <div class="input-field col s4">
-                    <input id="longin" type="text" class="validate">
-                    <label for="longin">Longitude</label>
+                    <input id="longin_fac" type="text" class="validate">
+                    <label for="longin_fac">Longitude</label>
                 </div>
             </div>
             
             <div class="row start_time">
                 <div class="input-field col s4">
-                    <input type="text" class="datepicker" value="Start Date" id="st_date"> 
+                    <input type="text" class="datepicker" value="Start Date" id="st_date_fac"> 
                 </div>
                 <div class="input-field col s4">
-                    <input type="text" class="timepicker" value="Start Time" id="st_time">
+                    <input type="text" class="timepicker" value="Start Time" id="st_time_fac">
                 </div>
             </div>
 
             <div class="row end_time">
                 <div class="input-field col s4">
-                    <input type="text" class="datepicker" value="End Date" id="ed_date">
+                    <input type="text" class="datepicker" value="End Date" id="ed_date_fac">
                 </div>
                 <div class="input-field col s4">
-                    <input type="text" class="timepicker" value="End Time" id="ed_time">
+                    <input type="text" class="timepicker" value="End Time" id="ed_time_fac">
                 </div>
             </div>
 
@@ -144,17 +138,19 @@
                 <form class="col s12">
                     <div class="row">
                         <div class="input-field col s12">
-                            <textarea id="remark" class="materialize-textarea"></textarea>
-                            <label for="remark">Remarks</label>
+                            <textarea id="remark_fac" class="materialize-textarea"></textarea>
+                            <label for="remark_fac">Remarks</label>
                         </div>
                     </div>
                 </form>
+                <div>
+                    <a class="waves-effect waves-light btn" id="create_notam" style="margin-bottom: 2vw; margin-left: 1vw;">Submit</a>
+                </div>
             </div>
-            <a class="waves-effect waves-light btn" id="create_notam" style="margin-bottom: 2vw; margin-left: 1vw;">Submit</a>
         </div>
-
+    </div>
+    
 
     </div>
-     <script  src="{{ url_for('static', filename='js/admin/create.js') }}"></script>
 </body>
 </html>

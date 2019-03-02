@@ -124,6 +124,22 @@ ul {
       transition: border 1s ease;
       min-width:100px;
   }
+  tbc:checked + .slider {
+    background-color: #66bb6a;
+}
+.slider.round {
+    border-radius: 34px;
+}
+.slider {
+    background-color: #ccc;
+    bottom: 0;
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: .4s;
+}
 
   input:hover{
     

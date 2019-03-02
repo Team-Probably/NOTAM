@@ -172,7 +172,10 @@ def tags(notam):
     data['priority'] = rushang()
     data['runways']=runways
     data['taxiways']=taxiways
+<<<<<<< HEAD
     # data['year']=year
+=======
+>>>>>>> 85fe2bc62cea244094e8fb5760b695b09e181100
     #data['year']=year
     data['sentence_an']=sentence_an
     print(pprint.pprint(data))
