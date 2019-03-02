@@ -137,5 +137,12 @@ def kittu():
 
 
 @app.route('/admin2')  # USER : Notam Lists
-def dash2():
+def admin2():
     return render_template("dashboard_v2/index.html")
+
+@app.route('/dashboard2')
+def dash2():
+    airspace = database.get_notams('airspace')
+    facility = database.get_notams('facility')
+    print(airspace, facility)
+    return render_template("dashboard_v2/newdash.html", facility = facility , airspace = airspace)

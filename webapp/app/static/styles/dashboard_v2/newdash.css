@@ -1,0 +1,35 @@
+.series{
+    font-size:3rem;
+    color: #008;
+}
+
+.number{
+    font-size: 3rem;
+}
+
+.clb{
+    background: #fff;
+}
+
+.notamview{
+   padding-top:0.5rem !important; 
+}
+
+td{
+    font-size:1rem !important;
+}
+
+.nav-wrapper{
+    padding-left: 20px;
+}
+
+.dsd{
+    width:100%;
+}
+
+.searchout{
+    background: white;
+    margin:auto;
+    margin-top:10px;
+    
+}
