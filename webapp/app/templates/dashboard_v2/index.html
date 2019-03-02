@@ -56,7 +56,7 @@
                     <form class="col m12">
                         <div class="row">
                             <div class="input-field col s12">
-                                <textarea id="notam_notam" class="materialize-textarea"></textarea>
+                                <textarea id="notam_notam" class="materialize-textarea">{{notam.notam_notam}}</textarea>
                                 <label for="notam_notam">Paste NOTAM Here</label>
                             </div>
                         </div>
@@ -69,7 +69,13 @@
             <div class="row">
                 <div class="input-field col m4">
                     <select id="notam_series">
-                        <option value="" disabled selected>Choose your option</option>
+                        <option value="{{notam.class}}" disabled selected>
+                            {% if notam.class!="" %}
+                                {{notam.class}}
+                            {% else %}
+                                Choose an Option
+                            {% endif %}
+                        </option>
                         <option value="A">A Series</option>
                         <option value="B">B Series</option>
                         <option value="C">C Series</option>
@@ -96,7 +102,12 @@
                 <div class="row">
                     <div class="input-field col m12">
                         <select id="scenario">
-                            <option value="" disabled selected>Choose your option</option>
+                            <option value="{{notam.scenario}}" disabled selected>
+                                {% if notam.scenario != '' %}
+                                    {{notam.scenario}}
+                                {% else %}
+                                    Choose an Option
+                                {% endif %}</option>
                             <option value="CLOSURE">Closure</option>
                             <option value="UNSERVICEABLE">Unserviceable</option>
                         </select>
@@ -107,7 +118,13 @@
                 <div class="row">
                     <div class="input-field col m12">
                         <select id="nature">
-                            <option value="" disabled selected>Choose your option</option>
+                            <option value="{{notam.nature}}" disabled selected>
+                                {% if notam.nature != '' %}
+                                    {{notam.nature}}
+                                {% else %}
+                                    Choose an Option
+                                {% endif %}
+                            </option>
                             <option value="PROHIBITED">Prohibited</option>
                             <option value="DANGER">Danger</option>
                             <option value="RESTRICTED">Restricted</option>

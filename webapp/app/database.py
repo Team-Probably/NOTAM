@@ -31,25 +31,15 @@ def get_notams(notam_type):
     notams = []
     print("Getting NOTAMs")
     for notam in db.find():
-        #     time = notam['stimein'].split('-')
-        #     notam['start_time'] = time[0]
-        #     notam['end_time'] = time[1]
-        #     time_start = notam['start_time'].split(' ')
-        #     time_start.extend(time_start[0].split('-'))
-        #     time_start.extend(time_start[1][:-2].split(':'))
-        #     time_end = notam['end_time'].split(' ')
-        #     time_end.extend(time_end[0].split('-'))
-        #     time_end.extend(time_end[1][:-2].split(':'))
-        #     time_start = datetime.datetime(*time_start)
-        #     time_end = datetime.datetime(*time_end)
-        #     delta_time = time_start - datetime.datetime.now() 
-        #     if delta_time.total_seconds()>0:
-        #         notam['status'] = 'Upcoming'
-        #         delta_time = time_end - datetime.datetime.now()
-        #     elif delta_time.total_seconds()>0:
-        #         notam['status'] = 'Ongoing'
-        #     else:
-        #         notam['status'] = 'Expired'
+        st = datetime.datetime(*list(map(int,notam['stime'].split(' ')[0].split('/')+notam['stime'].split(' ')[1].split(':'))))
+        et = datetime.datetime(*list(map(int,notam['etime'].split(' ')[0].split('/')+notam['etime'].split(' ')[1].split(':'))))
+        now = datetime.datetime.now()
+        if st>now:
+            notam['status'] = "Upcoming"
+        elif et<now:
+            notam['status'] = "Expired"
+        else:
+            notam['status'] = "Ongoing"
         notams.append(notam)
     return notams
 
