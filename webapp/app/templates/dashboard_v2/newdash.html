@@ -33,9 +33,12 @@
                 <ul class="right hide-on-med-and-down">
                     <li><a href="#">Dashboard</a></li>
                     <!-- <li><a href="#">Logout</a></li> -->
-                    <li><button data-target="loginform" class="btn modal-trigger" >Modal</button></li>
-                    
-                </ul>
+                    {% if logged_in%}
+                    <li><button class="waves-effect waves-light btn" onclick="location.href='/logout'">Log Out</button></li>
+                    {%else%}
+                    <li><button data-target="loginform" class="btn modal-trigger" >Log In</button></li>
+                    {%endif%}
+                  </ul>
             </div>
         </nav>
     
@@ -112,7 +115,7 @@
     <script  src="{{ url_for('static', filename='js/dashboard/magicvis.js') }}"></script>
    
     <script src="{{ url_for('static', filename='js/imports/list.min.js') }}"></script>
-
+    <script src = "check_login();"></script>
    
 </body>
 </html>

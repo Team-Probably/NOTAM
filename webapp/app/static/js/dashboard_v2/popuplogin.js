@@ -1,14 +1,12 @@
-
-
-  // Or with jQuery
-
   $(document).ready(function(){
     $('.modal').modal();
   });
   
-  // Or with jQuery
-
-//   $(document).ready(function(){
-//     $('.popupform').popupform();
-//   });
-      
+ function check_login()
+ {
+    var f = fetch('/check_login').then(
+    response=>{
+        response.json().then((data)=>{console.log(data);editMode(data)})
+    }
+);
+ }
