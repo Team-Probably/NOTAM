@@ -95,7 +95,7 @@ def verify_login(user):
     db = db.users
     if db.find_one(user):
         print(user, "LOGIN SUCCESSFUL")
-        return 1
+        return db.find_one(user)
     return 0
 
 def mongodb_push():

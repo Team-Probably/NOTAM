@@ -5,14 +5,14 @@ from app import app
 from app import extract
 from app import database
 from werkzeug.datastructures import ImmutableMultiDict
+from pprint import pprint
 
-app.secret_key = "hetzz"
-app.username = ""
+app.secret_key = os.environ['FLASK_SECRET_KEY']
 
 @app.route('/') #TO-DO : By Aditya and Avi 
 def index():
     print("INDEX")
-    # session['username'] = ""
+    session['username'] = {}
     return render_template("login.html")    
 
 
@@ -27,8 +27,11 @@ def listview():
 
 @app.route('/admin1')
 def admin():
-    # if session['username']!=app.secret_key:
-    #     return redirect(url_for('index'))
+    try:
+        if session['username']['admin']!=True:
+            return redirect(url_for('index'))
+    except:
+        return redirect(url_for('index'))
     airspace = database.get_notams('airspace')
     facility = database.get_notams('facility')
     return render_template('admin.html', facility=facility, airspace=airspace)
@@ -45,8 +48,6 @@ def processor():
 
 @app.route('/dashboard') #USER : Notam Lists
 def dashboard():
-    # if session['username']!=app.secret_key:
-    #     return redirect(url_for('index'))
     airspace = database.get_notams('airspace')
     facility = database.get_notams('facility')
     print(airspace, facility)
@@ -58,22 +59,22 @@ def create():
     data = request.get_json()
     print(data)
     if data['notam_type'] == 'airspace':
-        keys = ['notam_series', 'notam_no', 'fir', 'scenario', 'nature', 'latin', 'longin', 'stime', 'etime',
-        'remarks','notam_type']
+        keys = ['notam_notam', 'notam_series', 'notam_no', 'fir', 'scenario', 'nature', 
+        'latin', 'longin', 'stime', 'etime', 'remarks', 'map_poly', 'notam_type']
     else:
         keys = ['notam_series', 'notam_no', 'fir', 'ident', 'freq', 'latin', 'longin', 'stime', 'etime',
         'remarks','notam_type']    
     notam_data = ""
     for key in keys:
         notam[key] = data[key]
-        notam_data += " " + notam[key]
+        # notam_data += " " + notam[key]
     notam['coords'] = []
     notam['coords'].append((notam['latin'],notam['longin']))
-    notam_extract = extract.extract_is_back(notam_data['notam_notam'])
-    notam['issued_by'] = app.username
+    # notam_extract = extract.extract_is_back(notam_data['notam_notam'])
+    notam['issued_by'] = "Administrator"
 
-    for key in notam_extract.keys():
-        notam[key] = notam_extract[key]
+    # for key in notam_extract.keys():
+    #     notam[key] = notam_extract[key]
     print(notam)
     if database.add_notam(notam):
         return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
@@ -85,7 +86,8 @@ def signup():
     user = request.form
     user = user.to_dict(flat=False)
     for key in user.keys():
-        user[key] = user[key][0]
+        user[key] = user[key][0]   
+    user['admin'] = False
     if database.add_user(user):
         return redirect(url_for('dashboard'))
     return redirect(url_for('index'))
@@ -96,10 +98,11 @@ def verify_login():
     user = user.to_dict(flat=False)
     for key in user.keys():
         user[key] = user[key][0]
-    if database.verify_login(user):
+    user = database.verify_login(user)
+    print(user)
+    if user:
         print("LOGIN SUCCESSFUL")
-        app.username = user['email']
-        session['username'] = user['email'] + app.secret_key 
+        session['username'] = {'user_name':user['email'],'admin':user['admin'], "key":app.secret_key} 
         print(session['username'])
         return redirect(url_for('dashboard'))
     return redirect(url_for('index'))
@@ -107,7 +110,6 @@ def verify_login():
 @app.route('/getnotamdata')
 def getnotamdata():
     notam_no = request.args.get('notamid')
-    
     notam = database.get_notam('notam_no',notam_no)
     notam['_id']='hi'
     return jsonify(notam)
@@ -139,10 +141,41 @@ def kittu():
     return render_template("kittu.html")
 
 
+
+@app.route('/dashboard2')
+def dash2n():
+    airspace = database.get_notams('airspace')
+    facility = database.get_notams('facility')
+    print(airspace, facility)
+    return render_template("dashboard_v2/newdash.html", facility = facility , airspace = airspace)
 @app.route('/admin')  # USER : Notam Lists
 def dash2():
-    return render_template("dashboard_v2/index.html")
+    notam = {'class': 'Notam Series', 'airport': '', 'notam': '', 'start_date': 'Start Date',
+             'end_date': 'End Date', 'start_time': 'Start Time', 'end_time': 'End Time',
+             'notam_no': ''}
+    try:
+        if session['username']['admin']!=True:
+            return redirect(url_for('index'))
+    except:
+        return redirect(url_for('index'))
+    else:
+        return render_template("dashboard_v2/index.html", notam=notam)
 
 @app.route('/admin3')  # USER : Notam Lists
 def dash3():
-    return render_template("dashboard_v2/Facility.html")
+    notam = {'class': 'Notam Series', 'airport': '', 'notam': '', 'start_date': 'Start Date',
+     'end_date': 'End Date', 'start_time': 'Start Time', 'end_time': 'End Time',
+      'notam_no':''}
+    return render_template("dashboard_v2/Facility.html",notam=notam)
+
+@app.route('/predict_notam', methods=["GET"])
+def predict_notam():
+    notam = request.args.get('notam')
+    notam = extract.extract_is_back(notam)
+    notam['start_date'],notam["start_time"] = notam['starttime'].split(" ")
+    notam['end_date'], notam["end_time"] = notam['endtime'].split(" ")
+    print(notam)
+    if notam['firOfac'] == 'FIR':
+        return render_template('dashboard_v2/Facility.html', notam=notam)
+    else:
+        return render_template('dashboard_v2/index.html', notam=notam)

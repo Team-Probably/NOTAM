@@ -3,7 +3,7 @@ $('#create_notam').on('click', function() {
     // console.log(chk.checked);
     // if(chk.checked)
     //     return;
-    var notam_notam = $().val();
+    var notam_notam = $('#notam_notam').val();
     var notam_series = $('#notam_series').val();
     var notam_no = $('#notam_no').val();
     var fir = $('#fir').val();
@@ -15,6 +15,7 @@ $('#create_notam').on('click', function() {
     var etime = $('#ed_date').val() + " " + $('#ed_time').val();
     // var endtimein = $('#endtimein').val();
     var remarks = $('#remark').val();
+    var map_poly = [center, radius, poly];
 
     var notam_data = {
         notam_notam: notam_notam,
@@ -29,9 +30,11 @@ $('#create_notam').on('click', function() {
         etime: etime,
         // endtimein: endtimein,
         remarks: remarks,
+        map_poly: map_poly,
         notam_type: "airspace"
     }
     console.log('Adding Notam to Airspace');
+    console.log(notam_data);
     $.ajax({
         url : '/create_notam',
         type: 'POST',
@@ -64,32 +67,32 @@ $('#create_notam').on('click', function() {
 
 // For Date Time Picker
 
-window.onload = function () {
-    $('#stimein_fac').daterangepicker({
-        "showDropdowns": true,
-        "timePicker": true,
-        "timePicker24Hour": true,
-        "startDate": "02/02/2019",
-        "endDate": "03/02/2019",
-        "drops": "up",
-        locale: {
-            format: 'YYYY-MM-DD hh:mm A'
-        }
-    }, function (start, end, label) {
-        console.log('New date range selected: ' + start.format('YYYY-MM-DD hh:mm A') + ' to ' + end.format('YYYY-MM-DD hh:mm A') + ' (predefined range: ' + label + ')');
-    });
+// window.onload = function () {
+//     $('#stimein_fac').daterangepicker({
+//         "showDropdowns": true,
+//         "timePicker": true,
+//         "timePicker24Hour": true,
+//         "startDate": "02/02/2019",
+//         "endDate": "03/02/2019",
+//         "drops": "up",
+//         locale: {
+//             format: 'YYYY-MM-DD hh:mm A'
+//         }
+//     }, function (start, end, label) {
+//         console.log('New date range selected: ' + start.format('YYYY-MM-DD hh:mm A') + ' to ' + end.format('YYYY-MM-DD hh:mm A') + ' (predefined range: ' + label + ')');
+//     });
 
-    $('#stimein').daterangepicker({
-        "showDropdowns": true,
-        "timePicker": true,
-        "timePicker24Hour": true,
-        "startDate": "02/02/2019",
-        "endDate": "03/02/2019",
-        "drops": "up",
-        locale: {
-            format: 'YYYY-MM-DD hh:mm A'
-        }
-    }, function (start, end, label) {
-        console.log('New date range selected: ' + start.format('YYYY-MM-DD hh:mm A') + ' to ' + end.format('YYYY-MM-DD hh:mm A') + ' (predefined range: ' + label + ')');
-    });
-};
+//     $('#stimein').daterangepicker({
+//         "showDropdowns": true,
+//         "timePicker": true,
+//         "timePicker24Hour": true,
+//         "startDate": "02/02/2019",
+//         "endDate": "03/02/2019",
+//         "drops": "up",
+//         locale: {
+//             format: 'YYYY-MM-DD hh:mm A'
+//         }
+//     }, function (start, end, label) {
+//         console.log('New date range selected: ' + start.format('YYYY-MM-DD hh:mm A') + ' to ' + end.format('YYYY-MM-DD hh:mm A') + ' (predefined range: ' + label + ')');
+//     });
+// };

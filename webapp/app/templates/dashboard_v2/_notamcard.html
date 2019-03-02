@@ -1,0 +1,54 @@
+<li>
+    
+    <div class="collapsible-header">
+        <div class="dsd">
+            <div class = "row">
+                    
+                    <div class = "col m2 number"><span class="series">{{notam.notam_series}}</span>{{notam.notam_no}}</div>
+                    <div class="col m7 notamview">
+                         
+                    </div>
+                    <div class="col m3">
+                            <table id="uptable">
+                                    <tr><td>Start Time</td><td >
+                                            {{notam.stime}}</td></tr>
+                                    <tr><td>End Time</td><td>{{notam.etime}}</td></tr>
+                                    <tr><td>Status</td><td id="status-what-{{notam.notam_no}}">
+                                            {{notam.status}}</td></tr>
+                                    </table>
+                                    
+                            
+                    </div>
+               
+
+            </div>
+            
+            </div>
+            <!-- {{notam.notam_series}}
+            {{notam.notam_no}} -->
+    </div>
+    <div class="collapsible-body clb">
+            <div class="coord-data" style="display:none;">
+                    {% for cord in notam.coords%}       
+                        <div class="coordlat">{{cord[0]}}</div>
+                        <div class="coordlong">{{cord[1]}}</div>
+                    {% endfor %}
+                </div>
+        <div class ="row">
+                <div id="vismap" class="vismap col m6">
+    
+                </div>
+                <div class="visinfo col m6">
+                        <table id="vistable">
+                        
+                        <tr><td>Issued By</td><td>{{notam.issued_by}}</td></tr>
+                        <!-- <tr><td>Start Time</td><td id="start-time-td-{{notam.notam_no}}">{{notam.start_time}}</td></tr>
+                        <tr><td>End Time</td><td id="end-time-td-{{notam.notam_no}}">{{notam.end_time}}</td></tr> -->
+                        <tr><td>Notam Type</td><td>{{notam.notam_type}}</td></tr>
+                        <tr><td>Tags</td><td>{{notam.tags}}</td></tr>
+                       
+                </table>
+        </div>
+    
+    </div>
+</li>
