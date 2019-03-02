@@ -46,6 +46,12 @@
 <div class="clearfix"></div>
 </div>
 <div class="content_vis">
+    <div class="coord-data" style="display:none;">
+        {% for cord in notam.coords%}       
+            <div class="coordlat">{{cord[0]}}</div>
+            <div class="coordlong">{{cord[1]}}</div>
+        {% endfor %}
+    </div>
     {% include '_magic_vis.html' %}
 </div>
 

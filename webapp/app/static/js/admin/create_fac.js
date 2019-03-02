@@ -56,25 +56,3 @@ $('#create_notam').on('click', function() {
     
 
 });
-
-// For Date Time Picker
-
-window.onload = function () {
-    $('#stimein_fac').daterangepicker({
-        timePicker: true,
-        startDate: moment().startOf('hour'),
-        endDate: moment().startOf('hour').add(32, 'hour'),
-        locale: {
-            format: 'M/DD hh:mm A'
-        }
-    });
-
-    $('#stimein').daterangepicker({
-        timePicker: true,
-        startDate: moment().startOf('hour'),
-        endDate: moment().startOf('hour').add(32, 'hour'),
-        locale: {
-            format: 'M/DD hh:mm A'
-        }
-    });
-};
