@@ -50,7 +50,8 @@ map.addControl(drawControl);
 
 radius = null
 center = null
-poly = null
+poly = []
+zoom = 14
 
 map.on('draw:created', function (e) {
 
@@ -61,13 +62,15 @@ map.on('draw:created', function (e) {
         
         radius = layer.getRadius();
         center = layer.getLatLng();
-        poly = null;
+        poly = [];
+        zoom = map.getZoom();
         
     } else {
         
         poly = layer.getLatLngs();
         radius = null;
         center = null;
+        zoom = map.getZoom();
         
     } 
 
