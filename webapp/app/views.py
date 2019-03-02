@@ -63,16 +63,16 @@ def create():
         'latin', 'longin', 'stime', 'etime', 'remarks', 'map_poly', 'notam_type']
     else:
         keys = ['notam_series', 'notam_no', 'fir', 'ident', 'freq', 'latin', 'longin', 'stime', 'etime',
-        'remarks','notam_type']    
-    notam_data = ""
-    for key in keys:
-        notam[key] = data[key]
-        notam_data += " " + notam[key]
-    notam['coords'] = []
-    notam['coords'].append((notam['latin'],notam['longin']))
-    # notam_extract = extract.extract_is_back(notam_data['notam_notam'])
-    notam['issued_by'] = "Administrator"
-
+        'remarks','notam_type']
+    try:
+        for key in keys:
+            notam[key] = data[key]
+        notam['coords'] = []
+        notam['coords'].append((notam['latin'],notam['longin']))
+        # notam_extract = extract.extract_is_back(notam_data['notam_notam'])
+        notam['issued_by'] = "Administrator"
+    except:
+        print("ERROR")
     # for key in notam_extract.keys():
     #     notam[key] = notam_extract[key]
     print(notam)
@@ -142,20 +142,16 @@ def kittu():
 
 @app.route('/admin')  # USER : Notam Lists
 def dash2():
-<<<<<<< HEAD
     try:
         if session['username']['admin']!=True:
             return redirect(url_for('index'))
     except:
         return redirect(url_for('index'))
     else:
-        return render_template("dashboard_v2/index.html")
-=======
-    notam = {'class': 'Notam Series', 'airport': '', 'notam': '', 'start_date': 'Start Date',
+        notam = {'class': 'Notam Series', 'airport': '', 'notam': '', 'start_date': 'Start Date',
      'end_date': 'End Date', 'start_time': 'Start Time', 'end_time': 'End Time',
       'notam_no':''}
-    return render_template("dashboard_v2/index.html",notam=notam)
->>>>>>> fd594e86d375ec7fd95f83aeb8e798c4fabf7d4e
+        return render_template("dashboard_v2/index.html",notam=notam)
 
 @app.route('/admin3')  # USER : Notam Lists
 def dash3():
