@@ -5,11 +5,62 @@ $('.collapsible-header').on('click', function () {
     //magic.children('.content_vis').toggleClass('magicopen');
     magic_map = magic.find('#vismap')[0];
     console.log(magic_map);
+
     lat = magic.find('.coordlat')[0].innerHTML;
     long = magic.find('.coordlong')[0].innerHTML;
-    console.log(lat);
-    var mapCenter = [lat, long];
-    var map = L.map(magic_map).setView(mapCenter, 14);
+
+    circle_lat = magic.find('.circle_lat')[0].innerHTML;
+    circle_lng = magic.find('.circle_lng')[0].innerHTML;
+    circle_rad = magic.find('.circle_rad')[0].innerHTML;
+    zoom = magic.find('.zoom')[0].innerHTML;
+    zoom = parseInt(zoom);
+    console.log(zoom);
+    poly_lat = magic.find('.polylat');
+    poly_lng = magic.find('.polylng');
+    avg_lat = 0;
+    avg_lng = 0;
+    poly = []
+    for (var i = 0; i < poly_lat.length; i++) {
+        poly_lat[i] = poly_lat[i].innerHTML;
+        avg_lat += parseFloat(poly_lat[i]);
+        poly_lng[i] = poly_lng[i].innerHTML;
+        avg_lng += parseFloat(poly_lng[i]);
+        poly.push([poly_lat[i],poly_lng[i]])
+    }
+    avg_lat = avg_lat / poly_lat.length;
+    avg_lng = avg_lng / poly_lat.length;
+    console.log(poly_lat);
+    
+
+    if (circle_rad > 0) {
+        var mapCenter = [circle_lat, circle_lng];
+        var map = L.map(magic_map).setView(mapCenter, zoom);
+
+
+        L.circle(mapCenter, {
+            color: 'red',
+            fillColor: '#f03',
+            fillOpacity: 0.5,
+            radius: circle_rad
+        }).addTo(map);
+
+    } else if (poly_lat[0] > 0) {
+        var mapCenter = [avg_lat, avg_lng];
+        var map = L.map(magic_map).setView(mapCenter, zoom);
+
+
+        L.polygon(poly, {
+            color: 'red',
+            fillColor: '#f03',
+            fillOpacity: 0.5
+        }).addTo(map);
+    }
+    else {
+        var map = L.map(magic_map).setView(mapCenter, zoom);
+        var mapCenter = [lat, long];
+        L.marker(mapCenter).addTo(mymap);
+    }
+    
 
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
         // attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',

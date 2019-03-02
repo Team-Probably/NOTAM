@@ -60,7 +60,7 @@ def create():
     print(data)
     if data['notam_type'] == 'airspace':
         keys = ['notam_notam', 'notam_series', 'notam_no', 'fir', 'scenario', 'nature', 
-        'latin', 'longin', 'stime', 'etime', 'remarks', 'map_poly', 'notam_type']
+        'latin', 'longin', 'stime', 'etime', 'remarks', 'map_poly','zoom' ,'notam_type']
     else:
         keys = ['notam_series', 'notam_no', 'fir', 'ident', 'freq', 'latin', 'longin', 'stime', 'etime',
         'remarks','notam_type']    
@@ -148,6 +148,8 @@ def dash2n():
     facility = database.get_notams('facility')
     print(airspace, facility)
     return render_template("dashboard_v2/newdash.html", facility = facility , airspace = airspace)
+
+
 @app.route('/admin')  # USER : Notam Lists
 def dash2():
     notam = {'class': 'Notam Series', 'airport': '', 'notam': '', 'start_date': 'Start Date',

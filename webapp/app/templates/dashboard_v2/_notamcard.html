@@ -33,6 +33,15 @@
                         <div class="coordlat">{{cord[0]}}</div>
                         <div class="coordlong">{{cord[1]}}</div>
                     {% endfor %}
+
+                    <div class="circle_lat">{{notam.map_poly[0].lat}}</div>
+                    <div class="circle_lng">{{notam.map_poly[0].lng}}</div>
+                    <div class="circle_rad">{{notam.map_poly[1]}}</div>
+                    {% for cord in notam.map_poly[2][0]%}       
+                        <div class="polylat">{{cord.lat}}</div>
+                        <div class="polylng">{{cord.lng}}</div>
+                    {% endfor %}
+                    <div class="zoom">{{notam.zoom}}</div>
                 </div>
         <div class ="row">
                 <div id="vismap" class="vismap col m6">

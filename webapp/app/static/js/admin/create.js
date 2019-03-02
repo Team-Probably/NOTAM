@@ -16,6 +16,7 @@ $('#create_notam').on('click', function() {
     // var endtimein = $('#endtimein').val();
     var remarks = $('#remark').val();
     var map_poly = [center, radius, poly];
+    
 
     var notam_data = {
         notam_notam: notam_notam,
@@ -31,6 +32,7 @@ $('#create_notam').on('click', function() {
         // endtimein: endtimein,
         remarks: remarks,
         map_poly: map_poly,
+        zoom: zoom,
         notam_type: "airspace"
     }
     console.log('Adding Notam to Airspace');
