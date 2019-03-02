@@ -3,6 +3,7 @@ $('#create_notam').on('click', function() {
     // console.log(chk.checked);
     // if(chk.checked)
     //     return;
+    var notam_notam = $().val();
     var notam_series = $('#notam_series').val();
     var notam_no = $('#notam_no').val();
     var fir = $('#fir').val();
@@ -16,6 +17,7 @@ $('#create_notam').on('click', function() {
     var remarks = $('#remark').val();
 
     var notam_data = {
+        notam_notam: notam_notam,
         notam_series: notam_series,
         notam_no: notam_no,
         fir: fir,

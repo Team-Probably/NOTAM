@@ -68,7 +68,7 @@ def create():
         notam_data += " " + notam[key]
     notam['coords'] = []
     notam['coords'].append((notam['latin'],notam['longin']))
-    notam_extract = extract.(notam_data)
+    notam_extract = extract.extract_is_back(notam_data['notam_notam'])
     notam['issued_by'] = app.username
 
     for key in notam_extract.keys():
