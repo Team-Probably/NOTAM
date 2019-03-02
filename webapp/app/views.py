@@ -6,13 +6,13 @@ from app import extract
 from app import database
 from werkzeug.datastructures import ImmutableMultiDict
 
-app.secret_key = os.environ['FLASK_SECRET_KEY']
+app.secret_key = "hetzz"
 app.username = ""
 
 @app.route('/') #TO-DO : By Aditya and Avi 
 def index():
     print("INDEX")
-    session['username'] = ""
+    # session['username'] = ""
     return render_template("login.html")    
 
 
@@ -27,8 +27,8 @@ def listview():
 
 @app.route('/admin')
 def admin():
-    if session['username']!=app.secret_key:
-        return redirect(url_for('index'))
+    # if session['username']!=app.secret_key:
+    #     return redirect(url_for('index'))
     airspace = database.get_notams('airspace')
     facility = database.get_notams('facility')
     return render_template('admin.html', facility=facility, airspace=airspace)
@@ -45,8 +45,8 @@ def processor():
 
 @app.route('/dashboard') #USER : Notam Lists
 def dashboard():
-    if session['username']!=app.secret_key:
-        return redirect(url_for('index'))
+    # if session['username']!=app.secret_key:
+    #     return redirect(url_for('index'))
     airspace = database.get_notams('airspace')
     facility = database.get_notams('facility')
     print(airspace, facility)
