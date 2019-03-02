@@ -26,14 +26,8 @@ def listview():
 
 @app.route('/admin')
 def admin():
-<<<<<<< HEAD
     # if session['username']!=app.secret_key:
     #     return redirect(url_for('index'))
-=======
-    print(session['username'])
-    if session['username']!=app.username+app.secret_key or app.username=="":
-        return redirect(url_for('index'))
->>>>>>> 41a070430a93c674fd7f66ccb0a50aede90cc51f
     airspace = database.get_notams('airspace')
     facility = database.get_notams('facility')
     return render_template('admin.html', facility=facility, airspace=airspace)
