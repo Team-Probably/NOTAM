@@ -100,3 +100,8 @@ def verify_login():
         print(session['username'])
         return redirect(url_for('dashboard'))
     return redirect(url_for('index'))
+
+
+@app.route('/kittu')  # USER : Notam Lists
+def kittu():
+    return render_template("kittu.html")
