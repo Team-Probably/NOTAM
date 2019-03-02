@@ -1,8 +1,7 @@
 import pymongo
-import os
+import os,datetime
 from pymongo import MongoClient
-
-mongodb_remote_url = str(os.environ["NOTAMS_MONGODB"])
+# mongodb_remote_url = str(os.environ["NOTAMS_MONGODB"])
 #mongod --dbpath "/home/rusherrg/Projects/SIH/webapp/database" --port 10000
 mongodb_local_url = 'mongodb://localhost:10000/' 
 
@@ -32,6 +31,25 @@ def get_notams(notam_type):
     notams = []
     print("Getting NOTAMs")
     for notam in db.find():
+        time = notam['stimein'].split('-')
+        notam['start_time'] = time[0]
+        notam['end_time'] = time[1]
+        time_start = notam['start_time'].split(' ')
+        time_start.extend(time_start[0].split('-'))
+        time_start.extend(time_start[1][:-2].split(':'))
+        time_end = notam['end_time'].split(' ')
+        time_end.extend(time_end[0].split('-'))
+        time_end.extend(time_end[1][:-2].split(':'))
+        time_start = datetime.datetime(*time_start)
+        time_end = datetime.datetime(*time_end)
+        delta_time = time_start - datetime.datetime.now() 
+        if delta_time.total_seconds()>0:
+            notam['status'] = 'Upcoming'
+            delta_time = time_end - datetime.datetime.now()
+        elif delta_time.total_seconds()>0:
+            notam['status'] = 'Ongoing'
+        else:
+            notam['status'] = 'Expired'
         notams.append(notam)
     return notams
 

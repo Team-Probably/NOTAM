@@ -1,4 +1,4 @@
-var mapCenter = [22, 87];
+var mapCenter = [19,42];
 var map = L.map('map_picker').setView(mapCenter, 3);
 
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
@@ -30,7 +30,7 @@ $('#latin').on('input', updateMarkerByInputs);
 $('#longin').on('input', updateMarkerByInputs);
 
 //fac
-var mapCenter_fac = [22, 87];
+var mapCenter_fac = [19,42];
 var map_fac = L.map('map_picker_fac').setView(mapCenter_fac, 3);
 
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
