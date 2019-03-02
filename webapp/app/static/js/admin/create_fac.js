@@ -1,8 +1,8 @@
 $('#create_notam').on('click', function() {
-    var chk = document.getElementById('checkboxtog');
-    console.log(chk.checked);
-    if(!chk.checked)
-        return;
+    // var chk = document.getElementById('checkboxtog');
+    // console.log(chk.checked);
+    // if(!chk.checked)
+    //     return;
     var notam_series = $('#notam_series_fac').val();
     var notam_no = $('#notam_no_fac').val();
     var fir = $('#fir_fac').val();
