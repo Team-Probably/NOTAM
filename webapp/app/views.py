@@ -5,6 +5,7 @@ from app import app
 from app import extract
 from app import database
 from werkzeug.datastructures import ImmutableMultiDict
+from pprint import pprint
 
 app.secret_key = os.environ['FLASK_SECRET_KEY']
 
@@ -58,8 +59,8 @@ def create():
     data = request.get_json()
     print(data)
     if data['notam_type'] == 'airspace':
-        keys = ['notam_series', 'notam_no', 'fir', 'scenario', 'nature', 'latin', 'longin', 'stime', 'etime',
-        'remarks','notam_type']
+        keys = ['notam_notam', 'notam_series', 'notam_no', 'fir', 'scenario', 'nature', 
+        'latin', 'longin', 'stime', 'etime', 'remarks', 'map_poly', 'notam_type']
     else:
         keys = ['notam_series', 'notam_no', 'fir', 'ident', 'freq', 'latin', 'longin', 'stime', 'etime',
         'remarks','notam_type']    
@@ -69,11 +70,11 @@ def create():
         notam_data += " " + notam[key]
     notam['coords'] = []
     notam['coords'].append((notam['latin'],notam['longin']))
-    notam_extract = extract.extract_is_back(notam_data['notam_notam'])
-    notam['issued_by'] = session['username']
+    # notam_extract = extract.extract_is_back(notam_data['notam_notam'])
+    notam['issued_by'] = "Administrator"
 
-    for key in notam_extract.keys():
-        notam[key] = notam_extract[key]
+    # for key in notam_extract.keys():
+    #     notam[key] = notam_extract[key]
     print(notam)
     if database.add_notam(notam):
         return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
@@ -141,6 +142,7 @@ def kittu():
 
 @app.route('/admin')  # USER : Notam Lists
 def dash2():
+<<<<<<< HEAD
     try:
         if session['username']['admin']!=True:
             return redirect(url_for('index'))
@@ -148,7 +150,28 @@ def dash2():
         return redirect(url_for('index'))
     else:
         return render_template("dashboard_v2/index.html")
+=======
+    notam = {'class': 'Notam Series', 'airport': '', 'notam': '', 'start_date': 'Start Date',
+     'end_date': 'End Date', 'start_time': 'Start Time', 'end_time': 'End Time',
+      'notam_no':''}
+    return render_template("dashboard_v2/index.html",notam=notam)
+>>>>>>> fd594e86d375ec7fd95f83aeb8e798c4fabf7d4e
 
 @app.route('/admin3')  # USER : Notam Lists
 def dash3():
-    return render_template("dashboard_v2/Facility.html")
+    notam = {'class': 'Notam Series', 'airport': '', 'notam': '', 'start_date': 'Start Date',
+     'end_date': 'End Date', 'start_time': 'Start Time', 'end_time': 'End Time',
+      'notam_no':''}
+    return render_template("dashboard_v2/Facility.html",notam=notam)
+
+@app.route('/predict_notam', methods=["GET"])
+def predict_notam():
+    notam = request.args.get('notam')
+    notam = extract.extract_is_back(notam)
+    notam['start_date'],notam["start_time"] = notam['starttime'].split(" ")
+    notam['end_date'], notam["end_time"] = notam['endtime'].split(" ")
+    print(notam)
+    if notam['firOfac'] == 'FIR':
+        return render_template('dashboard_v2/Facility.html', notam=notam)
+    else:
+        return render_template('dashboard_v2/index.html', notam=notam)
