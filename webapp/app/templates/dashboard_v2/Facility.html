@@ -26,7 +26,7 @@
                 <a href="#!" class="brand-logo">Create Notam</a>
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                 <ul class="right hide-on-med-and-down">
-                    <li><a href="#">Sass</a></li>
+                    
                     <!-- Dropdown Trigger -->
                     <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Select<i
                                 class="material-icons right">arrow_drop_down</i></a></li>
@@ -37,7 +37,7 @@
         </nav>
     
         <ul class="sidenav" id="mobile-demo">
-            <li><a href="#">Sass</a></li>
+            
             <li><a href="#">Dashboard</a></li>
             <li><a href="#">Logout</a></li>
         </ul>
@@ -50,7 +50,7 @@
                     <form class="col s12">
                         <div class="row">
                             <div class="input-field col s12">
-                                <textarea id="textarea1" class="materialize-textarea"></textarea>
+                                <textarea id="textarea1" class="materialize-textarea" >{{notam.notam}}</textarea>
                                 <label for="textarea1">Paste NOTAM Here</label>
                             </div>
                         </div>
@@ -61,17 +61,17 @@
             <div class="row">
                 <div class="input-field col s4">
                     <select id="notam_series_fac">
-                        <option value="" disabled selected>Choose your option</option>
-                        <option value="1">A Series</option>
-                        <option value="2">B Series</option>
-                        <option value="3">C Series</option>
-                        <option value="4">G Series</option>
+                        <option value="" disabled selected>Choose Option</option>
+                        <option value="A">A Series</option>
+                        <option value="B">B Series</option>
+                        <option value="C">C Series</option>
+                        <option value="G">G Series</option>
                     </select>
                     <label>Select Notam Series</label>
                 </div>
                 <div class="input-field col s4">
                     <i class="material-icons prefix">account_circle</i>
-                    <input id="notam_no_fac" type="text" class="validate">
+                    <input id="notam_no_fac" type="text" class="validate" value="{{notam.notam_no}}">
                     <label for="notam_no_fac">Notam No.</label>
                 </div>
             </div>
@@ -79,7 +79,7 @@
             <div class="row">
                 <div class="input-field col s4">
                     <!-- <i class="material-icons prefix">place</i> -->
-                    <input id="fir_fac" type="text" class="validate">
+                    <input id="fir_fac" type="text" class="validate" value="{{notam.firOfac}}">
                     <label for="fir_fac">Facility Name</label>
                 </div>
             </div>
@@ -116,22 +116,22 @@
             
             <div class="row start_time">
                 <div class="input-field col s4">
-                    <input type="text" class="datepicker" value="Start Date" id="st_date_fac"> 
+                    <input type="text" class="datepicker" value="{{notam.start_date}}" id="st_date_fac"> 
                 </div>
                 <div class="input-field col s4">
-                    <input type="text" class="timepicker" value="Start Time" id="st_time_fac">
+                    <input type="text" class="timepicker" value="{{notam.start_time}}" id="st_time_fac">
                 </div>
             </div>
 
             <div class="row end_time">
                 <div class="input-field col s4">
-                    <input type="text" class="datepicker" value="End Date" id="ed_date_fac">
+                    <input type="text" class="datepicker" value="{{notam.end_date}}" id="ed_date_fac">
                 </div>
                 <div class="input-field col s4">
-                    <input type="text" class="timepicker" value="End Time" id="ed_time_fac">
+                    <input type="text" class="timepicker" value="{{notam.end_time}}" id="ed_time_fac">
                 </div>
             </div>
-
+            
             <div class="row">
                 <form class="col s12">
                     <div class="row">

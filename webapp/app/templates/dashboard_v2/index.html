@@ -13,7 +13,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/dashboard_v2/style.css') }}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="{{ url_for('static', filename='js/dashboard_v2/index.js') }}"></script>
+    
 </head>
 <body style="background:#d0d8d8;">
     <div class="desk_nav">
@@ -26,7 +26,7 @@
                 <a href="#!" class="brand-logo">Create Notam</a>
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                 <ul class="right hide-on-med-and-down">
-                    <li><a href="#">Sass</a></li>
+                    
                     <!-- Dropdown Trigger -->
                     <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Select<i
                                 class="material-icons right">arrow_drop_down</i></a></li>
@@ -37,7 +37,7 @@
         </nav>
     
         <ul class="sidenav" id="mobile-demo">
-            <li><a href="#">Sass</a></li>
+            
             <li><a href="#">Dashboard</a></li>
             <li><a href="#">Logout</a></li>
         </ul>
@@ -50,30 +50,28 @@
                     <form class="col s12">
                         <div class="row">
                             <div class="input-field col s12">
-                                <textarea id="textarea1" class="materialize-textarea"></textarea>
-                                <label for="textarea1">Paste NOTAM Here</label>
+                                <textarea id="notam_notam" class="materialize-textarea"></textarea>
+                                <label for="notam_notam">Paste NOTAM Here</label>
                             </div>
                         </div>
                     </form>
+                    <a id="auto_notam" class="waves-effect waves-light btn" >AutoFill</a>
                 </div>
-            </div>
-            <div class="row">
-                <a class="waves-effect waves-light btn" id="auto_notam">AutoFill</a>
             </div>
             <div class="row">
                 <div class="input-field col s4">
                     <select id="notam_series">
                         <option value="" disabled selected>Choose your option</option>
-                        <option value="1">A Series</option>
-                        <option value="2">B Series</option>
-                        <option value="3">C Series</option>
-                        <option value="4">G Series</option>
+                        <option value="A">A Series</option>
+                        <option value="B">B Series</option>
+                        <option value="C">C Series</option>
+                        <option value="G">G Series</option>
                     </select>
                     <label>Select Notam Series</label>
                 </div>
                 <div class="input-field col s4">
                     <i class="material-icons prefix">account_circle</i>
-                    <input id="notam_no" type="text" class="validate">
+                    <input id="notam_no" type="text" class="validate" value="{{notam.notam_no}}">
                     <label for="notam_no">Notam No.</label>
                 </div>
             </div>
@@ -82,7 +80,7 @@
                 <div class="input-field col s4">
                     <i class="material-icons prefix">place</i>
                     <input id="fir" type="text" class="validate">
-                    <label for="fir">Affected Fir</label>
+                    <label for="fir">FIR</label>
                 </div>
             </div>
 
@@ -124,19 +122,19 @@
             
             <div class="row start_time">
                 <div class="input-field col s4">
-                    <input type="text" class="datepicker" value="Start Date" id="st_date"> 
+                    <input type="text" class="datepicker" value="{{notam.start_date}}" id="st_date"> 
                 </div>
                 <div class="input-field col s4">
-                    <input type="text" class="timepicker" value="Start Time" id="st_time">
+                    <input type="text" class="timepicker" value="{{notam.start_time}}" id="st_time">
                 </div>
             </div>
 
             <div class="row end_time">
                 <div class="input-field col s4">
-                    <input type="text" class="datepicker" value="End Date" id="ed_date">
+                    <input type="text" class="datepicker" value="{{notam.end_date}}" id="ed_date">
                 </div>
                 <div class="input-field col s4">
-                    <input type="text" class="timepicker" value="End Time" id="ed_time">
+                    <input type="text" class="timepicker" value="{{notam.end_time}}" id="ed_time">
                 </div>
             </div>
 
@@ -156,5 +154,6 @@
 
     </div>
      <script  src="{{ url_for('static', filename='js/admin/create.js') }}"></script>
+     <script src="{{ url_for('static', filename='js/dashboard_v2/index.js') }}"></script>
 </body>
 </html>

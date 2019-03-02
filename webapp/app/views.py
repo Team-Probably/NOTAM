@@ -5,6 +5,7 @@ from app import app
 from app import extract
 from app import database
 from werkzeug.datastructures import ImmutableMultiDict
+from pprint import pprint
 
 app.secret_key = "hetzz"
 app.username = ""
@@ -141,8 +142,21 @@ def kittu():
 
 @app.route('/admin')  # USER : Notam Lists
 def dash2():
-    return render_template("dashboard_v2/index.html")
+    notam = {'class':'Notam Series','airport': '', 'notam': '', 'start_date': 'Start Date', 'end_date': 'End Date', 'start_time': 'Start Time', 'end_time': 'End Time', 'notam_no':'Notam No.'}
+    return render_template("dashboard_v2/index.html",notam=notam)
 
 @app.route('/admin3')  # USER : Notam Lists
 def dash3():
     return render_template("dashboard_v2/Facility.html")
+
+@app.route('/predict_notam', methods=["GET"])
+def predict_notam():
+    notam = request.args.get('notam')
+    notam = extract.extract_is_back(notam)
+    notam['start_date'],notam["start_time"] = notam['starttime'].split(" ")
+    notam['end_date'], notam["end_time"] = notam['endtime'].split(" ")
+    print(notam)
+    if notam['firOfac'] == 'FIR':
+        return render_template('dashboard_v2/Facility.html', notam=notam)
+    else:
+        return render_template('dashboard_v2/index.html', notam=notam)

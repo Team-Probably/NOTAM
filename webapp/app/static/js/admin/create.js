@@ -64,32 +64,32 @@ $('#create_notam').on('click', function() {
 
 // For Date Time Picker
 
-window.onload = function () {
-    $('#stimein_fac').daterangepicker({
-        "showDropdowns": true,
-        "timePicker": true,
-        "timePicker24Hour": true,
-        "startDate": "02/02/2019",
-        "endDate": "03/02/2019",
-        "drops": "up",
-        locale: {
-            format: 'YYYY-MM-DD hh:mm A'
-        }
-    }, function (start, end, label) {
-        console.log('New date range selected: ' + start.format('YYYY-MM-DD hh:mm A') + ' to ' + end.format('YYYY-MM-DD hh:mm A') + ' (predefined range: ' + label + ')');
-    });
+// window.onload = function () {
+//     $('#stimein_fac').daterangepicker({
+//         "showDropdowns": true,
+//         "timePicker": true,
+//         "timePicker24Hour": true,
+//         "startDate": "02/02/2019",
+//         "endDate": "03/02/2019",
+//         "drops": "up",
+//         locale: {
+//             format: 'YYYY-MM-DD hh:mm A'
+//         }
+//     }, function (start, end, label) {
+//         console.log('New date range selected: ' + start.format('YYYY-MM-DD hh:mm A') + ' to ' + end.format('YYYY-MM-DD hh:mm A') + ' (predefined range: ' + label + ')');
+//     });
 
-    $('#stimein').daterangepicker({
-        "showDropdowns": true,
-        "timePicker": true,
-        "timePicker24Hour": true,
-        "startDate": "02/02/2019",
-        "endDate": "03/02/2019",
-        "drops": "up",
-        locale: {
-            format: 'YYYY-MM-DD hh:mm A'
-        }
-    }, function (start, end, label) {
-        console.log('New date range selected: ' + start.format('YYYY-MM-DD hh:mm A') + ' to ' + end.format('YYYY-MM-DD hh:mm A') + ' (predefined range: ' + label + ')');
-    });
-};
+//     $('#stimein').daterangepicker({
+//         "showDropdowns": true,
+//         "timePicker": true,
+//         "timePicker24Hour": true,
+//         "startDate": "02/02/2019",
+//         "endDate": "03/02/2019",
+//         "drops": "up",
+//         locale: {
+//             format: 'YYYY-MM-DD hh:mm A'
+//         }
+//     }, function (start, end, label) {
+//         console.log('New date range selected: ' + start.format('YYYY-MM-DD hh:mm A') + ' to ' + end.format('YYYY-MM-DD hh:mm A') + ' (predefined range: ' + label + ')');
+//     });
+// };
