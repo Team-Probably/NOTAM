@@ -140,3 +140,7 @@ def kittu():
 @app.route('/admin2')  # USER : Notam Lists
 def dash2():
     return render_template("dashboard_v2/index.html")
+
+@app.route('/admin3')  # USER : Notam Lists
+def dash3():
+    return render_template("dashboard_v2/Facility.html")
