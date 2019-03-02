@@ -40,6 +40,7 @@ $('#create_notam').on('click', function() {
         ulimit: ulimit,
         notam_type: "airspace"
     }
+    
     console.log('Adding Notam to Airspace');
     console.log(notam_data);
     $.ajax({
