@@ -8,6 +8,8 @@ from werkzeug.datastructures import ImmutableMultiDict
 from pprint import pprint
 from datetime import datetime
 
+# app.secret_key = "WORKS"
+
 app.secret_key = os.environ['FLASK_SECRET_KEY']
 
 #URL Routes
@@ -143,6 +145,14 @@ def getnotamdata():
     notam = database.get_notam('notam_no',notam_no)
     notam['_id']='hi'
     return jsonify(notam)
+
+@app.route('/editnotam',methods=['POST'])
+def edit_notam():
+    notam_no = request.args.get('notamid')
+    notam = database.get_notam('notam_no',notam_no)
+    notam['_id']='hi'
+    return jsonify(notam)
+    
 
 @app.route('/deletenotam')
 def deletenotam():

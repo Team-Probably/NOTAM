@@ -22,6 +22,18 @@ def add_notam(notam):
     db.insert(notam)
     return 1
 
+def edit_notam(notam):
+    db=connect(mongodb_local_url)
+    if notam['notam_type'] == "airspace":
+        db = db.airspace
+    if notam['notam_type'] == "facility":
+        db = db.facility
+    if db.find_one({'notam_no':notam['notam_no'],'notam_series':notam['notam_series']}):
+        print(notam, db)
+        # remove_notam(notam)
+        # add_notam(notam)   
+    return notam
+
 def get_notams(notam_type):
     db = connect(mongodb_local_url)
     if notam_type == "airspace":
