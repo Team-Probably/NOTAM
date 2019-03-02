@@ -25,8 +25,8 @@ def listview():
 
 @app.route('/admin')
 def admin():
-    if session['username']!=app.secret_key:
-        return redirect(url_for('index'))
+    # if session['username']!=app.secret_key:
+    #     return redirect(url_for('index'))
     airspace = database.get_notams('airspace')
     facility = database.get_notams('facility')
     return render_template('admin.html', facility=facility, airspace=airspace)
@@ -43,8 +43,8 @@ def processor():
 
 @app.route('/dashboard') #USER : Notam Lists
 def dashboard():
-    if session['username']!=app.secret_key:
-        return redirect(url_for('index'))
+    # if session['username']!=app.secret_key:
+    #     return redirect(url_for('index'))
     airspace = database.get_notams('airspace')
     facility = database.get_notams('facility')
     print(airspace, facility)
