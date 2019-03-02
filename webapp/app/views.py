@@ -15,12 +15,17 @@ app.secret_key = os.environ['FLASK_SECRET_KEY']
 def index():
     print("INDEX")
     session['username'] = {}
-    return render_template("login.html")    
+    return render_template('login.html')  
 
 @app.route('/dashboard')
 def dashboard():
     airspace = database.get_notams('airspace')
     facility = database.get_notams('facility')
+    print(airspace, facility)
+    for i in range(len(airspace)):
+        airspace[i]['msg'] = airspace[i]['msg'].replace('\n','<br/>')
+    for i in range(len(facility)):
+        facility[i]['msg'] = facility[i]['msg'].replace('\n','<br/>')
     print(airspace, facility)
     return render_template("dashboard_v2/newdash.html", facility = facility , airspace = airspace)
 
@@ -74,7 +79,6 @@ def create():
         keys = ['notam_series', 'notam_no', 'fir', 'ident', 'freq', 'latin', 'longin', 'stime', 'etime',
                 'remarks', 'map_poly', 'zoom', 'notam_type']
     notam_data = ""
-    print(data)
     if data.get('notam_notam'):
         data['msg']=data['notam_notam']
     else:
@@ -86,7 +90,12 @@ def create():
             coords = 'AROUND '+str(round(float(data['latin'])*10000, 2))+'N'+' '+str(round(float(data['longin'])*10000, 2))
         except:
             try:
-                coords = 'WITHIN THE REGION '+str(data['map_poly'])
+                coords = 'WITHIN THE REGION '
+                if data['map_poly'][0]:
+                    coords += "CENTERED AT "+str(0.000539957*data['map_poly'][0][0]) + " " +str(0.000539957*data['map_poly'][0][0]) + " RADIUS " + str(0.000539957*data['map_poly'][1])
+                coords += '\n'
+                for i in data['map_poly'][2][0]:
+                    coords += 'lat : ' + str(i['lat']) + " lng : " + str(i['lng'])+"\n"
             except:
                 coords = ''
         msg+='E) '+(' AIRSPACE ' if data['notam_type']=='airspace' else 'FACILITY ')+data.get('scenario', '')+' DUE '+data.get('nature', '')+' '+coords+'\n'
@@ -168,6 +177,11 @@ def predict_notam():
 @app.route('/visualizer')
 def visualizer():
     return render_template("visualizer/visual.html")
+
+@app.route('/populate')
+def populate_notams():
+    database.populate()
+    return redirect(url_for('dashboard'))
 
 @app.route('/listview') 
 def listview():

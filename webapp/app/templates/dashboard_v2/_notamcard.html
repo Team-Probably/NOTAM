@@ -6,7 +6,9 @@
                     
                     <div class = "col m2 number"><span class="series">{{notam.notam_series}}</span>{{notam.notam_no}}</div>
                     <div class="col m7 notamview">
-                         {{notam.msg}}
+                        {% autoescape false %}
+                                {{notam.msg}}
+                        {% endautoescape %}
                     </div>
                     <div class="col m3">
                             <table id="uptable">
