@@ -1,13 +1,16 @@
 # views.py
-from flask import render_template,request,Response,redirect,url_for
-import json
+from flask import render_template,request,Response,redirect,url_for,session
+import json,os
 from app import app
 from app import extract
 from app import database
 from werkzeug.datastructures import ImmutableMultiDict
 
+app.secret_key = os.environ['FLASK_SECRET_KEY']
+
 @app.route('/') #TO-DO : By Aditya and Avi 
 def index():
+    session['username'] = ""
     return render_template("login.html")    
 
 
@@ -22,6 +25,8 @@ def listview():
 
 @app.route('/admin')
 def admin():
+    if session['username']!=app.secret_key:
+        return redirect(url_for('index'))
     airspace = database.get_notams('airspace')
     facility = database.get_notams('facility')
     return render_template('admin.html', facility=facility, airspace=airspace)
@@ -38,8 +43,11 @@ def processor():
 
 @app.route('/dashboard') #USER : Notam Lists
 def dashboard():
+    if session['username']!=app.secret_key:
+        return redirect(url_for('index'))
     airspace = database.get_notams('airspace')
     facility = database.get_notams('facility')
+    print(airspace, facility)
     return render_template("dashboard.html", facility = facility , airspace = airspace)
 
 @app.route('/create_notam',methods=['POST']) #Admin : Create Notams
@@ -77,7 +85,7 @@ def signup():
         user[key] = user[key][0]
     if database.add_user(user):
         return redirect(url_for('dashboard'))
-    return render_template('login.html')
+    return redirect(url_for('index'))
 
 @app.route('/verify_login',methods=['POST']) #User : SignUp
 def verify_login():
@@ -86,6 +94,7 @@ def verify_login():
     for key in user.keys():
         user[key] = user[key][0]
     if database.verify_login(user):
+        session['username'] = app.secret_key
         return redirect(url_for('dashboard'))
-    return render_template('login.html')
+    return redirect(url_for('index'))
     

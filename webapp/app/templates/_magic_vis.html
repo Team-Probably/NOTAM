@@ -1,13 +1,43 @@
 <div class="visrow">
-    <div id="vismap" class="vismap">
+    <div id="vismap" class="vismap col-md-2">
     
     </div>
-    <div class="visinfo">
-        Status: Ongoing<br>
-        Issued By: Kittu<br>
+    
+    <div class="visinfo col-md-10">
+        <table id="vistable">
+        <tr><td>Status</td><td id="status-what-{{notam.notam_no}}">
+            Ongoing</td></tr>
+        <tr><td>Issued By</td><td>Kittu</td></tr>
+        <tr><td>Start Time</td><td id="start-time-td-{{notam.notam_no}}">{{notam.start_time}}</td></tr>
+        <tr><td>End Time</td><td id="end-time-td-{{notam.notam_no}}">{{notam.end_time}}</td></tr>
+        <tr><td>Notam Type</td><td>{{notam.notam_type}}</td></tr>
+        <tr><td>Tags</td><td>Tags</td></tr>
+        <!-- <script>
+            var status_what=document.getElementById('status-what');
+            var now = new Date();
+            var stm = document.getElementById('start-time-td').innerText;
+            var endm = document.getElementById('end-time-td').innerText;
+            var startd = new Date('2019/'+stm);
+            var endd = new Date('2019/'+endm);
+            console.log(startd+"    \n"+stm);
+           if(startd > now)
+           {
+               console.log('greater');
+               status_what.innerText='Future';
+           }
+           else if(endd < now)
+           {
+                status_what.innerText='Expired';
+           }
+           else{
+            status_what.innerText='Ongoing';
+           }
+        </script> -->
+       <!--
         Start Time: 14/2/1201 45:51<br>
-        End Time: Start Time: 14/2/1201 45:56<br>
+        End Time: 14/2/1201 45:56<br>
         Notam Type: Space<br>
-        Tags: Akshay ko Pata<br>
+        Tags: Akshay ko Pata<br>-->
+        </table>
     </div>
 </div>
