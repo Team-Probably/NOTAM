@@ -8,21 +8,29 @@ from werkzeug.datastructures import ImmutableMultiDict
 from pprint import pprint
 from datetime import datetime
 
+# app.secret_key = "WORKS"
+
 app.secret_key = os.environ['FLASK_SECRET_KEY']
 
 #URL Routes
-@app.route('/')
-def index():
-    print("INDEX")
-    session['username'] = {}
-    return render_template("login.html")    
+# @app.route('/')
+# def index():
+#     print("INDEX")
+#     session['username'] = {}
+#     return render_template("login.html")    
 
+@app.route('/')
 @app.route('/dashboard')
 def dashboard():
     airspace = database.get_notams('airspace')
     facility = database.get_notams('facility')
     print(airspace, facility)
-    return render_template("dashboard_v2/newdash.html", facility = facility , airspace = airspace)
+    for i in range(len(airspace)):
+        airspace[i]['msg'] = airspace[i]['msg'].replace('\n','<br/>')
+    for i in range(len(facility)):
+        facility[i]['msg'] = facility[i]['msg'].replace('\n','<br/>')
+    print(airspace, facility)
+    return render_template("dashboard_v2/newdash.html", facility = facility , airspace = airspace, logged_in = check_login())
 
 @app.route('/admin_airspace')
 def admin_airspace():
@@ -74,7 +82,6 @@ def create():
         keys = ['notam_series', 'notam_no', 'fir', 'ident', 'freq', 'latin', 'longin', 'stime', 'etime',
                 'remarks', 'map_poly', 'zoom', 'notam_type']
     notam_data = ""
-    print(data)
     if data.get('notam_notam'):
         data['msg']=data['notam_notam']
     else:
@@ -86,7 +93,12 @@ def create():
             coords = 'AROUND '+str(round(float(data['latin'])*10000, 2))+'N'+' '+str(round(float(data['longin'])*10000, 2))
         except:
             try:
-                coords = 'WITHIN THE REGION '+str(data['map_poly'])
+                coords = 'WITHIN THE REGION '
+                if data['map_poly'][0]:
+                    coords += "CENTERED AT "+str(0.000539957*data['map_poly'][0][0]) + " " +str(0.000539957*data['map_poly'][0][0]) + " RADIUS " + str(0.000539957*data['map_poly'][1])
+                coords += '\n'
+                for i in data['map_poly'][2][0]:
+                    coords += 'lat : ' + str(i['lat']) + " lng : " + str(i['lng'])+"\n"
             except:
                 coords = ''
         msg+='E) '+(' AIRSPACE ' if data['notam_type']=='airspace' else 'FACILITY ')+data.get('scenario', '')+' DUE '+data.get('nature', '')+' '+coords+'\n'
@@ -144,6 +156,14 @@ def getnotamdata():
     notam['_id']='hi'
     return jsonify(notam)
 
+@app.route('/editnotam',methods=['POST'])
+def edit_notam():
+    notam_no = request.args.get('notamid')
+    notam = database.get_notam('notam_no',notam_no)
+    notam['_id']='hi'
+    return jsonify(notam)
+    
+
 @app.route('/deletenotam')
 def deletenotam():
     notam_no = request.args.get('notamid')
@@ -162,12 +182,33 @@ def predict_notam():
     else:
         return render_template('dashboard_v2/index.html', notam=notam)
 
+def check_login():
+    #print(request, type(request))
+    try:
+        if(session['username']['admin']==True):
+            return True
+        else:
+            return False
+    except:
+        return False
+
+@app.route('/logout')
+def logout():
+    session['username']=None
+    return redirect(url_for('dashboard')) 
+
+
 
 
 #DEBUG URLs
 @app.route('/visualizer')
 def visualizer():
     return render_template("visualizer/visual.html")
+
+@app.route('/populate')
+def populate_notams():
+    database.populate()
+    return redirect(url_for('dashboard'))
 
 @app.route('/listview') 
 def listview():
@@ -210,4 +251,3 @@ PRESENTATION. AS A CONSEQUENCE OF AIRSPACE CLOSURE COIMBATORE AP
 WILL REMAIN CLSD FOR ACFT OPS.
 F) GND G) FL140'''
     return str(extract.extract_is_back(tnot))
-

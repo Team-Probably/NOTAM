@@ -6,15 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Dash</title>
     <!-- Compiled and minified CSS -->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script type="text/javascript" src="{{ url_for('static',filename='js/imports/jquery-3.3.1.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/imports/materialize.min.css') }}">
     
     <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="{{ url_for('static',filename='js/imports/materialize.min.js') }}"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/dashboard_v2/newdash.css') }}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="{{ url_for('static', filename='js/dashboard_v2/newdash.js') }}"></script>
-
+    <script src="{{ url_for('static', filename='js/dashboard_v2/popuplogin.js') }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/dashboard_v2/popuplogin.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/magicopen.css') }}">
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/magicvis.css') }}">
 		<link rel="stylesheet" href="{{ url_for('static',filename='styles/imports/leaflet.css') }}"/>
@@ -31,8 +32,13 @@
                 
                 <ul class="right hide-on-med-and-down">
                     <li><a href="#">Dashboard</a></li>
-                    <li><a href="#">Logout</a></li>
-                </ul>
+                    <!-- <li><a href="#">Logout</a></li> -->
+                    {% if logged_in %}
+                    <li><button class="waves-effect waves-light btn" onclick="location.href='/logout'">Log Out</button></li>
+                    {% else %}
+                    <li><button data-target="loginform" class="btn modal-trigger" >Log In</button></li>
+                    {% endif %}
+                  </ul>
             </div>
         </nav>
     
@@ -40,11 +46,7 @@
     </div>
     <ul class="sidenav" id="mobile-demo">
             <li><a href="#">Create Notam</a></li>
-            <li><a href="#">Logout</a></li>
-    </ul>
-    <ul class="sidenav" id="mobile-demo">
-            <li><a href="#">Create Notam</a></li>
-            <li><a href="#">Logout</a></li>
+            <li><button data-target="loginform" class="btn modal-trigger">Modal</button></li>
     </ul>
     
 
@@ -82,6 +84,38 @@
             </ul>
         </div>
     </div>
+
+    <div id="loginform" class='modal'>   
+        <div id="login">   
+          <h1>Welcome Back!</h1>
+
+          <form action="/verify_login" method="post">
+
+            <div class="field-wrap">
+            <label>
+              Email Address<span class="req">*</span>
+            </label>
+            <input type="email"required autocomplete="off" name="email"/>
+          </div>
+          
+          <div class="field-wrap">
+            <label>
+              Password<span class="req">*</span>
+            </label>
+            <input type="password"required autocomplete="off" name="password"/>
+          </div>
+          
+          <p class="forgot"><a href="#">Forgot Password?</a></p>
+          
+          <button type="submit" class="button button-block">Log In</button>
+          </form>
+
+        </div>
+      
+</div>
+
+
+
     <script src="{{ url_for('static', filename='js/dashboard_v2/newdash.js') }}"></script>
     <script  src="{{ url_for('static', filename='js/dashboard/open_vis.js') }}"></script>
     <script  src="{{ url_for('static', filename='js/dashboard/magicvis.js') }}"></script>

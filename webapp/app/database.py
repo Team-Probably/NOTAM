@@ -1,5 +1,5 @@
 import pymongo
-import os,datetime
+import os,datetime,ast,pprint
 from pymongo import MongoClient
 #mongodb_remote_url = str(os.environ["NOTAMS_MONGODB"])
 #mongod --dbpath "/home/rusherrg/Projects/SIH/webapp/database" --port 10000
@@ -21,6 +21,18 @@ def add_notam(notam):
         return 0
     db.insert(notam)
     return 1
+
+def edit_notam(notam):
+    db=connect(mongodb_local_url)
+    if notam['notam_type'] == "airspace":
+        db = db.airspace
+    if notam['notam_type'] == "facility":
+        db = db.facility
+    if db.find_one({'notam_no':notam['notam_no'],'notam_series':notam['notam_series']}):
+        print(notam, db)
+        # remove_notam(notam)
+        # add_notam(notam)   
+    return notam
 
 def get_notams(notam_type):
     db = connect(mongodb_local_url)
@@ -87,6 +99,14 @@ def verify_login(user):
         print(user, "LOGIN SUCCESSFUL")
         return db.find_one(user)
     return 0
+
+def populate():
+    with open('./database/notams.txt','r') as f:
+        notams = f.readlines()
+        for notam in notams:
+            pprint.pprint(eval(notam))
+            add_notam(eval(notam))
+    return
 
 def mongodb_push():
     remote = connect(mongodb_remote_url)
