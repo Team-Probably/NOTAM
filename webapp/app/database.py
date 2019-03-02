@@ -1,7 +1,7 @@
 import pymongo
 import os,datetime
 from pymongo import MongoClient
-# mongodb_remote_url = str(os.environ["NOTAMS_MONGODB"])
+#mongodb_remote_url = str(os.environ["NOTAMS_MONGODB"])
 #mongod --dbpath "/home/rusherrg/Projects/SIH/webapp/database" --port 10000
 mongodb_local_url = 'mongodb://localhost:10000/' 
 
@@ -31,44 +31,55 @@ def get_notams(notam_type):
     notams = []
     print("Getting NOTAMs")
     for notam in db.find():
-        # time = notam['stimein'].split('-')
-        # notam['start_time'] = time[0]
-        # notam['end_time'] = time[1]
-        # time_start = notam['start_time'].split(' ')
-        # time_start.extend(time_start[0].split('-'))
-        # time_start.extend(time_start[1][:-2].split(':'))
-        # time_end = notam['end_time'].split(' ')
-        # time_end.extend(time_end[0].split('-'))
-        # time_end.extend(time_end[1][:-2].split(':'))
-        # print(time_start,time_end)
-        # time_start = datetime.datetime(*time_start)
-        # time_end = datetime.datetime(*time_end)
-        # delta_time = time_start - datetime.datetime.now() 
-        # if delta_time.total_seconds()>0:
-        #     notam['status'] = 'Upcoming'
-        #     delta_time = time_end - datetime.datetime.now()
-        # elif delta_time.total_seconds()>0:
-        #     notam['status'] = 'Ongoing'
-        # else:
-        #     notam['status'] = 'Expired'
+        #     time = notam['stimein'].split('-')
+        #     notam['start_time'] = time[0]
+        #     notam['end_time'] = time[1]
+        #     time_start = notam['start_time'].split(' ')
+        #     time_start.extend(time_start[0].split('-'))
+        #     time_start.extend(time_start[1][:-2].split(':'))
+        #     time_end = notam['end_time'].split(' ')
+        #     time_end.extend(time_end[0].split('-'))
+        #     time_end.extend(time_end[1][:-2].split(':'))
+        #     time_start = datetime.datetime(*time_start)
+        #     time_end = datetime.datetime(*time_end)
+        #     delta_time = time_start - datetime.datetime.now() 
+        #     if delta_time.total_seconds()>0:
+        #         notam['status'] = 'Upcoming'
+        #         delta_time = time_end - datetime.datetime.now()
+        #     elif delta_time.total_seconds()>0:
+        #         notam['status'] = 'Ongoing'
+        #     else:
+        #         notam['status'] = 'Expired'
         notams.append(notam)
     return notams
 
-def remove_notam(notam):
+def get_notam(key,value):
+    notam = {key: value}
     db = connect(mongodb_local_url)
-    if notam['notam_type'] == "airspace":
-        db = db.airspace
-    if notam['notam_type'] == "facility":
-        db = db.facility
-    if db.find_one({'notam_no':notam['notam_no'],'notam_series':notam['notam_series']}):
+    if db.airspace.find_one(notam):
+        notam = db.airspace.find_one(notam)
+        return notam
+    if db.facility.find_one(notam):
+        notam = db.airspace.find_one(notam)
+        return notam
+    return "NOT FOUND"
+
+def remove_notam(key,value):
+    db = connect(mongodb_local_url)
+    notam = {key:value}
+    if db.airspace.find_one(notam):
         try:
-            db.delete_one(notam)
+            db.airspace.delete_one(notam)
+            return "NOTAM DELETED"
         except:
-            print("ERROR")
-        print("NOTAM Deleted")
-    else:
-        print("NOTAM not Present")
-    return
+            return "ERROR"
+    if db.facility.find_one(notam):
+        try:
+            db.facility.delete_one(notam)
+            return "NOTAM DELETED"
+        except:
+            return "ERROR"
+    return "NOTAM NOT FOUND"
 
 def add_user(user):
     db = connect(mongodb_local_url)
