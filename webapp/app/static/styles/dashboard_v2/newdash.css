@@ -13,6 +13,7 @@
 
 .notamview{
    padding-top:0.5rem !important; 
+   font-family: monospace;
 }
 
 td{
@@ -32,4 +33,25 @@ td{
     margin:auto;
     margin-top:10px;
     padding-top:10px;
+}
+
+.indicator-outer{
+    padding-left:5px;
+    padding-right: 5px;
+    height: 35vh;
+}
+
+.indicator{
+    height: 100%;
+    background: #aaa;
+    width: 10%;
+    margin:auto;
+
+}
+
+.gauge{
+    background: #005;
+    width:100%;
+    
+    
 }

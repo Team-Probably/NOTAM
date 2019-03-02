@@ -6,6 +6,7 @@ from app import extract
 from app import database
 from werkzeug.datastructures import ImmutableMultiDict
 from pprint import pprint
+from datetime import datetime
 
 app.secret_key = os.environ['FLASK_SECRET_KEY']
 
@@ -34,6 +35,7 @@ def admin():
         return redirect(url_for('index'))
     airspace = database.get_notams('airspace')
     facility = database.get_notams('facility')
+    
     return render_template('admin.html', facility=facility, airspace=airspace)
 
 
@@ -81,22 +83,16 @@ def create():
             except:
                 coords = ''
         msg+='E) '+(' AIRSPACE ' if data['notam_type']=='airspace' else 'FACILITY ')+data.get('scenario', '')+' DUE '+data.get('nature', '')+' '+coords+'\n'
-        msg+=data.get('remarks', '')
+        msg+=data.get('remarks', '')+'\n '
+        nw = datetime.utcnow()
+        msg+='Created On: '+nw.year+'/'+nw.month+'/'+nw.day+' '+nw.hour+':'+nw.minute
         data['msg']=msg
     keys.append('msg')
     for key in keys:
         notam[key] = data[key]
         # notam_data += " " + notam[key]
     # notam status
-    st = datetime.datetime(list(map(int,notam['stime'].split(' ')[0].split('/')+notam['stime'].split(' ')[1].split(':'))))
-    et = datetime.datetime(list(map(int,notam['etime'].split(' ')[0].split('/')+notam['etime'].split(' ')[1].split(':'))))
-    now = datetime.datetime.now()
-    if st>now:
-        notam['status'] = "Upcoming"
-    elif et<now:
-        notam['status'] = "Expired"
-    else:
-        notam['status'] = "Ongoing"
+    
     notam['coords'] = []
     notam['coords'].append((notam['latin'],notam['longin']))
     # notam_extract = extract.extract_is_back(notam_data['notam_notam'])
@@ -175,7 +171,34 @@ def kittu():
 def dash2n():
     airspace = database.get_notams('airspace')
     facility = database.get_notams('facility')
-    print(airspace, facility)
+    for notam in airspace:
+        # notam status
+        dtls = list(map(int,notam['stime'].split(' ')[0].split('/')+notam['stime'].split(' ')[1].split(':')))
+        dtle = list(map(int,notam['etime'].split(' ')[0].split('/')+notam['etime'].split(' ')[1].split(':')))
+        st = datetime(dtls[0], dtls[1], dtls[2], dtls[3], dtls[4])
+        et = datetime(dtle[0], dtle[1], dtle[2], dtle[3], dtle[4])
+        now = datetime.utcnow()
+        if st>now:
+            notam['status'] = "Upcoming"
+        elif et<now:
+            notam['status'] = "Expired"
+        else:
+            notam['status'] = "Ongoing"
+        print(notam)
+    for notam in facility:
+        # notam status
+        dtls = list(map(int,notam['stime'].split(' ')[0].split('/')+notam['stime'].split(' ')[1].split(':')))
+        dtle = list(map(int,notam['etime'].split(' ')[0].split('/')+notam['etime'].split(' ')[1].split(':')))
+        st = datetime(dtls[0], dtls[1], dtls[2], dtls[3], dtls[4])
+        et = datetime(dtle[0], dtle[1], dtle[2], dtle[3], dtle[4])
+        now = datetime.utcnow()
+        if st>now:
+            notam['status'] = "Upcoming"
+        elif et<now:
+            notam['status'] = "Expired"
+        else:
+            notam['status'] = "Ongoing"
+        
     return render_template("dashboard_v2/newdash.html", facility = facility , airspace = airspace)
 
 
