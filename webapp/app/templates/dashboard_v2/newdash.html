@@ -6,11 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Dash</title>
     <!-- Compiled and minified CSS -->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script type="text/javascript" src="{{ url_for('static',filename='js/imports/jquery-3.3.1.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/imports/materialize.min.css') }}">
     
     <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="{{ url_for('static',filename='js/imports/materialize.min.js') }}"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/dashboard_v2/newdash.css') }}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="{{ url_for('static', filename='js/dashboard_v2/newdash.js') }}"></script>
