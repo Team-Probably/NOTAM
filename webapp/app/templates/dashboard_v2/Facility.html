@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Facility form</title>
+    <title>Kiteretsu</title>
     <!-- Compiled and minified CSS -->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="{{ url_for('static', filename='js/imports/jquery-3.3.1.min.js') }}" ></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     
     <!-- Compiled and minified JavaScript -->
@@ -14,6 +14,12 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/dashboard_v2/style.css') }}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="{{ url_for('static', filename='js/dashboard_v2/index.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/imports/leaflet.css') }}" />
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="{{ url_for('static',filename='js/imports/leaflet.js') }}"></script>
+    <link rel='stylesheet' href="{{ url_for('static',filename='styles/kittu/map.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css">
+    <script src="{{ url_for('static', filename='js/kittu/leaflet.draw.min.js') }}"></script>
 </head>
 <body style="background:#d0d8d8;">
     <div class="desk_nav">
@@ -47,7 +53,7 @@
         <div class="form_notam">
             <div class="notam_input">
                 <div class="row">
-                    <form class="col s12">
+                    <form class="col m12">
                         <div class="row">
                             <div class="input-field col s12">
                                 <textarea id="textarea1" class="materialize-textarea" >{{notam.notam}}</textarea>
@@ -57,9 +63,11 @@
                     </form>
                 </div>
             </div>
-
             <div class="row">
-                <div class="input-field col s4">
+                <a class="waves-effect waves-light btn" id="auto_notam_fac" style="margin-bottom: 2vw; margin-left: 1vw;">AutoFill</a>
+            </div>
+            <div class="row">
+                <div class="input-field col m4">
                     <select id="notam_series_fac">
                         <option value="" disabled selected>Choose Option</option>
                         <option value="A">A Series</option>
@@ -69,82 +77,98 @@
                     </select>
                     <label>Select Notam Series</label>
                 </div>
-                <div class="input-field col s4">
+                <div class="input-field col m4">
                     <i class="material-icons prefix">account_circle</i>
                     <input id="notam_no_fac" type="text" class="validate" value="{{notam.notam_no}}">
                     <label for="notam_no_fac">Notam No.</label>
                 </div>
             </div>
+            <div class="row"><div class="col m4">
+                <div class="row">
+                    <div class="input-field col m4">
+                        <!-- <i class="material-icons prefix">place</i> -->
+                        <input id="fir_fac" type="text" class="validate" value="{{notam.firOfac}}">
+                        <label for="fir_fac">Facility Name</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col m12">
+                            <!-- <i class="material-icons prefix">place</i> -->
+                            <input id="ident_fac" type="text" class="validate">
+                            <label for="ident_fac">Ident</label>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="input-field col m12">
+                            <!-- <i class="material-icons prefix">place</i> -->
+                            <input id="freq_fac" type="text" class="validate">
+                            <label for="freq_fac">Frequency</label>
+                    </div>
+                </div>
             
-            <div class="row">
-                <div class="input-field col s4">
-                    <!-- <i class="material-icons prefix">place</i> -->
-                    <input id="fir_fac" type="text" class="validate" value="{{notam.firOfac}}">
-                    <label for="fir_fac">Facility Name</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s4">
-                    <!-- <i class="material-icons prefix">place</i> -->
-                    <input id="ident_fac" type="text" class="validate">
-                    <label for="ident_fac">IDENT</label>
-                </div>
-            </div>
-
-         
-            <div class="row">
-                <div class="input-field col s4">
-                    <!-- <i class="material-icons prefix">place</i> -->
-                    <input id="freq_fac" type="text" class="validate">
-                    <label for="freq_fac">Frequency</label>
-                </div>
-            </div>
-
             <!-- To be Changed later -->
-            <div class="row">
-                <div class="input-field col s4">
-                    <i class="material-icons prefix">place</i>
-                    <input id="latin_fac" type="text" class="validate">
-                    <label for="latin_fac">Latitude</label>
+                <div class="row">
+                    <center>
+                        <i class="material-icons prefix">place</i>
+                    </center>
                 </div>
-
-                <div class="input-field col s4">
-                    <input id="longin_fac" type="text" class="validate">
-                    <label for="longin_fac">Longitude</label>
+                <div class="row">
+                    <div class="input-field col m12">
+                        <!-- <i class="material-icons prefix">place</i> -->
+                        <input id="latin_fac" type="text" class="validate">
+                        <label for="latin_fac">Latitude</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col m12">
+                        <input id="longin_fac" type="text" class="validate">
+                        <label for="longin_fac">Longitude</label>
+                    </div>
                 </div>
             </div>
+
+            <div class="col m8">
+                <div id="marker_map">
             
+                </div>
+            </div>
+            </div>
             <div class="row start_time">
-                <div class="input-field col s4">
+                <div class="input-field col m4">
                     <input type="text" class="datepicker" value="{{notam.start_date}}" id="st_date_fac"> 
                 </div>
-                <div class="input-field col s4">
+                <div class="input-field col m4">
                     <input type="text" class="timepicker" value="{{notam.start_time}}" id="st_time_fac">
                 </div>
             </div>
 
             <div class="row end_time">
-                <div class="input-field col s4">
+                <div class="input-field col m4">
                     <input type="text" class="datepicker" value="{{notam.end_date}}" id="ed_date_fac">
                 </div>
-                <div class="input-field col s4">
+                <div class="input-field col m4">
                     <input type="text" class="timepicker" value="{{notam.end_time}}" id="ed_time_fac">
                 </div>
             </div>
             
             <div class="row">
-                <form class="col s12">
+                <form class="col m12">
                     <div class="row">
-                        <div class="input-field col s12">
+                        <div class="input-field col m12">
                             <textarea id="remark_fac" class="materialize-textarea"></textarea>
                             <label for="remark_fac">Remarks</label>
                         </div>
                     </div>
                 </form>
             </div>
+            <a class="waves-effect waves-light btn" id="create_notam_fac" style="margin-bottom: 2vw; margin-left: 1vw;">Submit</a>
+        </div>
         </div>
 
 
     </div>
+     <script  src="{{ url_for('static', filename='js/admin/create.js') }}"></script>
+     <script src="{{ url_for('static', filename='js/kittu/map.js') }}"></script>
 </body>
 </html>

@@ -50,7 +50,8 @@ map.addControl(drawControl);
 
 radius = null
 center = null
-rect = null
+poly = null
+
 map.on('draw:created', function (e) {
 
     var type = e.layerType,
@@ -60,11 +61,11 @@ map.on('draw:created', function (e) {
         
         radius = layer.getRadius();
         center = layer.getLatLng();
-        rect = null;
+        poly = null;
         
     } else {
         
-        rect = layer.getLatLngs();
+        poly = layer.getLatLngs();
         radius = null;
         center = null;
         
