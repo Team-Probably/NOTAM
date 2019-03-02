@@ -8,15 +8,18 @@ from werkzeug.datastructures import ImmutableMultiDict
 from pprint import pprint
 from datetime import datetime
 
+# app.secret_key = "WORKS"
+
 app.secret_key = os.environ['FLASK_SECRET_KEY']
 
 #URL Routes
-@app.route('/')
-def index():
-    print("INDEX")
-    session['username'] = {}
-    return render_template('login.html')  
+# @app.route('/')
+# def index():
+#     print("INDEX")
+#     session['username'] = {}
+#     return render_template("login.html")    
 
+@app.route('/')
 @app.route('/dashboard')
 def dashboard():
     airspace = database.get_notams('airspace')
@@ -27,7 +30,7 @@ def dashboard():
     for i in range(len(facility)):
         facility[i]['msg'] = facility[i]['msg'].replace('\n','<br/>')
     print(airspace, facility)
-    return render_template("dashboard_v2/newdash.html", facility = facility , airspace = airspace)
+    return render_template("dashboard_v2/newdash.html", facility = facility , airspace = airspace, logged_in = check_login())
 
 @app.route('/admin_airspace')
 def admin_airspace():
@@ -153,6 +156,14 @@ def getnotamdata():
     notam['_id']='hi'
     return jsonify(notam)
 
+@app.route('/editnotam',methods=['POST'])
+def edit_notam():
+    notam_no = request.args.get('notamid')
+    notam = database.get_notam('notam_no',notam_no)
+    notam['_id']='hi'
+    return jsonify(notam)
+    
+
 @app.route('/deletenotam')
 def deletenotam():
     notam_no = request.args.get('notamid')
@@ -170,6 +181,22 @@ def predict_notam():
         return render_template('dashboard_v2/Facility.html', notam=notam)
     else:
         return render_template('dashboard_v2/index.html', notam=notam)
+
+def check_login():
+    #print(request, type(request))
+    try:
+        if(session['username']['admin']==True):
+            return True
+        else:
+            return False
+    except:
+        return False
+
+@app.route('/logout')
+def logout():
+    session['username']=None
+    return redirect(url_for('dashboard')) 
+
 
 
 
@@ -224,4 +251,3 @@ PRESENTATION. AS A CONSEQUENCE OF AIRSPACE CLOSURE COIMBATORE AP
 WILL REMAIN CLSD FOR ACFT OPS.
 F) GND G) FL140'''
     return str(extract.extract_is_back(tnot))
-

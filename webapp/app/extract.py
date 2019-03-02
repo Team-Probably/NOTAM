@@ -1,5 +1,5 @@
 import re
-import pdftotext
+#import pdftotext
 import pprint
 from app import airportdata
 

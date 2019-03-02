@@ -1,10 +1,10 @@
-<li>
+<li class="adi_full">
     
     <div class="collapsible-header" onclick="loadgauge(this)">
         <div class="dsd">
             <div class = "row">
                     
-                    <div class = "col m2 number"><span class="series">{{notam.notam_series}}</span>{{notam.notam_no}}</div>
+                    <div class = "col m2 number"><span class="series">{{notam.notam_series}}</span><span class="adi_no">{{notam.notam_no}}</span></div>
                     <div class="col m7 notamview">
                         {% autoescape false %}
                                 {{notam.msg}}
@@ -64,7 +64,9 @@
                         <tr><td>End Time</td><td id="end-time-td-{{notam.notam_no}}">{{notam.end_time}}</td></tr> -->
                         <tr><td>Notam Type</td><td>{{notam.notam_type}}</td></tr>
                         <tr><td>Tags</td><td>{{notam.tags}}</td></tr>
-                       
+                        <script  src="{{ url_for('static', filename='js/admin/edit_notam.js') }}"></script>
+                        <tr><td><button id="edit_notam" class="adi btn">Edit notam</button></td></tr>
+                        <!-- {{ url_for('static', filename='js/admin/edit_notam.js') }} -->
                 </table>
         </div>
     
