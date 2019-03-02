@@ -6,6 +6,7 @@ from app import extract
 from app import database
 from werkzeug.datastructures import ImmutableMultiDict
 from pprint import pprint
+from datetime import datetime
 
 app.secret_key = os.environ['FLASK_SECRET_KEY']
 
@@ -89,22 +90,14 @@ def create():
             except:
                 coords = ''
         msg+='E) '+(' AIRSPACE ' if data['notam_type']=='airspace' else 'FACILITY ')+data.get('scenario', '')+' DUE '+data.get('nature', '')+' '+coords+'\n'
-        msg+=data.get('remarks', '')
+        msg+=data.get('remarks', '')+'\n '
+        nw = datetime.utcnow()
+        msg+='Created On: '+str(nw.year)+'/'+str(nw.month)+'/'+str(nw.day)+' '+str(nw.hour)+':'+str(nw.minute)
         data['msg']=msg
     keys.append('msg')
     for key in keys:
         notam[key] = data[key]
         # notam_data += " " + notam[key]
-    # notam status
-    st = datetime.datetime(*list(map(int,notam['stime'].split(' ')[0].split('/')+notam['stime'].split(' ')[1].split(':'))))
-    et = datetime.datetime(*list(map(int,notam['etime'].split(' ')[0].split('/')+notam['etime'].split(' ')[1].split(':'))))
-    now = datetime.datetime.now()
-    if st>now:
-        notam['status'] = "Upcoming"
-    elif et<now:
-        notam['status'] = "Expired"
-    else:
-        notam['status'] = "Ongoing"
     notam['coords'] = []
     notam['coords'].append((notam['latin'],notam['longin']))
     # notam_extract = extract.extract_is_back(notam_data['notam_notam'])

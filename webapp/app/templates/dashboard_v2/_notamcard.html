@@ -1,6 +1,6 @@
 <li>
     
-    <div class="collapsible-header">
+    <div class="collapsible-header" onclick="loadgauge(this)">
         <div class="dsd">
             <div class = "row">
                     
@@ -47,9 +47,14 @@
                 </div>
         <div class ="row">
                 <div id="vismap" class="vismap col m6">
-    
+                                
                 </div>
-                <div class="visinfo col m6">
+                <div class="indicator-outer col m1">
+                        <div class="indicator">
+                                <div class="gauge"></div>
+                        </div>
+                </div>
+                <div class="visinfo col m5">
                         <table id="vistable">
                         
                         <tr><td>Issued By</td><td>{{notam.issued_by}}</td></tr>
