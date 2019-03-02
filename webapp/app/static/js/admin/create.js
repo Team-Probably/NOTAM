@@ -33,6 +33,7 @@ $('#create_notam').on('click', function() {
         map_poly: map_poly,
         notam_type: "airspace"
     }
+    
     console.log('Adding Notam to Airspace');
     console.log(notam_data);
     $.ajax({

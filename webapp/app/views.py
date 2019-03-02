@@ -65,9 +65,38 @@ def create():
         keys = ['notam_series', 'notam_no', 'fir', 'ident', 'freq', 'latin', 'longin', 'stime', 'etime',
         'remarks','notam_type']    
     notam_data = ""
+    print(data)
+    if data.get('notam_notam'):
+        data['msg']=data['notam_notam']
+    else:
+        msg = ''
+        msg+=data['notam_series']+data['notam_no']+'/'+'19'+' NOTAMN\n'
+        msg += 'Q) '+data['fir']+'\n'
+        msg+='A) '+data['fir']+' B) '+data['stime'].replace('/', '').replace(' ', '').replace(':', '')+' C) '+data['etime'].replace('/', '').replace(' ', '').replace(':', '')+'\n'
+        try:
+            coords = 'AROUND '+str(round(float(data['latin'])*10000, 2))+'N'+' '+str(round(float(data['longin'])*10000, 2))
+        except:
+            try:
+                coords = 'WITHIN THE REGION '+str(data['map_poly'])
+            except:
+                coords = ''
+        msg+='E) '+(' AIRSPACE ' if data['notam_type']=='airspace' else 'FACILITY ')+data.get('scenario', '')+' DUE '+data.get('nature', '')+' '+coords+'\n'
+        msg+=data.get('remarks', '')
+        data['msg']=msg
+    keys.append('msg')
     for key in keys:
         notam[key] = data[key]
         # notam_data += " " + notam[key]
+    # notam status
+    st = datetime.datetime(list(map(int,notam['stime'].split(' ')[0].split('/')+notam['stime'].split(' ')[1].split(':'))))
+    et = datetime.datetime(list(map(int,notam['etime'].split(' ')[0].split('/')+notam['etime'].split(' ')[1].split(':'))))
+    now = datetime.datetime.now()
+    if st>now:
+        notam['status'] = "Upcoming"
+    elif et<now:
+        notam['status'] = "Expired"
+    else:
+        notam['status'] = "Ongoing"
     notam['coords'] = []
     notam['coords'].append((notam['latin'],notam['longin']))
     # notam_extract = extract.extract_is_back(notam_data['notam_notam'])
