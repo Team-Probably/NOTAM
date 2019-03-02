@@ -9,7 +9,13 @@ var showmap=false;
 var showmap_fac= false;
 // When the user clicks on the button, open the modal 
 btn.onclick = function() {
-  modal.style.display = "block";
+    document.getElementById('modalhead').innerHTML='Create NOTAM';
+    modal.style.display = "block";
+    document.getElementById('notam_series').value = '';
+    document.getElementById('notam_no').value = '';
+    document.getElementById('fir').value ='';
+    document.getElementById('scenario').value ='';
+    document.getElementById('remark').value = '';
 }
 
 // When the user clicks on <span> (x), close the modal

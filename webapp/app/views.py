@@ -1,5 +1,5 @@
 # views.py
-from flask import render_template,request,Response,redirect,url_for,session
+from flask import render_template,request,Response,redirect,url_for,session,jsonify
 import json,os,datetime
 from app import app
 from app import extract
@@ -101,3 +101,42 @@ def verify_login():
         print(session['username'])
         return redirect(url_for('dashboard'))
     return redirect(url_for('index'))
+
+@app.route('/getnotamdata')
+def getnotamdata():
+    notam_no = request.args.get('notamid')
+    
+    notam = database.get_notam('notam_no',notam_no)
+    notam['_id']='hi'
+    return jsonify(notam)
+
+@app.route('/deletenotam')
+def deletenotam():
+    notam_no = request.args.get('notamid')
+    result = database.remove_notam('notam_no',notam_no)
+    return result
+
+@app.route('/test')
+def test():
+    tnot = '''A0422/19 NOTAMN
+Q) VOMF/QWALW/IV/NBO/W/000/140/
+A) VOMF B) 1902270305 C) 1903040510
+D) FEB 27 28, MAR 01 02 AND 04 BTN 0305-0510
+E) AIRSPACE BOUNDED BY COORD 103456N 0763816E - 105113N 0765726E
+THEN ALONG CLOCKWISE ARC OF 15NM RADIUS CENTRED AT SULUR ARP TILL
+110959N 0772134E - 112528N 0774130E THEN ALONG CLOCKWISE ARC OF 40NM
+RADIUS CENTRED AT SULUR ARP TILL 103456N 0763816E IS RESERVED FOR
+FLYPAST AND AIR DISPLAY AT IAF STATION SULUR FOR PRESIDENTS STANDARD
+PRESENTATION. AS A CONSEQUENCE OF AIRSPACE CLOSURE COIMBATORE AP
+WILL REMAIN CLSD FOR ACFT OPS.
+F) GND G) FL140'''
+    return str(extract.extract_is_back(tnot))
+
+@app.route('/kittu')  # USER : Notam Lists
+def kittu():
+    return render_template("kittu.html")
+
+
+@app.route('/admin2')  # USER : Notam Lists
+def dash2():
+    return render_template("dashboard_v2/index.html")
