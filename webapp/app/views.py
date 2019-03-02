@@ -1,12 +1,13 @@
 # views.py
 from flask import render_template,request,Response,redirect,url_for,session
-import json,os
+import json,os,datetime
 from app import app
 from app import extract
 from app import database
 from werkzeug.datastructures import ImmutableMultiDict
 
 app.secret_key = os.environ['FLASK_SECRET_KEY']
+app.username = ""
 
 @app.route('/') #TO-DO : By Aditya and Avi 
 def index():
@@ -25,7 +26,8 @@ def listview():
 
 @app.route('/admin')
 def admin():
-    if session['username']!=app.secret_key:
+    print(session['username'])
+    if session['username']!=app.username+app.secret_key or app.username=="":
         return redirect(url_for('index'))
     airspace = database.get_notams('airspace')
     facility = database.get_notams('facility')
@@ -43,7 +45,8 @@ def processor():
 
 @app.route('/dashboard') #USER : Notam Lists
 def dashboard():
-    if session['username']!=app.secret_key:
+    print(session['username'])
+    if session['username']!=app.username+app.secret_key or app.username=="":
         return redirect(url_for('index'))
     airspace = database.get_notams('airspace')
     facility = database.get_notams('facility')
@@ -69,6 +72,23 @@ def create():
     time = notam['stimein'].split('-')
     notam['start_time'] = time[0]
     notam['end_time'] = time[1]
+    notam['issued_by'] = app.username
+    time_start = notam['start_time'].split(' ')
+    time_start.extend(time_start[0].split('-'))
+    time_start.extend(time_start[1][:-2].split(':'))
+    time_end = notam['end_time'].split(' ')
+    time_end.extend(time_end[0].split('-'))
+    time_end.extend(time_end[1][:-2].split(':'))
+    time_start = datetime.datetime(*time_start)
+    time_end = datetime.datetime(*time_end)
+    delta_time = time_start - datetime.datetime.now() 
+    if delta_time.total_seconds()>0:
+        notam['status'] = 'Upcoming'
+        delta_time = time_end - datetime.datetime.now()
+    elif delta_time.total_seconds()>0:
+        notam['status'] = 'Ongoing'
+    else:
+        notam['status'] = 'Expired'
     for key in notam_extract.keys():
         notam[key] = notam_extract[key]
     print(notam)
@@ -94,7 +114,9 @@ def verify_login():
     for key in user.keys():
         user[key] = user[key][0]
     if database.verify_login(user):
-        session['username'] = app.secret_key
+        print("LOGIN SUCCESSFUL")
+        app.username = user['email']
+        session['username'] = user['email'] + app.secret_key 
+        print(session['username'])
         return redirect(url_for('dashboard'))
     return redirect(url_for('index'))
-    
