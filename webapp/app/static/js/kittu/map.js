@@ -71,6 +71,6 @@ map.on('draw:created', function (e) {
         
     } 
 
-    console.log(radius, center, rect);
+    console.log(radius, center, poly);
     editableLayers.addLayer(layer);
 });
