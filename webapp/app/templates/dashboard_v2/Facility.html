@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Facility form</title>
+    <!-- Compiled and minified CSS -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/dashboard_v2/style.css') }}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="{{ url_for('static', filename='js/dashboard_v2/index.js') }}"></script>
+</head>
+<body style="background:#d0d8d8;">
+    <div class="desk_nav">
+        <ul id="dropdown1" class="dropdown-content">
+            <li><a href="#!">FIR</a></li>
+            <li><a href="#!">Aerodrome</a></li>
+        </ul>
+        <nav>
+            <div class="nav-wrapper blue">
+                <a href="#!" class="brand-logo">Create Notam</a>
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="#">Sass</a></li>
+                    <!-- Dropdown Trigger -->
+                    <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Select<i
+                                class="material-icons right">arrow_drop_down</i></a></li>
+                    <li><a href="#">Dashboard</a></li>
+                    <li><a href="#">Logout</a></li>
+                </ul>
+            </div>
+        </nav>
+    
+        <ul class="sidenav" id="mobile-demo">
+            <li><a href="#">Sass</a></li>
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Logout</a></li>
+        </ul>
+    </div>
+
+    <div class="container z-depth-2" style="background:#e5e7e8;">       
+        <div class="form_notam">
+            <div class="notam_input">
+                <div class="row">
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <textarea id="textarea1" class="materialize-textarea"></textarea>
+                                <label for="textarea1">Paste NOTAM Here</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s4">
+                    <select id="notam_series_fac">
+                        <option value="" disabled selected>Choose your option</option>
+                        <option value="1">A Series</option>
+                        <option value="2">B Series</option>
+                        <option value="3">C Series</option>
+                        <option value="4">G Series</option>
+                    </select>
+                    <label>Select Notam Series</label>
+                </div>
+                <div class="input-field col s4">
+                    <i class="material-icons prefix">account_circle</i>
+                    <input id="notam_no_fac" type="text" class="validate">
+                    <label for="notam_no_fac">Notam No.</label>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="input-field col s4">
+                    <!-- <i class="material-icons prefix">place</i> -->
+                    <input id="fir_fac" type="text" class="validate">
+                    <label for="fir_fac">Facility Name</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s4">
+                    <!-- <i class="material-icons prefix">place</i> -->
+                    <input id="ident_fac" type="text" class="validate">
+                    <label for="ident_fac">IDENT</label>
+                </div>
+            </div>
+
+         
+            <div class="row">
+                <div class="input-field col s4">
+                    <!-- <i class="material-icons prefix">place</i> -->
+                    <input id="freq_fac" type="text" class="validate">
+                    <label for="freq_fac">Frequency</label>
+                </div>
+            </div>
+
+            <!-- To be Changed later -->
+            <div class="row">
+                <div class="input-field col s4">
+                    <i class="material-icons prefix">place</i>
+                    <input id="latin_fac" type="text" class="validate">
+                    <label for="latin_fac">Latitude</label>
+                </div>
+
+                <div class="input-field col s4">
+                    <input id="longin_fac" type="text" class="validate">
+                    <label for="longin_fac">Longitude</label>
+                </div>
+            </div>
+            
+            <div class="row start_time">
+                <div class="input-field col s4">
+                    <input type="text" class="datepicker" value="Start Date" id="st_date_fac"> 
+                </div>
+                <div class="input-field col s4">
+                    <input type="text" class="timepicker" value="Start Time" id="st_time_fac">
+                </div>
+            </div>
+
+            <div class="row end_time">
+                <div class="input-field col s4">
+                    <input type="text" class="datepicker" value="End Date" id="ed_date_fac">
+                </div>
+                <div class="input-field col s4">
+                    <input type="text" class="timepicker" value="End Time" id="ed_time_fac">
+                </div>
+            </div>
+
+            <div class="row">
+                <form class="col s12">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <textarea id="remark_fac" class="materialize-textarea"></textarea>
+                            <label for="remark_fac">Remarks</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+</body>
+</html>

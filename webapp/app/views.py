@@ -6,12 +6,13 @@ from app import extract
 from app import database
 from werkzeug.datastructures import ImmutableMultiDict
 
-app.secret_key = os.environ['FLASK_SECRET_KEY']
+app.secret_key = "hetzz"
 app.username = ""
 
 @app.route('/') #TO-DO : By Aditya and Avi 
 def index():
-    session['username'] = ""
+    print("INDEX")
+    # session['username'] = ""
     return render_template("login.html")    
 
 
@@ -141,3 +142,7 @@ def kittu():
 @app.route('/admin')  # USER : Notam Lists
 def dash2():
     return render_template("dashboard_v2/index.html")
+
+@app.route('/admin3')  # USER : Notam Lists
+def dash3():
+    return render_template("dashboard_v2/Facility.html")
