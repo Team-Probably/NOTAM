@@ -3,10 +3,13 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Search and Sort Bootstrap 3 List Group with List.js</title>
-		<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
+	<title>NOTAM Awesomeness In Progress</title>
+		<!-- <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
 		<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
-		<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700,700i'>
+		<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700,700i'> -->
+		<link rel='stylesheet' href="{{ url_for('static',filename='styles/imports/bootstrap.min.css') }}">
+		<link rel='stylesheet' href="{{ url_for('static',filename='styles/imports/font-awesome-4.7.0/css/font-awesome.min.css') }}">
+		<link rel='stylesheet' href="{{ url_for('static',filename='styles/imports/sourcesanspro.css') }}">
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/dashboard.css') }}">
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/magicopen.css') }}">
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/magicvis.css') }}">
@@ -20,7 +23,7 @@
 	<div class="container">
 	<div class="row">
 		<div class="col-md-12">
-			<h1>Search and Filter Bootstrap 3 List Group</h1>
+			<h1>NOTAM Awesomeness In Progress</h1>
 		</div>
 	</div>
 </div>
@@ -45,12 +48,16 @@
 		{% include '_listview.html' %}
 	</div>
 </div>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js" ></script>
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js" ></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js'></script> -->
+<script src="{{ url_for('static', filename='js/imports/jquery-3.3.1.min.js') }}" ></script>
 <script  src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
 <script  src="{{ url_for('static', filename='js/dashboard/open_vis.js') }}"></script>
 <script  src="{{ url_for('static', filename='js/dashboard/magicvis.js') }}"></script>
+<script src="{{ url_for('static', filename='js/imports/bootstrap.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/imports/list.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/imports/jquery-3.3.1.min.js') }}" ></script>
 </body>
 
 </html>

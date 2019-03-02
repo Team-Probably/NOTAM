@@ -6,6 +6,7 @@ var btn = document.getElementById("myBtn");
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 var showmap=false;
+var showmap_fac= false;
 // When the user clicks on the button, open the modal 
 btn.onclick = function() {
   modal.style.display = "block";
@@ -23,6 +24,9 @@ window.onclick = function(event) {
   }
   if(event.target != document.getElementById('map_picker') && event.target != document.getElementById('mapfa') && showmap)
     maptoggle();
+
+    if(event.target != document.getElementById('map_picker_fac') && event.target != document.getElementById('mapfa_fac') && showmap_fac)
+        maptoggle_fac();
 }
 
 
@@ -53,5 +57,19 @@ function maptoggle(){
     else{
         showmap=true;
         document.getElementById('mappickdiv').style.display='block';
+    }
+}
+
+function maptoggle_fac(){
+    console.log(showmap+" hi");
+    if(showmap_fac)
+    {
+        showmap_fac=false;
+        document.getElementById('mappickdiv_fac').style.display='none';
+        
+    }
+    else{
+        showmap_fac=true;
+        document.getElementById('mappickdiv_fac').style.display='block';
     }
 }

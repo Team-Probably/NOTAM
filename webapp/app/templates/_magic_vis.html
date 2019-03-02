@@ -6,12 +6,12 @@
     <div class="visinfo col-md-10">
         <table id="vistable">
         <tr><td>Status</td><td id="status-what-{{notam.notam_no}}">
-            Ongoing</td></tr>
-        <tr><td>Issued By</td><td>Kittu</td></tr>
+            {{notam.status}}</td></tr>
+        <tr><td>Issued By</td><td>{{notam.issued_by}}</td></tr>
         <tr><td>Start Time</td><td id="start-time-td-{{notam.notam_no}}">{{notam.start_time}}</td></tr>
         <tr><td>End Time</td><td id="end-time-td-{{notam.notam_no}}">{{notam.end_time}}</td></tr>
         <tr><td>Notam Type</td><td>{{notam.notam_type}}</td></tr>
-        <tr><td>Tags</td><td>Tags</td></tr>
+        <tr><td>Tags</td><td>{{notam.tags}}</td></tr>
         <!-- <script>
             var status_what=document.getElementById('status-what');
             var now = new Date();

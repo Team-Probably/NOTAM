@@ -34,18 +34,29 @@
     <div class="read-more">
         <button type="button" class="btn btn-primary btn-more">Visualize &nbsp; <i class="fa fa-chevron-circle-right" aria-hidden="true"></i></button>
     </div>
-    <span class="expertise-label">Keywords&nbsp;</span>
+    <!-- <span class="expertise-label">Keywords&nbsp;</span>
     <p class="labels">
         {% for word in notam.keywords %}
             <span class="label label-default expertise">{{word}}</span>
         {% endfor %}
-    </p>
+    </p> -->
+    {% if request.path == '/admin'%}
+    <div class="read-more" style="margin-top:5px;">
+            <button type="button" class="btn btn-warning btn-edit">Edit &nbsp; <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+    </div>
+    {%endif%}
     </div>
 </div>
 
 <div class="clearfix"></div>
 </div>
 <div class="content_vis">
+    <div class="coord-data" style="display:none;">
+        {% for cord in notam.coords%}       
+            <div class="coordlat">{{cord[0]}}</div>
+            <div class="coordlong">{{cord[1]}}</div>
+        {% endfor %}
+    </div>
     {% include '_magic_vis.html' %}
 </div>
 

@@ -1,12 +1,13 @@
 # views.py
 from flask import render_template,request,Response,redirect,url_for,session
-import json,os
+import json,os,datetime
 from app import app
 from app import extract
 from app import database
 from werkzeug.datastructures import ImmutableMultiDict
 
-#app.secret_key = os.environ['FLASK_SECRET_KEY']
+app.secret_key = os.environ['FLASK_SECRET_KEY']
+app.username = ""
 
 @app.route('/') #TO-DO : By Aditya and Avi 
 def index():
@@ -67,9 +68,8 @@ def create():
     notam['coords'] = []
     notam['coords'].append((notam['latin'],notam['longin']))
     notam_extract = extract.tags(notam_data)
-    time = notam['stimein'].split('-')
-    notam['start_time'] = time[0]
-    notam['end_time'] = time[1]
+    notam['issued_by'] = app.username
+
     for key in notam_extract.keys():
         notam[key] = notam_extract[key]
     print(notam)
@@ -95,7 +95,13 @@ def verify_login():
     for key in user.keys():
         user[key] = user[key][0]
     if database.verify_login(user):
+<<<<<<< HEAD
     #     session['username'] = app.secret_key
+=======
+        print("LOGIN SUCCESSFUL")
+        app.username = user['email']
+        session['username'] = user['email'] + app.secret_key 
+        print(session['username'])
+>>>>>>> e98fff7f85dee807319d60e25eaa264911f151f8
         return redirect(url_for('dashboard'))
     return redirect(url_for('index'))
-    
