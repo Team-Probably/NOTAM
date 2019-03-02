@@ -1,8 +1,8 @@
-$('.getparent').on('click', function () {
+$('.collapsible-header').on('click', function () {
 
     console.log('Magic in Progress');
     magic = $(this).parent();
-    magic.children('.content_vis').toggleClass('magicopen');
+    //magic.children('.content_vis').toggleClass('magicopen');
     magic_map = magic.find('#vismap')[0];
     console.log(magic_map);
     lat = magic.find('.coordlat')[0].innerHTML;

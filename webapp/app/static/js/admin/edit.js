@@ -7,10 +7,7 @@ function editfn(e)
             response.json().then((data)=>{console.log(data);editMode(data)})
         }
     );
-    
-    
-    
-    
+   
 }
 
 function editMode(data)

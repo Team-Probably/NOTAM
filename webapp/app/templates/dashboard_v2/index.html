@@ -13,7 +13,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/dashboard_v2/style.css') }}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="{{ url_for('static', filename='js/dashboard_v2/index.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/imports/leaflet.css') }}" />
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="{{ url_for('static',filename='js/imports/leaflet.js') }}"></script>
+    <link rel='stylesheet' href="{{ url_for('static',filename='styles/kittu/map.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css">
+    <script src="{{ url_for('static', filename='js/kittu/leaflet.draw.min.js') }}"></script>
+    
 </head>
 <body style="background:#d0d8d8;">
     <div class="desk_nav">
@@ -26,7 +32,7 @@
                 <a href="#!" class="brand-logo">Create Notam</a>
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                 <ul class="right hide-on-med-and-down">
-                    <li><a href="#">Sass</a></li>
+                    
                     <!-- Dropdown Trigger -->
                     <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Select<i
                                 class="material-icons right">arrow_drop_down</i></a></li>
@@ -37,7 +43,7 @@
         </nav>
     
         <ul class="sidenav" id="mobile-demo">
-            <li><a href="#">Sass</a></li>
+            
             <li><a href="#">Dashboard</a></li>
             <li><a href="#">Logout</a></li>
         </ul>
@@ -47,11 +53,11 @@
         <div class="form_notam">
             <div class="notam_input">
                 <div class="row">
-                    <form class="col s12">
+                    <form class="col m12">
                         <div class="row">
                             <div class="input-field col s12">
-                                <textarea id="textarea1" class="materialize-textarea"></textarea>
-                                <label for="textarea1">Paste NOTAM Here</label>
+                                <textarea id="notam_notam" class="materialize-textarea"></textarea>
+                                <label for="notam_notam">Paste NOTAM Here</label>
                             </div>
                         </div>
                     </form>
@@ -61,89 +67,102 @@
                 <a class="waves-effect waves-light btn" id="auto_notam" style="margin-bottom: 2vw; margin-left: 1vw;">AutoFill</a>
             </div>
             <div class="row">
-                <div class="input-field col s4">
+                <div class="input-field col m4">
                     <select id="notam_series">
                         <option value="" disabled selected>Choose your option</option>
-                        <option value="1">A Series</option>
-                        <option value="2">B Series</option>
-                        <option value="3">C Series</option>
-                        <option value="4">G Series</option>
+                        <option value="A">A Series</option>
+                        <option value="B">B Series</option>
+                        <option value="C">C Series</option>
+                        <option value="G">G Series</option>
                     </select>
                     <label>Select Notam Series</label>
                 </div>
-                <div class="input-field col s4">
+                <div class="input-field col m4">
                     <i class="material-icons prefix">account_circle</i>
-                    <input id="notam_no" type="text" class="validate">
+                    <input id="notam_no" type="text" class="validate" value="{{notam.notam_no}}">
                     <label for="notam_no">Notam No.</label>
                 </div>
             </div>
+            <div class="row">
+                <div class="col m4">
+                <div class="row">
+                    <div class="input-field col m12">
+                        <i class="material-icons prefix">place</i>
+                        <input id="fir" type="text" class="validate">
+                        <label for="fir">Affected Fir</label>
+                    </div>
+                </div>
             
-            <div class="row">
-                <div class="input-field col s4">
-                    <i class="material-icons prefix">place</i>
-                    <input id="fir" type="text" class="validate">
-                    <label for="fir">Affected Fir</label>
+                <div class="row">
+                    <div class="input-field col m12">
+                        <select id="scenario">
+                            <option value="" disabled selected>Choose your option</option>
+                            <option value="CLOSURE">Closure</option>
+                            <option value="UNSERVICEABLE">Unserviceable</option>
+                        </select>
+                        <label>Scenario</label>
+                    </div>
                 </div>
-            </div>
 
-            <div class="row">
-                <div class="input-field col s4">
-                    <select id="scenario">
-                        <option value="" disabled selected>Choose your option</option>
-                        <option value="CLOSURE">Closure</option>
-                        <option value="UNSERVICEABLE">Unserviceable</option>
-                    </select>
-                    <label>Scenario</label>
+                <div class="row">
+                    <div class="input-field col m12">
+                        <select id="nature">
+                            <option value="" disabled selected>Choose your option</option>
+                            <option value="PROHIBITED">Prohibited</option>
+                            <option value="DANGER">Danger</option>
+                            <option value="RESTRICTED">Restricted</option>
+                        </select>
+                        <label>Nature Of Event</label>
+                    </div>
                 </div>
-            </div>
-
-            <div class="row">
-                <div class="input-field col s4">
-                    <select id="nature">
-                        <option value="" disabled selected>Choose your option</option>
-                        <option value="PROHIBITED">Prohibited</option>
-                        <option value="DANGER">Danger</option>
-                        <option value="RESTRICTED">Restricted</option>
-                    </select>
-                    <label>Nature Of Event</label>
-                </div>
-            </div>
             <!-- To be Changed later -->
-            <div class="row">
-                <div class="input-field col s4">
-                    <i class="material-icons prefix">place</i>
-                    <input id="latin" type="text" class="validate">
-                    <label for="latin">Latitude</label>
+                <div class="row">
+                    <center>
+                        <i class="material-icons prefix">place</i>
+                    </center>
                 </div>
-
-                <div class="input-field col s4">
-                    <input id="longin" type="text" class="validate">
-                    <label for="longin">Longitude</label>
+                <div class="row">
+                    <div class="input-field col m12">
+                        <input id="latin" type="text" class="validate">
+                        <label for="latin">Latitude</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col m12">
+                        <input id="longin" type="text" class="validate">
+                        <label for="longin">Longitude</label>
+                    </div>
                 </div>
             </div>
+
+            <div class="col m8">
+                <div id="marker_map">
             
-            <div class="row start_time">
-                <div class="input-field col s4">
-                    <input type="text" class="datepicker" value="Start Date" id="st_date"> 
                 </div>
-                <div class="input-field col s4">
-                    <input type="text" class="timepicker" value="Start Time" id="st_time">
+            </div>
+        </div>
+            <div class="row start_time">
+                <div class="input-field col m4">
+                    <input type="text" class="datepicker" value="{{notam.start_date}}" id="st_date"> 
+                </div>
+                <div class="input-field col m4">
+                    <input type="text" class="timepicker" value="{{notam.start_time}}" id="st_time">
                 </div>
             </div>
 
             <div class="row end_time">
-                <div class="input-field col s4">
-                    <input type="text" class="datepicker" value="End Date" id="ed_date">
+                <div class="input-field col m4">
+                    <input type="text" class="datepicker" value="{{notam.end_date}}" id="ed_date">
                 </div>
-                <div class="input-field col s4">
-                    <input type="text" class="timepicker" value="End Time" id="ed_time">
+                <div class="input-field col m4">
+                    <input type="text" class="timepicker" value="{{notam.end_time}}" id="ed_time">
                 </div>
             </div>
 
             <div class="row">
-                <form class="col s12">
+                <form class="col m12">
                     <div class="row">
-                        <div class="input-field col s12">
+                        <div class="input-field col m12">
                             <textarea id="remark" class="materialize-textarea"></textarea>
                             <label for="remark">Remarks</label>
                         </div>
@@ -152,9 +171,13 @@
             </div>
             <a class="waves-effect waves-light btn" id="create_notam" style="margin-bottom: 2vw; margin-left: 1vw;">Submit</a>
         </div>
+        </div>
 
 
     </div>
+     
+     <script src="{{ url_for('static', filename='js/dashboard_v2/index.js') }}"></script>
      <script  src="{{ url_for('static', filename='js/admin/create.js') }}"></script>
+     <script src="{{ url_for('static', filename='js/kittu/map.js') }}"></script>
 </body>
 </html>
