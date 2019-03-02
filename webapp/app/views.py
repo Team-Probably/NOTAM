@@ -12,7 +12,7 @@ app.username = ""
 @app.route('/') #TO-DO : By Aditya and Avi 
 def index():
     print("INDEX")
-    # session['username'] = ""
+    session['username'] = ""
     return render_template("login.html")    
 
 
@@ -27,8 +27,8 @@ def listview():
 
 @app.route('/admin')
 def admin():
-    # if session['username']!=app.secret_key:
-    #     return redirect(url_for('index'))
+    if session['username']!=app.secret_key:
+        return redirect(url_for('index'))
     airspace = database.get_notams('airspace')
     facility = database.get_notams('facility')
     return render_template('admin.html', facility=facility, airspace=airspace)
@@ -45,8 +45,8 @@ def processor():
 
 @app.route('/dashboard') #USER : Notam Lists
 def dashboard():
-    # if session['username']!=app.secret_key:
-    #     return redirect(url_for('index'))
+    if session['username']!=app.secret_key:
+        return redirect(url_for('index'))
     airspace = database.get_notams('airspace')
     facility = database.get_notams('facility')
     print(airspace, facility)
@@ -95,13 +95,9 @@ def verify_login():
     for key in user.keys():
         user[key] = user[key][0]
     if database.verify_login(user):
-<<<<<<< HEAD
-    #     session['username'] = app.secret_key
-=======
         print("LOGIN SUCCESSFUL")
         app.username = user['email']
         session['username'] = user['email'] + app.secret_key 
         print(session['username'])
->>>>>>> e98fff7f85dee807319d60e25eaa264911f151f8
         return redirect(url_for('dashboard'))
     return redirect(url_for('index'))
