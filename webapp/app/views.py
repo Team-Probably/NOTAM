@@ -67,7 +67,7 @@ def create():
     notam_data = ""
     for key in keys:
         notam[key] = data[key]
-        notam_data += " " + notam[key]
+        # notam_data += " " + notam[key]
     notam['coords'] = []
     notam['coords'].append((notam['latin'],notam['longin']))
     # notam_extract = extract.extract_is_back(notam_data['notam_notam'])
@@ -99,6 +99,7 @@ def verify_login():
     for key in user.keys():
         user[key] = user[key][0]
     user = database.verify_login(user)
+    print(user)
     if user:
         print("LOGIN SUCCESSFUL")
         session['username'] = {'user_name':user['email'],'admin':user['admin'], "key":app.secret_key} 
@@ -142,20 +143,16 @@ def kittu():
 
 @app.route('/admin')  # USER : Notam Lists
 def dash2():
-<<<<<<< HEAD
+    notam = {'class': 'Notam Series', 'airport': '', 'notam': '', 'start_date': 'Start Date',
+             'end_date': 'End Date', 'start_time': 'Start Time', 'end_time': 'End Time',
+             'notam_no': ''}
     try:
         if session['username']['admin']!=True:
             return redirect(url_for('index'))
     except:
         return redirect(url_for('index'))
     else:
-        return render_template("dashboard_v2/index.html")
-=======
-    notam = {'class': 'Notam Series', 'airport': '', 'notam': '', 'start_date': 'Start Date',
-     'end_date': 'End Date', 'start_time': 'Start Time', 'end_time': 'End Time',
-      'notam_no':''}
-    return render_template("dashboard_v2/index.html",notam=notam)
->>>>>>> fd594e86d375ec7fd95f83aeb8e798c4fabf7d4e
+        return render_template("dashboard_v2/index.html", notam=notam)
 
 @app.route('/admin3')  # USER : Notam Lists
 def dash3():
