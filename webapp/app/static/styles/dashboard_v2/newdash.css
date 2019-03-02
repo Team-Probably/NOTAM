@@ -43,8 +43,8 @@ td{
 
 .indicator{
     height: 100%;
-    background: #aaa;
-    width: 10%;
+    background: #ddd;
+    width: 20%;
     margin:auto;
 
 }
@@ -52,6 +52,6 @@ td{
 .gauge{
     background: #005;
     width:100%;
-    
+    position: relative;
     
 }

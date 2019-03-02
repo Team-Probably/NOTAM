@@ -85,7 +85,7 @@ def create():
         msg+='E) '+(' AIRSPACE ' if data['notam_type']=='airspace' else 'FACILITY ')+data.get('scenario', '')+' DUE '+data.get('nature', '')+' '+coords+'\n'
         msg+=data.get('remarks', '')+'\n '
         nw = datetime.utcnow()
-        msg+='Created On: '+nw.year+'/'+nw.month+'/'+nw.day+' '+nw.hour+':'+nw.minute
+        msg+='Created On: '+str(nw.year)+'/'+str(nw.month)+'/'+str(nw.day)+' '+str(nw.hour)+':'+str(nw.minute)
         data['msg']=msg
     keys.append('msg')
     for key in keys:
