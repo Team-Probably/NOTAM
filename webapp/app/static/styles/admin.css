@@ -105,14 +105,18 @@ ul {
 
   #notam_series, #notam_series_fac{
       width:40%;
-      margin: auto; 
+      margin: auto;
+      background: #000; 
   }
+  #notam_series{border-radius: 10px;}
+  #notam_series_fac{border-radius: 10px;}
+
 
   #notam_no, #notam_no_fac{
       margin:auto;
       width:40%;
   }
-
+  
   input, textarea, select{
       padding: 5px;
       border:none;

@@ -1,5 +1,9 @@
 body {
   font-family: 'Source Sans Pro', sans-serif;
+  background: #13232fe6;
+  color:#fff;
+  box-shadow: 2mm;
+  
 }
 h1 {
   text-align:center;
@@ -7,12 +11,13 @@ h1 {
 .row {
   margin-top: 10px;
   margin-bottom: 10px;
+  border-radius: 5px;
 }
 .photo {
   border-radius: 45px;
   margin-right: 20px;
   width: 90px;
-  height:90px
+  height:90px;
 }
 .form-control { 
   width:30%;
@@ -29,7 +34,7 @@ h1 {
 }
 .btn-more {
   margin-top:10px;
-  width: 100%
+  border-radius: 25px;
 }
 .label {
   font-weight: normal;
@@ -39,12 +44,77 @@ h1 {
   color: blue;
   vertical-align: center;
   font-size: 3vw;
+  font-family: Algerian;
+  transform: translateY(12px);
+    background-clip: text;
+    font-weight: bold;
+    text-shadow: rgba(58, 28, 168, 0.3) 1px 1px 1px;
+
 }
 
 .notam_series{
-  color: black;
+  color: white;
+  font-family: Algerian;
+  font-weight: bold;
+    background-color: rgb(218, 208, 208);
+    background-clip: text;
+    color: rgba(95, 81, 81, 0.3);
+    text-shadow: rgba(243, 222, 222, 0.3) 1px 1px 1px;
+
 }
 
 .notam{
-  font-size: 16px;
+  font-size: 18px;
+  font-weight: bold;
+    background-color: rgb(206, 187, 187);
+    background-clip: text;
+    color: rgba(95, 81, 81, 0.3);
+    text-shadow: rgba(255,255,255,0.3) 1px 1px 1px;
+    text-align: left;
+  }
+.container
+{
+  background:  #160e0e;
+  /* height: 85vh; */
+
 }
+.list-group-item
+{
+  background:#13232fe6;
+}
+.col-md-12
+{
+  text-align: center;
+}
+.sort 
+{
+  border-radius: 30px;
+  font-size: 15px;
+}
+.col-md-8
+{
+  float: left;
+  text-align: left;
+  transform: translateX(45px);
+}
+.expertise-label {
+
+  display: block;
+  font-weight: 700;
+  margin-top: 10px;
+  font-weight: bold;
+  background-color: rgb(255, 255, 255);
+  background-clip: text;
+  color: rgba(255, 255, 255, 0.3);
+  text-shadow: rgba(255, 255, 255, 0.3) 1px 1px 1px;
+
+}
+
+
+
+
+
+
+
+
+

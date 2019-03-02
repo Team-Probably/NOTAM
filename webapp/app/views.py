@@ -6,7 +6,7 @@ from app import extract
 from app import database
 from werkzeug.datastructures import ImmutableMultiDict
 
-app.secret_key = os.environ['FLASK_SECRET_KEY']
+app.secret_key = "WORKS"
 app.username = ""
 
 @app.route('/') #TO-DO : By Aditya and Avi 
