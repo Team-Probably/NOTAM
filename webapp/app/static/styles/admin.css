@@ -260,7 +260,7 @@ textarea:hover{
     width:90%;
 }
 
-#mappickdiv{
+#mappickdiv, #mappickdiv_fac{
     
     position: absolute;
     width: 50%;
@@ -269,7 +269,7 @@ textarea:hover{
     
 }
 
-#mappickindiv{
+#mappickindiv, #mappickindiv_fac{
     
     position: relative;
     
@@ -279,11 +279,11 @@ textarea:hover{
     box-shadow: 2px 2px 5px #888;
     top: -20vh;
     left: 50%;
-    width: fit-content;
+    width: 100%;
     padding: 5px;
 }
 
-#mapfa{
+#mapfa, #mapfa_fac{
     cursor:pointer;
 }
 
