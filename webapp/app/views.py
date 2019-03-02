@@ -134,3 +134,8 @@ F) GND G) FL140'''
 @app.route('/kittu')  # USER : Notam Lists
 def kittu():
     return render_template("kittu.html")
+
+
+@app.route('/admin2')  # USER : Notam Lists
+def dash2():
+    return render_template("dashboard_v2/index.html")
