@@ -60,7 +60,7 @@ def create():
     print(data)
     if data['notam_type'] == 'airspace':
         keys = ['notam_notam', 'notam_series', 'notam_no', 'fir', 'scenario', 'nature', 
-        'latin', 'longin', 'stime', 'etime', 'remarks', 'map_poly','zoom' ,'notam_type']
+                'latin', 'longin', 'stime', 'etime', 'remarks', 'map_poly', 'zoom', 'llimit', 'ulimit','notam_type']
     else:
         keys = ['notam_series', 'notam_no', 'fir', 'ident', 'freq', 'latin', 'longin', 'stime', 'etime',
         'remarks','notam_type']    
