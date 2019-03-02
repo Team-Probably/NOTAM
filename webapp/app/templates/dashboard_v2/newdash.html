@@ -51,35 +51,43 @@
     
                 
     </div>
-    <div class = "container searchout z-depth-2">
-    <div class="row">
-            <form class="col s12">
-              <div class="row">
-                <div class="input-field col s12">
-                  
-                  <textarea id="icon_prefix2" class="materialize-textarea"></textarea>
-                  <label for="icon_prefix2">Search</label>
-                </div>
-              </div>
-            </form>
-    </div>
-</div>
-    <div class = "container z-depth-2">
+    <div id="forsort">
+        <div class = "container searchout z-depth-2">
+            <div class="row">
+                    <form class="col s12">
+                    <div class="row">
+                        <div class=" col s12">
+                        
+                        <input class="search form-control" placeholder="Search" />
+                        <div class="sort btn blue" data-sort="notamno">
+                            Sort by Notam No.
+                        </div>
+                        <div class="sort btn blue" data-sort="get_status">
+                            Sort by Status
+                        </div>
 
-            <ul class="collapsible">
+                        </div>
+                    </div>
+                    </form>
+            </div>
+        </div>
+        <div class = "container z-depth-2">
+            <ul class="collapsible list">
                 {% for notam in airspace %}
                     {% include 'dashboard_v2/_notamcard.html' %}
                 {% endfor %}
                 {% for notam in facility %}
                     {% include 'dashboard_v2/_notamcard.html' %}
                 {% endfor %}
-                </ul>
+            </ul>
+        </div>
     </div>
     <script src="{{ url_for('static', filename='js/dashboard_v2/newdash.js') }}"></script>
     <script  src="{{ url_for('static', filename='js/dashboard/open_vis.js') }}"></script>
     <script  src="{{ url_for('static', filename='js/dashboard/magicvis.js') }}"></script>
    
     <script src="{{ url_for('static', filename='js/imports/list.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/dashboard_v2/sort.js') }}"></script>
 
    
 </body>

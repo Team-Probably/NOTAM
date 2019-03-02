@@ -4,16 +4,15 @@
         <div class="dsd">
             <div class = "row">
                     
-                    <div class = "col m2 number"><span class="series">{{notam.notam_series}}</span>{{notam.notam_no}}</div>
+                    <div class = "col m2 number"><span class="series">{{notam.notam_series}}</span><span class="notamno">{{notam.notam_no}}</span></div>
                     <div class="col m7 notamview">
                          {{notam.msg}}
                     </div>
                     <div class="col m3">
                             <table id="uptable">
-                                    <tr><td>Start Time</td><td >
-                                            {{notam.stime}}</td></tr>
-                                    <tr><td>End Time</td><td>{{notam.etime}}</td></tr>
-                                    <tr><td>Status</td><td id="status-what-{{notam.notam_no}}">
+                                    <tr><td >Start Time</td><td class="starttime">{{notam.stime}}</td></tr>
+                                    <tr><td >End Time</td><td class="endtime">{{notam.etime}}</td></tr>
+                                    <tr><td class="status">Status</td><td id="status-what-{{notam.notam_no}}" class="get_status">
                                             {{notam.status}}</td></tr>
                                     </table>
                                     
