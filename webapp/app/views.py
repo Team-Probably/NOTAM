@@ -11,6 +11,7 @@ from datetime import datetime
 # app.secret_key = "WORKS"
 app.secret_key = os.environ['FLASK_SECRET_KEY']
 
+
 #URL Routes
 # @app.route('/')
 # def index():
@@ -127,8 +128,11 @@ def signup():
     user = request.form
     user = user.to_dict(flat=False)
     for key in user.keys():
-        user[key] = user[key][0]   
-    user['admin'] = False
+        user[key] = user[key][0] 
+    if user['secretKey'] == os.environ['secretKey']:
+        user['admin'] = True
+    else:
+        user['admin'] = False
     if database.add_user(user):
         return redirect(url_for('dashboard'))
     return redirect(url_for('index'))
