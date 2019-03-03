@@ -34,7 +34,8 @@
                     <li><a href="#">Dashboard</a></li>
                     <!-- <li><a href="#">Logout</a></li> -->
                     {% if logged_in%}
-                    <li><button class="waves-effect waves-light btn" onclick="location.href='/logout'">Log Out</button></li>
+                    <li><a href="/logout">Log Out</a></li>
+                    <!-- <li>< onclick="location.href='/logout'">Log Out</button></li> -->
                     {%else%}
                     <li><button data-target="loginform" class="btn modal-trigger" >Log In</button></li>
                     {%endif%}
@@ -81,7 +82,7 @@
 
     <div id="loginform" class='modal'>   
         <div id="login">   
-          <h1>Welcome Back!</h1>
+          <h4>Welcome Back!</h4>
 
           <form action="/verify_login" method="post">
 

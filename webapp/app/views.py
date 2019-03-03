@@ -9,7 +9,6 @@ from pprint import pprint
 from datetime import datetime
 
 # app.secret_key = "WORKS"
-
 app.secret_key = os.environ['FLASK_SECRET_KEY']
 
 #URL Routes
