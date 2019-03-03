@@ -1,10 +1,10 @@
 .series{
-    font-size:3rem;
+    font-size:2.2vw;
     color: #008;
 }
 
 .number{
-    font-size: 3rem;
+    font-size: 1.3vw;
 }
 
 .clb{
@@ -14,10 +14,11 @@
 .notamview{
    padding-top:0.5rem !important; 
    font-family: monospace;
+   font-size: 1vw;
 }
 
 td{
-    font-size:1rem !important;
+    font-size:0.875vw !important;
 }
 
 .nav-wrapper{
@@ -54,4 +55,17 @@ td{
     width:100%;
     position: relative;
     
+}
+
+#uptable{
+    font-size: 0.875vw !important;
+    margin-right: 0.5vw;
+}
+
+.green{
+    font-size: 0.925vw !important;
+}
+
+.collapsible-header i{
+    margin-right: 0px;
 }

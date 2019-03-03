@@ -58,7 +58,7 @@
     background: none;
     background-image: none;
     border: 1px solid #a0b3b0;
-    color: #ffffff;
+    color: #000000;
     border-radius: 10px;
     transition: border-color .25s ease, box-shadow .25s ease;
   }

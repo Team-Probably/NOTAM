@@ -12,8 +12,8 @@ function loadgauge(e)
   console.log(e); 
   llimit = e.parentNode.getElementsByClassName('llimit')[0].innerHTML;
   ulimit = e.parentNode.getElementsByClassName('ulimit')[0].innerHTML;
-  e.parentNode.getElementsByClassName('llim')[0].innerHTML = llimit;
-  e.parentNode.getElementsByClassName('ulim')[0].innerHTML = ulimit;
+  e.parentNode.getElementsByClassName('llim')[0].innerHTML = parseInt(llimit*10);
+  e.parentNode.getElementsByClassName('ulim')[0].innerHTML = parseInt(ulimit*10;
 
   var gauge = e.parentNode.getElementsByClassName('gauge')[0]
   gauge.style.top = (999 - parseInt(ulimit)) / 10 + "%";

@@ -16,6 +16,14 @@
                                     <tr><td >End Time</td><td class="endtime">{{notam.etime}}</td></tr>
                                     <tr><td class="status">Status</td><td id="status-what-{{notam.notam_no}}" class="get_status">
                                             {{notam.status}}</td></tr>
+
+                                    <tr><td colspan=2><a class="btn green">Visualize</a></td></tr>
+                                {% if logged_in %}
+                                    <tr>
+                                        <td><a class="btn yellow"><i class="material-icons">edit</i></a></td>
+                                        <td><a class="btn red"><i class="material-icons">delete</i></a></td>
+                                    </tr>
+                                {% endif %}
                                     </table>
                                     
                             
@@ -69,11 +77,12 @@
                         <tr><td>End Time</td><td id="end-time-td-{{notam.notam_no}}">{{notam.end_time}}</td></tr> -->
                         <tr><td>Notam Type</td><td>{{notam.notam_type}}</td></tr>
                         <tr><td>Tags</td><td>{{notam.tags}}</td></tr>
-                        <script  src="{{ url_for('static', filename='js/admin/edit_notam.js') }}"></script>
-                        <tr><td><button id="edit_notam" class="adi btn">Edit notam</button></td></tr>
-                        <!-- {{ url_for('static', filename='js/admin/edit_notam.js') }} -->
+                
                 </table>
         </div>
     
     </div>
+    {% if logged_in %}
+        <script src="{{ url_for('static', filename='js/admin/editx.js') }}"></script>
+    {% endif %}
 </li>
