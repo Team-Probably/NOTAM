@@ -76,6 +76,7 @@ $('#create_notam').on('click', function() {
 
 });
 
+
 // For Date Time Picker
 
 // window.onload = function () {

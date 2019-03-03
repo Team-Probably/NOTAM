@@ -7,9 +7,13 @@ from app import database
 from werkzeug.datastructures import ImmutableMultiDict
 from pprint import pprint
 from datetime import datetime
+<<<<<<< HEAD
 import random
 import smtplib, ssl
 
+=======
+import overpy
+>>>>>>> ea588afc6b10a99a75adee896837c5f35c01d316
 # app.secret_key = "WORKS"
 app.secret_key = os.environ['FLASK_SECRET_KEY']
 
@@ -219,9 +223,9 @@ def deletenotam():
 def predict_notam():
     notam = request.args.get('notam')
     notam = extract.extract_is_back(notam)
-    notam['start_date'],notam["start_time"] = notam['starttime'].split(" ")
-    notam['end_date'], notam["end_time"] = notam['endtime'].split(" ")
     print(notam)
+    notam['start_date'], notam["start_time"] = notam['starttime'].split(" ")
+    notam['end_date'], notam["end_time"] = notam['endtime'].split(" ")
     if notam['firOfac'] == 'FIR':
         return render_template('dashboard_v2/Facility.html', notam=notam)
     else:
@@ -237,13 +241,37 @@ def check_login():
     except:
         return False
 
+def overpass_aerodrome(query):
+    pass
+
+def overpass_runway(query):
+    pass
+
+def overpass_taxiway(coords):
+    api = overpy.Overpass()
+    q = """
+    way({}) ["aeroway"="taxiway"];
+    (._;>;);
+    out body;
+    """.format(str(coord))
+    result = api.query()
+    res = {}
+    for way in result.ways:
+        print("Name: %s" % way.tags.get("name", "n/a"))
+        print("Highway: %s" % way.tags.get("taxiway", "n/a"))
+        print("Nodes:")
+        nod = []
+        for node in way.nodes:
+            print("Lat: %f,Lon: %f" % (node.lat, node.lon))
+            nod.append([node.lat,node.lon])
+        res[way.tags.get("name", "n/a")] = nod
+    return res
+    
+
 @app.route('/logout')
 def logout():
     session['username']=None
     return redirect(url_for('dashboard')) 
-
-
-
 
 #DEBUG URLs
 @app.route('/visualizer')

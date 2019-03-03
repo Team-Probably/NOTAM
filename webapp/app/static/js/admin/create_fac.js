@@ -58,6 +58,10 @@ $('#create_notam').on('click', function() {
         
     });
 
+    $('#notam_firOfac').on('input', function () {
+        console.log($('#notam_firOfac').val());
+})
+
     
     
     
