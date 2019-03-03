@@ -19,7 +19,9 @@ $('#create_notam').on('click', function() {
     var remarks = $('#remark').val();
 
     var map_poly = [center, radius, poly];
-    
+    $('#notam_no').oninvalid = function(e){
+        e.target.setCustomValidity('Notam_No should contain 4 digits');
+    }
 
     var notam_data = {
         notam_notam: notam_notam,
@@ -41,6 +43,7 @@ $('#create_notam').on('click', function() {
         notam_type: "airspace"
     }
     
+
     console.log('Adding Notam to Airspace');
     console.log(notam_data);
     $.ajax({

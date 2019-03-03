@@ -1,5 +1,12 @@
   $(document).ready(function(){
     $('.modal').modal();
+    var instance = M.Modal.getInstance($('#modalveri'));
+    console.log(document.getElementById('sveri').innerHTML);
+    if(document.getElementById('sveri').innerHTML==='True')
+    {
+      console.log('opening');
+      instance.open();
+    }
   });
   
  function check_login()

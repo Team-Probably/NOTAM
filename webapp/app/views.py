@@ -7,6 +7,8 @@ from app import database
 from werkzeug.datastructures import ImmutableMultiDict
 from pprint import pprint
 from datetime import datetime
+import random
+import smtplib, ssl
 
 # app.secret_key = "WORKS"
 app.secret_key = os.environ['FLASK_SECRET_KEY']
@@ -30,7 +32,12 @@ def dashboard():
     for i in range(len(facility)):
         facility[i]['msg'] = facility[i]['msg'].replace('\n','<br/>')
     print(airspace, facility)
-    return render_template("dashboard_v2/newdash.html", facility = facility , airspace = airspace, logged_in = check_login())
+    if session.get('verification_code'):
+        vcs = True
+    else:
+        vcs = False
+
+    return render_template("dashboard_v2/newdash.html", facility = facility , airspace = airspace, logged_in = check_login(), vcs=vcs)
 
 @app.route('/admin_airspace')
 def admin_airspace():
@@ -135,7 +142,7 @@ def signup():
         user['admin'] = False
     if database.add_user(user):
         return redirect(url_for('dashboard'))
-    return redirect(url_for('index'))
+    return redirect(url_for('dashboard'))
 
 @app.route('/sign_up')
 def sign_up():
@@ -145,16 +152,47 @@ def sign_up():
 def verify_login():
     user = request.form
     user = user.to_dict(flat=False)
-    for key in user.keys():
-        user[key] = user[key][0]
-    user = database.verify_login(user)
+    print('verificode' in user)
     print(user)
-    if user:
-        print("LOGIN SUCCESSFUL")
-        session['username'] = {'user_name':user['email'],'admin':user['admin'], "key":app.secret_key} 
-        print(session['username'])
+    #print(session.get('verification_code'), user['verificode'])
+    if 'verificode' in user and session.get('verification_code'):
+        if user['verificode'][0] == session['verification_code']:
+            print("LOGIN SUCCESSFUL")
+            session['username'] = session['username_temp'] 
+            session.pop('verification_code', None)
+            print(session['username'])
         return redirect(url_for('dashboard'))
-    return redirect(url_for('admin_airspace'))
+    else:
+        for key in user.keys():
+            user[key] = user[key][0]
+        user = database.verify_login(user)
+        print(user)
+        if user:
+            vcode = ''
+            for i in range(6):
+                vcode+=str(random.randint(0, 9))
+            session['verification_code']=vcode
+            sendemail(user['email'],vcode)
+            session['username_temp'] = {'user_name':user['email'],'admin':user['admin'], "key":app.secret_key} 
+        return redirect(url_for('dashboard'))
+
+def sendemail(rec, vc):
+    
+
+    port = 465  # For SSL
+    smtp_server = "smtp.gmail.com"
+    sender_email = "teamprobably@gmail.com"  # Enter your address
+    receiver_email = rec  # Enter receiver address
+    password = os.environ['TPPASS']
+    message = """\
+    Subject: Hi there
+
+    Here's your OTP! """+vc
+    print(message)
+    context = ssl.create_default_context()
+    with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
+        server.login(sender_email, password)
+        server.sendmail(sender_email, receiver_email, message)
 
 @app.route('/getnotamdata')
 def getnotamdata():
@@ -258,3 +296,8 @@ PRESENTATION. AS A CONSEQUENCE OF AIRSPACE CLOSURE COIMBATORE AP
 WILL REMAIN CLSD FOR ACFT OPS.
 F) GND G) FL140'''
     return str(extract.extract_is_back(tnot))
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
