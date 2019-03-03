@@ -85,7 +85,7 @@
                 </div>
                 <div class="input-field col m4">
                     <i class="material-icons prefix">account_circle</i>
-                    <input id="notam_no_fac" type="text" class="validate" value="{{notam.notam_no}}">
+                    <input id="notam_no_fac" type="text" class="validate" value="{{notam.notam_no}}" pattern="[0-9]{4}" required>
                     <label for="notam_no_fac">Notam No.</label>
                 </div>
             </div>
@@ -93,14 +93,14 @@
                 <div class="row">
                     <div class="input-field col m4">
                         <!-- <i class="material-icons prefix">place</i> -->
-                        <input id="fir_fac" type="text" class="validate" value="{{notam.firOfac}}">
+                        <input id="fir_fac" type="text" class="validate" value="{{notam.firOfac}}" pattern="[A-Z]{4}" required>
                         <label for="fir_fac">Facility Name</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col m12">
                             <!-- <i class="material-icons prefix">place</i> -->
-                            <input id="ident_fac" type="text" class="validate">
+                            <input id="ident_fac" type="text" class="validate" pattern="[A-Z]{3}[0-9]{3}" required>
                             <label for="ident_fac">Ident</label>
                     </div>
                 </div>
@@ -142,19 +142,19 @@
             </div>
             <div class="row start_time">
                 <div class="input-field col m4">
-                    <input type="text" class="datepicker" value="{{notam.start_date}}" id="st_date_fac"> 
+                    <input type="text" class="datepicker" value="{{notam.start_date}}" id="st_date_fac" pattern="[0-9]{4}/[0-9]{2}/[0-9]{2}" required> 
                 </div>
                 <div class="input-field col m4">
-                    <input type="text" class="timepicker" value="{{notam.start_time}}" id="st_time_fac">
+                    <input type="text" class="timepicker" value="{{notam.start_time}}" id="st_time_fac" pattern="[0-9]{2}:[0-9]{2}" required>
                 </div>
             </div>
 
             <div class="row end_time">
                 <div class="input-field col m4">
-                    <input type="text" class="datepicker" value="{{notam.end_date}}" id="ed_date_fac">
+                    <input type="text" class="datepicker" value="{{notam.end_date}}" id="ed_date_fac" pattern="[0-9]{4}/[0-9]{2}/[0-9]{2}" required>
                 </div>
                 <div class="input-field col m4">
-                    <input type="text" class="timepicker" value="{{notam.end_time}}" id="ed_time_fac">
+                    <input type="text" class="timepicker" value="{{notam.end_time}}" id="ed_time_fac" pattern="[0-9]{2}:[0-9]{2}" required>
                 </div>
             </div>
             

@@ -71,9 +71,8 @@ $('.collapsible-header').on('click', function () {
             }).addTo(map);
         } else {
             var mapCenter = [lat, long];
-            var map = L.map(magic_map).setView([51.505, -0.09], zoom);
-            map.invalidateSize();
-            map.setView([51.505, -0.09], zoom);
+            var map = L.map(magic_map).setView(mapCenter, zoom);
+            
             L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
                 // attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
                 maxZoom: 18,
@@ -81,7 +80,7 @@ $('.collapsible-header').on('click', function () {
                 accessToken: 'pk.eyJ1Ijoia2l0ZXJldHN1IiwiYSI6ImNqc216MTExNzA2NDE0OW80bWhyNmwyMmoifQ.v7pnFYhTlfA59e_sMBMSBA'
             }).addTo(map);
 
-            L.marker([51.505, -0.09]).addTo(map);
+            L.marker(mapCenter).addTo(map);
         }
 
     }, 300);

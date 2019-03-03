@@ -251,3 +251,8 @@ PRESENTATION. AS A CONSEQUENCE OF AIRSPACE CLOSURE COIMBATORE AP
 WILL REMAIN CLSD FOR ACFT OPS.
 F) GND G) FL140'''
     return str(extract.extract_is_back(tnot))
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
