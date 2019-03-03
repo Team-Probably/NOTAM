@@ -1,7 +1,9 @@
 #loginform {
     background: rgba(19, 35, 47, 0.9);
     padding: 40px;
-    max-width: 600px;
+    color:#ffffff;
+    text-align: center;
+    max-width: 500px;
     margin: 40px auto;
     border-radius: 10px;
     box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
@@ -48,7 +50,7 @@
   }
   
   input, textarea {
-    font-size: 22px;
+    font-size: 15px;
     display: block;
     width: 100%;
     height: 100%;
@@ -73,29 +75,19 @@
   .field-wrap {
     position: relative;
     margin-bottom: 40px;
+    font-size: 3vw;
   }
   
-  .top-row:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-  .top-row > div {
-    float: left;
-    width: 48%;
-    margin-right: 4%;
-  }
-  .top-row > div:last-child {
-    margin: 0;
-  }
   
   .button {
     border: 0;
+    margin:auto;
     outline: none;
     border-radius: 25px;
-    padding: 15px 0;
-    font-size: 2rem;
-    font-weight: 600;
+    padding: 5px 0;
+    font-size: 1.5vw;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+    font-weight: 500;
     text-transform: uppercase;
     letter-spacing: .1em;
     background: #1ab188;
@@ -109,10 +101,21 @@
   
   .button-block {
     display: block;
-    width: 100%;
+    width: 80%;
   }
   
   .forgot {
     margin-top: -20px;
     text-align: right;
+  }
+  .signuprd{
+    margin-top: 5%;
+  }
+
+  .signuplink{
+    font-weight: bold;
+  }
+
+  .signuplink:hover {
+    color: #ffffff;
   }

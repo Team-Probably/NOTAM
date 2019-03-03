@@ -11,7 +11,6 @@ import random
 import smtplib, ssl
 
 # app.secret_key = "WORKS"
-
 app.secret_key = os.environ['FLASK_SECRET_KEY']
 
 #URL Routes
@@ -43,9 +42,9 @@ def dashboard():
 def admin_airspace():
     try:
         if session['username']['admin']!=True:
-            return redirect(url_for('index'))
+            return redirect(url_for('dashboard'))
     except:
-        return redirect(url_for('index'))
+        return redirect(url_for('dashboard'))
     else:
         notam = {'class': 'Notam Series', 'airport': '', 'notam': '', 'start_date': 'Start Date',
      'end_date': 'End Date', 'start_time': 'Start Time', 'end_time': 'End Time',
@@ -56,9 +55,9 @@ def admin_airspace():
 def admin_facility():
     try:
         if session['username']['admin']!=True:
-            return redirect(url_for('index'))
+            return redirect(url_for('dashboard'))
     except:
-        return redirect(url_for('index'))
+        return redirect(url_for('dashboard'))
     else:
         notam = {'class': 'Notam Series', 'airport': '', 'notam': '', 'start_date': 'Start Date',
         'end_date': 'End Date', 'start_time': 'Start Time', 'end_time': 'End Time',
@@ -140,6 +139,10 @@ def signup():
     if database.add_user(user):
         return redirect(url_for('dashboard'))
     return redirect(url_for('index'))
+
+@app.route('/sign_up')
+def sign_up():
+    return render_template("login.html")
 
 @app.route('/verify_login',methods=['POST'])
 def verify_login():
