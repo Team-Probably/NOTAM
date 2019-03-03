@@ -1,5 +1,5 @@
 import pymongo
-import os,datetime
+import os,datetime,ast,pprint
 from pymongo import MongoClient
 #mongodb_remote_url = str(os.environ["NOTAMS_MONGODB"])
 #mongod --dbpath "/home/rusherrg/Projects/SIH/webapp/database" --port 10000
@@ -99,6 +99,14 @@ def verify_login(user):
         print(user, "LOGIN SUCCESSFUL")
         return db.find_one(user)
     return 0
+
+def populate():
+    with open('./database/notams.txt','r') as f:
+        notams = f.readlines()
+        for notam in notams:
+            pprint.pprint(eval(notam))
+            add_notam(eval(notam))
+    return
 
 def mongodb_push():
     remote = connect(mongodb_remote_url)

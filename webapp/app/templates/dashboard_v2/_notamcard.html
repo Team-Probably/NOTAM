@@ -4,16 +4,17 @@
         <div class="dsd">
             <div class = "row">
                     
-                    <div class = "col m2 number"><span class="series">{{notam.notam_series}}</span><span class="adi_no">{{notam.notam_no}}</span></div>
+                    <div class = "col m2 number"><span class="series">{{notam.notam_series}}</span><span class="notamno">{{notam.notam_no}}</span></div>
                     <div class="col m7 notamview">
-                         {{notam.msg}}
+                        {% autoescape false %}
+                                {{notam.msg}}
+                        {% endautoescape %}
                     </div>
                     <div class="col m3">
                             <table id="uptable">
-                                    <tr><td>Start Time</td><td >
-                                            {{notam.stime}}</td></tr>
-                                    <tr><td>End Time</td><td>{{notam.etime}}</td></tr>
-                                    <tr><td>Status</td><td id="status-what-{{notam.notam_no}}">
+                                    <tr><td >Start Time</td><td class="starttime">{{notam.stime}}</td></tr>
+                                    <tr><td >End Time</td><td class="endtime">{{notam.etime}}</td></tr>
+                                    <tr><td class="status">Status</td><td id="status-what-{{notam.notam_no}}" class="get_status">
                                             {{notam.status}}</td></tr>
                                     </table>
                                     
@@ -49,11 +50,17 @@
                 <div id="vismap" class="vismap col m6">
                                 
                 </div>
+                {% if notam.notam_type != "facility" %}
                 <div class="indicator-outer col m1">
                         <div class="indicator">
                                 <div class="gauge"></div>
                         </div>
+                
+                                <span class="ulim" style="position:relative;left:40px;"></span>
+                                <span class="llim" style="position:relative;left:14px;"></span>
+                        
                 </div>
+                {% endif %}
                 <div class="visinfo col m5">
                         <table id="vistable">
                         
