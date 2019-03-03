@@ -36,7 +36,7 @@
                     {% if logged_in %}
                     <li><button class="waves-effect waves-light btn" onclick="location.href='/logout'">Log Out</button></li>
                     {% else %}
-                    <li><button data-target="loginform" class="btn modal-trigger" >Log In</button></li>
+                    <li><button data-target="loginform" class="btn modal-trigger" >Admin Log In</button></li>
                     {% endif %}
                   </ul>
             </div>
@@ -109,6 +109,9 @@
           
           <button type="submit" class="button button-block">Log In</button>
           </form>
+          <div class = "signuprd">
+            <h6>Don't have an account? Sign up <a class="signuplink" href="/sign_up">here</a></h6>
+          </div>
 
         </div>
       

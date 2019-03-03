@@ -3,7 +3,7 @@
     padding: 40px;
     color:#ffffff;
     text-align: center;
-    max-width: 450px;
+    max-width: 500px;
     margin: 40px auto;
     border-radius: 10px;
     box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
@@ -75,22 +75,9 @@
   .field-wrap {
     position: relative;
     margin-bottom: 40px;
-    font-size: 2vw;
+    font-size: 3vw;
   }
   
-  .top-row:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-  .top-row > div {
-    float: left;
-    width: 48%;
-    margin-right: 4%;
-  }
-  .top-row > div:last-child {
-    margin: 0;
-  }
   
   .button {
     border: 0;
@@ -114,10 +101,21 @@
   
   .button-block {
     display: block;
-    width: 75%;
+    width: 80%;
   }
   
   .forgot {
     margin-top: -20px;
     text-align: right;
+  }
+  .signuprd{
+    margin-top: 5%;
+  }
+
+  .signuplink{
+    font-weight: bold;
+  }
+
+  .signuplink:hover {
+    color: #ffffff;
   }

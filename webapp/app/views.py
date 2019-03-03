@@ -133,6 +133,10 @@ def signup():
         return redirect(url_for('dashboard'))
     return redirect(url_for('index'))
 
+@app.route('/sign_up')
+def sign_up():
+    return render_template("login.html")
+
 @app.route('/verify_login',methods=['POST'])
 def verify_login():
     user = request.form
