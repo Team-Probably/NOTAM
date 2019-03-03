@@ -22,4 +22,5 @@ function loadgauge(e)
   gauge.style.height = (parseInt(ulimit) - parseInt(llimit)) / 10 + "%";
   
 }
-        
+
+$(".dropdown-trigger").dropdown();

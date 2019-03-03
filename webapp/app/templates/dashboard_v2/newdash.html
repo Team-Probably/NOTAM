@@ -24,21 +24,32 @@
 </head>
 <body style="background:#d0d8d8;">
     <div class="desk_nav">
-        
+        {% if logged_in %}
+            <ul id="dropdown1" class="dropdown-content">
+                <li><a href="/admin_airspace">FIR</a></li>
+                <li><a href="/admin_facility">Aerodrome</a></li>
+            </ul>
+        {% endif %}
         <nav>
             <div class="nav-wrapper blue">
                
                 <a href="#!" class="brand-logo">Dashboard</a>
                 
                 <ul class="right hide-on-med-and-down">
-                    <li><a href="#">Dashboard</a></li>
+                
+                    {% if logged_in %}
+                        <!-- Dropdown Trigger -->
+                        <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Select<i
+                                    class="material-icons right">arrow_drop_down</i></a></li>
+                    {% endif %}
+                    <li><a href="/dashboard">Dashboard</a></li>
                     <!-- <li><a href="#">Logout</a></li> -->
                     {% if logged_in %}
-                    <li><button class="waves-effect waves-light btn" onclick="location.href='/logout'">Log Out</button></li>
+                        <li><a onclick="location.href='/logout'">Log Out</a></li>
                     {% else %}
-                    <li><button data-target="loginform" class="btn modal-trigger" >Log In</button></li>
+                        <li><a data-target="loginform" class="modal-trigger" >Log In</a></li>
                     {% endif %}
-                  </ul>
+                 </ul>
             </div>
         </nav>
     
