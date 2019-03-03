@@ -24,21 +24,32 @@
 </head>
 <body style="background:#d0d8d8;">
     <div class="desk_nav">
-        
+        {% if logged_in %}
+            <ul id="dropdown1" class="dropdown-content">
+                <li><a href="/admin_airspace">FIR</a></li>
+                <li><a href="/admin_facility">Aerodrome</a></li>
+            </ul>
+        {% endif %}
         <nav>
             <div class="nav-wrapper blue">
                
                 <a href="#!" class="brand-logo">Dashboard</a>
                 
                 <ul class="right hide-on-med-and-down">
-                    <li><a href="#">Dashboard</a></li>
+                
+                    {% if logged_in %}
+                        <!-- Dropdown Trigger -->
+                        <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Select<i
+                                    class="material-icons right">arrow_drop_down</i></a></li>
+                    {% endif %}
+                    <li><a href="/dashboard">Dashboard</a></li>
                     <!-- <li><a href="#">Logout</a></li> -->
                     {% if logged_in %}
-                    <li><button class="waves-effect waves-light btn" onclick="location.href='/logout'">Log Out</button></li>
+                        <li><a onclick="location.href='/logout'">Log Out</a></li>
                     {% else %}
-                    <li><button data-target="loginform" class="btn modal-trigger" >Log In</button></li>
+                        <li><a data-target="loginform" class="modal-trigger" >Admin Log In</a></li>
                     {% endif %}
-                  </ul>
+                 </ul>
             </div>
         </nav>
     
@@ -87,7 +98,7 @@
 
     <div id="loginform" class='modal'>   
         <div id="login">   
-          <h1>Welcome Back!</h1>
+          <h4>Welcome Back!</h4>
 
           <form action="/verify_login" method="post">
 
@@ -109,10 +120,28 @@
           
           <button type="submit" class="button button-block">Log In</button>
           </form>
+          <div class = "signuprd">
+            <h6>Don't have an account? Sign up <a class="signuplink" href="/sign_up">here</a></h6>
+          </div>
 
         </div>
+
+        
+            
+        </div>
+        <div id="sveri" style="display: none;">{{vcs}}</div>
+        <div id="modalveri" class="modal">
+
+                <form action="/verify_login" method="post">
+                <div class="input-field col s6">
+                        <input placeholder="Verification Code" id="verificode" name="verificode" type="text" />
+                        <label for="verificode">Verification Code</label>
+                </div>
+                <button type="submit" class="btn waves-effect waves-light">Submit</button>
+                </form>
+        </div>
       
-</div>
+
 
 
 

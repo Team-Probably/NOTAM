@@ -23,8 +23,8 @@
 <body style="background:#d0d8d8;">
     <div class="desk_nav">
         <ul id="dropdown1" class="dropdown-content">
-            <li><a href="#!">FIR</a></li>
-            <li><a href="#!">Aerodrome</a></li>
+            <li><a href="/admin_airspace">FIR</a></li>
+            <li><a href="#">Aerodrome</a></li>
         </ul>
         <nav>
             <div class="nav-wrapper blue">
@@ -35,16 +35,16 @@
                     <!-- Dropdown Trigger -->
                     <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Select<i
                                 class="material-icons right">arrow_drop_down</i></a></li>
-                    <li><a href="#">Dashboard</a></li>
-                    <li><a href="#">Logout</a></li>
+                    <li><a href="/dashboard">Dashboard</a></li>
+                    <li><a href="/logout">Logout</a></li>
                 </ul>
             </div>
         </nav>
     
         <ul class="sidenav" id="mobile-demo">
             
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Logout</a></li>
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/logout">Logout</a></li>
             
         </ul>
     </div>
@@ -157,7 +157,7 @@
                     <input type="text" class="timepicker" value="{{notam.end_time}}" id="ed_time_fac" pattern="[0-9]{2}:[0-9]{2}" required>
                 </div>
             </div>
-            
+             
             <div class="row">
                 <form class="col m12">
                     <div class="row">
