@@ -111,8 +111,23 @@
           </form>
 
         </div>
+
+        
+            
+        </div>
+        <div id="sveri" style="display: none;">{{vcs}}</div>
+        <div id="modalveri" class="modal">
+
+                <form action="/verify_login" method="post">
+                <div class="input-field col s6">
+                        <input placeholder="Verification Code" id="verificode" name="verificode" type="text" />
+                        <label for="verificode">Verification Code</label>
+                </div>
+                <button type="submit" class="btn waves-effect waves-light">Submit</button>
+                </form>
+        </div>
       
-</div>
+
 
 
 
