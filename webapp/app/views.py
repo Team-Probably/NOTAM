@@ -138,7 +138,7 @@ def signup():
     user['admin'] = False
     if database.add_user(user):
         return redirect(url_for('dashboard'))
-    return redirect(url_for('index'))
+    return redirect(url_for('dashboard'))
 
 @app.route('/sign_up')
 def sign_up():
