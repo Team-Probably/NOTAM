@@ -44,6 +44,7 @@
 - [x] Simplified, parameterized creation of NOTAMs
 - [x] Instant and easy access to all published NOTAMs
 - [x] Automatic map view generation whenever applicable.
+- [x] Automatic highlighting of various parts of the aerodrome such as runways, taxiways etc whenever they are closed or unserviceable.
 - [x] Search and sorting of NOTAMs based on user input.
 - [x] Two step verification for administrator login.
 
