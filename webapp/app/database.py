@@ -101,7 +101,7 @@ def verify_login(user):
     return 0
 
 def populate():
-    with open('./database/notams.txt','r') as f:
+    with open('./notams.txt','r') as f:
         notams = f.readlines()
         for notam in notams:
             pprint.pprint(eval(notam))

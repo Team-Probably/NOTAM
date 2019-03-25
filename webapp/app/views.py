@@ -7,13 +7,10 @@ from app import database
 from werkzeug.datastructures import ImmutableMultiDict
 from pprint import pprint
 from datetime import datetime
-<<<<<<< HEAD
 import random
 import smtplib, ssl
 
-=======
-import overpy
->>>>>>> ea588afc6b10a99a75adee896837c5f35c01d316
+#import overpy
 # app.secret_key = "WORKS"
 app.secret_key = os.environ['FLASK_SECRET_KEY']
 
@@ -194,9 +191,12 @@ def sendemail(rec, vc):
     Here's your OTP! """+vc
     print(message)
     context = ssl.create_default_context()
-    with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
-        server.login(sender_email, password)
-        server.sendmail(sender_email, receiver_email, message)
+    try:
+        with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
+            server.login(sender_email, password)
+            server.sendmail(sender_email, receiver_email, message)
+    except:
+        pass
 
 @app.route('/getnotamdata')
 def getnotamdata():
