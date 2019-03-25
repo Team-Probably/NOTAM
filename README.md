@@ -35,6 +35,8 @@
 <br/><br/>
 <img src="./assets/notam2.gif" width=600px/>
 <br/><br/>
+ <img src="./assets/notam_vis.png" width=600px/>
+<br/><br/>
 
 </div>
 
