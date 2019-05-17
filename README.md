@@ -70,7 +70,7 @@
 - [@Korusuke](https://github.com/Korusuke)
 - [@Rusherrg](https://github.com/RusherRG)
 - [@hetzz](https://github.com/hetzz)
-- [@aditya1999](https://github.com/aditya1999)
+- [@Syn3rman](https://github.com/Syn3rman)
 - [@akshay-99](https://github.com/akshay-99)
 - [@aviiiij](https://github.com/aviiij)
 
