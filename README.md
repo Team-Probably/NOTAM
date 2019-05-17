@@ -47,6 +47,7 @@
 - [x] Instant and easy access to all published NOTAMs
 - [x] Automatic map view generation whenever applicable.
 - [x] Automatic highlighting of various parts of the aerodrome such as runways, taxiways etc whenever they are closed or unserviceable.
+- [x] Automatic priority depending on the contents. 
 - [x] Search and sorting of NOTAMs based on user input.
 - [x] Two step verification for administrator login.
 
@@ -67,14 +68,9 @@
 ### Contributors
 
 
-- [@Korusuke](https://github.com/Korusuke)
-- [@Rusherrg](https://github.com/RusherRG)
-- [@hetzz](https://github.com/hetzz)
-- [@aditya1999](https://github.com/aditya1999)
-- [@akshay-99](https://github.com/akshay-99)
-- [@aviiiij](https://github.com/aviiij)
+ [@Korusuke](https://github.com/Korusuke) [@Rusherrg](https://github.com/RusherRG) [@hetzz](https://github.com/hetzz) [@Syn3rman](https://github.com/Syn3rman) [@akshay-99](https://github.com/akshay-99) [@aviiiij](https://github.com/aviiij)
 
 
 ------------------------------------------
 
-This repository / project was a part of **Smart India Hackathon 2019** under **Ministry of Civil Aviation, Government of India.**
+This repository / project was a part of **Smart India Hackathon 2019** under **Ministry of Civil Aviation, Government of India** where it stood second in the final round
