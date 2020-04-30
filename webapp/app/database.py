@@ -1,14 +1,19 @@
 import pymongo
-import os,datetime,ast,pprint
+import os
+import datetime
+import ast
+import pprint
 from pymongo import MongoClient
 #mongodb_remote_url = str(os.environ["NOTAMS_MONGODB"])
-#mongod --dbpath "/home/rusherrg/Projects/SIH/webapp/database" --port 10000
-mongodb_local_url = 'mongodb://localhost:10000/' 
+# mongod --dbpath "/home/rusherrg/Projects/SIH/webapp/database" --port 10000
+mongodb_local_url = os.getenv('MONGODB_URI')
+
 
 def connect(uri):
     client = MongoClient(uri)
     db = client.notams
     return db
+
 
 def add_notam(notam):
     db = connect(mongodb_local_url)
@@ -16,23 +21,25 @@ def add_notam(notam):
         db = db.airspace
     if notam['notam_type'] == "facility":
         db = db.facility
-    if db.find_one({'notam_no':notam['notam_no'],'notam_series':notam['notam_series']}):
+    if db.find_one({'notam_no': notam['notam_no'], 'notam_series': notam['notam_series']}):
         print("Already Present")
         return 0
     db.insert(notam)
     return 1
 
+
 def edit_notam(notam):
-    db=connect(mongodb_local_url)
+    db = connect(mongodb_local_url)
     if notam['notam_type'] == "airspace":
         db = db.airspace
     if notam['notam_type'] == "facility":
         db = db.facility
-    if db.find_one({'notam_no':notam['notam_no'],'notam_series':notam['notam_series']}):
+    if db.find_one({'notam_no': notam['notam_no'], 'notam_series': notam['notam_series']}):
         print(notam, db)
         # remove_notam(notam)
-        # add_notam(notam)   
+        # add_notam(notam)
     return notam
+
 
 def get_notams(notam_type):
     db = connect(mongodb_local_url)
@@ -43,19 +50,22 @@ def get_notams(notam_type):
     notams = []
     print("Getting NOTAMs")
     for notam in db.find():
-        st = datetime.datetime(*list(map(int,notam['stime'].split(' ')[0].split('/')+notam['stime'].split(' ')[1].split(':'))))
-        et = datetime.datetime(*list(map(int,notam['etime'].split(' ')[0].split('/')+notam['etime'].split(' ')[1].split(':'))))
+        st = datetime.datetime(
+            *list(map(int, notam['stime'].split(' ')[0].split('/')+notam['stime'].split(' ')[1].split(':'))))
+        et = datetime.datetime(
+            *list(map(int, notam['etime'].split(' ')[0].split('/')+notam['etime'].split(' ')[1].split(':'))))
         now = datetime.datetime.now()
-        if st>now:
+        if st > now:
             notam['status'] = "Upcoming"
-        elif et<now:
+        elif et < now:
             notam['status'] = "Expired"
         else:
             notam['status'] = "Ongoing"
         notams.append(notam)
     return notams
 
-def get_notam(key,value):
+
+def get_notam(key, value):
     notam = {key: value}
     db = connect(mongodb_local_url)
     if db.airspace.find_one(notam):
@@ -66,9 +76,10 @@ def get_notam(key,value):
         return notam
     return "NOT FOUND"
 
-def remove_notam(key,value):
+
+def remove_notam(key, value):
     db = connect(mongodb_local_url)
-    notam = {key:value}
+    notam = {key: value}
     if db.airspace.find_one(notam):
         try:
             db.airspace.delete_one(notam)
@@ -83,6 +94,7 @@ def remove_notam(key,value):
             return "ERROR"
     return "NOTAM NOT FOUND"
 
+
 def add_user(user):
     db = connect(mongodb_local_url)
     db = db.users
@@ -92,6 +104,7 @@ def add_user(user):
     print(user, "USER CREATED")
     return 1
 
+
 def verify_login(user):
     db = connect(mongodb_local_url)
     db = db.users
@@ -100,13 +113,15 @@ def verify_login(user):
         return db.find_one(user)
     return 0
 
+
 def populate():
-    with open('./notams.txt','r') as f:
+    with open('./notams.txt', 'r') as f:
         notams = f.readlines()
         for notam in notams:
             pprint.pprint(eval(notam))
             add_notam(eval(notam))
     return
+
 
 def mongodb_push():
     remote = connect(mongodb_remote_url)
@@ -114,9 +129,10 @@ def mongodb_push():
     collections = local.collection_names()
     for coll in collections:
         for data in list(local[coll].find()):
-            if list(remote[coll].find(data))!=[]:
+            if list(remote[coll].find(data)) != []:
                 remote[coll].insert(data)
     return
+
 
 def mongodb_pull():
     remote = connect(mongodb_remote_url)
@@ -124,8 +140,6 @@ def mongodb_pull():
     collections = local.collection_names()
     for coll in collections:
         for data in list(remote[coll].find()):
-            if list(local[coll].find(data))!=[]:
+            if list(local[coll].find(data)) != []:
                 local[coll].insert(data)
     return
-    
-            
